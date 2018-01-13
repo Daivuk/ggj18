@@ -1,0 +1,23 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "taskName": "Global Game Jam 2018",
+            "type": "shell",
+            "windows": {
+                "command": ".\\game\\game_win32.exe .\\game\\"
+            },
+            "osx": {
+                "command": "./game/game_osx ./game/"
+            },
+            "linux": {
+                "command": "./game/game_linux ./game/"
+            },
+            "group": "test",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        }
+    ]
+}
