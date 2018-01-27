@@ -134,6 +134,14 @@ function hero_update(hero, dt)
     }
 
     hero.spriteAnim.play(anim + "_" + hero.dir)
+    
+    var pickup = pickups_acquire(hero.position.add(HERO_PICKUP_OFFSET));
+
+    if(pickup != null)
+    {
+        print("picked up " + pickup.glyph);
+        hero_revealGlyph(hero, pickup.glyph);
+    }
 }
 
 function heroes_update(dt)

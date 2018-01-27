@@ -117,7 +117,7 @@ function pickups_acquire(position)
     {
         if(Vector2.distance(pickups[i].position, position) < ACQUIRE_RADIUS)
         {
-            return pickups.splice(i, 1);
+            return pickups.splice(i, 1)[0];
         }
     }
 
