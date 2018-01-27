@@ -230,6 +230,11 @@ function hero_update(hero, dt)
         }
     }
 
+    if(GamePad.isJustDown(hero.index, Button.X) && heroesInCentre < 2 && map_isInCentre(hero.position))
+    {
+        print("hero " + hero.index + " is entering a code");
+    }
+
     // Pick anim
     var anim = "idle";
     if (leftThumb.length() > 0.1) anim = "run";

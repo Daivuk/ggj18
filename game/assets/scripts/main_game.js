@@ -3,6 +3,8 @@ function updateGame(dt)
     heroes_update(dt)
 
     pickups_update(dt);
+
+    map_update(dt);
 }
 
 function renderGame()

@@ -2,7 +2,7 @@ var PICKUP_HERO_COLLISION_RADIUS = 0;
 var MAX_PICKUPS = 20;
 var PICKUP_SPAWN_INTERVAL_SEC = 0.1;
 var ACQUIRE_RADIUS = 10;
-
+var PICKUP_CENTER_SPAWN_TILE_RADIUS = 3;
 
 var circuitTexture = getTexture("circuit.png");
 var pickupColor = Color.fromHexRGB(0xa1ef79);
@@ -47,7 +47,7 @@ function pickup_spawn()
         spawnPos.y = tileY * TILE_HEIGHT + HALF_TILE_HEIGHT;
 
         // Check for collision against the centre area
-        if(Vector2.distance(CENTRE_POSITION, spawnPos) < 3 * TILE_HEIGHT)
+        if(Vector2.distance(CENTRE_POSITION, spawnPos) < PICKUP_CENTER_SPAWN_TILE_RADIUS * TILE_HEIGHT)
         {
             continue;
         }
