@@ -21,6 +21,11 @@ function hero_render(hero)
     SpriteBatch.drawSpriteAnim(hero.spriteAnim, hero.position);
 }
 
+function hero_renderGlow(hero)
+{
+    
+}
+
 function hero_update(hero, dt)
 {
     var leftThumb = GamePad.getLeftThumb(hero.index);
