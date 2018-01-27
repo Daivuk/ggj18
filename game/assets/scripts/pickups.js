@@ -1,6 +1,6 @@
 var PICKUP_HERO_COLLISION_RADIUS = 0;
-var MAX_PICKUPS = 4;
-var PICKUP_SPAWN_INTERVAL_SEC = 5;
+var MAX_PICKUPS = 20;
+var PICKUP_SPAWN_INTERVAL_SEC = 0.1;
 var CENTRE_POSITION = new Vector2(0, 0);
 var ACQUIRE_RADIUS = 10;
 
@@ -11,8 +11,10 @@ var pickups = [];
 function pickup_create(_pos)
 {
     var pickup = {
-        position: new Vector2(_pos),
+        position: new Vector2(_pos)
     }
+
+    pickup.glyph = String.fromCharCode(Random.randInt(0, 25) + 97);
 
     return pickup;
 }
@@ -27,8 +29,8 @@ function pickup_spawn()
         var foundCollision = false;
 
         // Get a random tile spot
-        var tileX = Math.round(Math.random() * tiledMap.getSize().x);
-        var tileY = Math.round(Math.random() * tiledMap.getSize().y);
+        var tileX = Random.randInt(0, tiledMap.getSize().x);
+        var tileY = Random.randInt(0, tiledMap.getSize().y);
 
         // Get the actual spawn position for the pickup
         spawnPos.x = tileX * TILE_HEIGHT + HALF_TILE_HEIGHT;
@@ -79,7 +81,8 @@ function pickup_spawn()
 
 function pickup_render(pickup)
 {
-    SpriteBatch.drawRect(null, new Rect(pickup.position.sub(new Vector2(5, 5)), new Vector2(10, 10)));
+    SpriteBatch.drawRect(null, new Rect(pickup.position.sub(new Vector2(5, 5)), new Vector2(10, 10)), new Color(0.3, 0.3, 0.3));
+    SpriteBatch.drawText(encryptedFont, pickup.glyph, pickup.position, Vector2.BOTTOM, new Color(1.0, 1.0, 1.0));
 }
 
 function pickups_render()
