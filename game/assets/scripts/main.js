@@ -74,6 +74,7 @@ function renderWorld()
     SpriteBatch.begin(cameraTransform);
     SpriteBatch.setFilter(FilterMode.NEAREST);
     SpriteBatch.setBlend(BlendMode.PREMULTIPLIED);
+    SpriteBatch.drawRect(null, new Rect(-100, -100, 1, 1)); // To avoid glitch
 
     switch(gameState)
     {

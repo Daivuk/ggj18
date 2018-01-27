@@ -7,10 +7,11 @@ function hero_create(_index, _pos, _color)
     var hero = {
         index: _index,
         position: new Vector2(_pos),
-        color: new Color(_color)
+        color: new Color(_color),
+        dir: "w"
     };
 
-    hero.spriteAnim = playSpriteAnim("hacker.spriteanim", "idle_e");
+    hero.spriteAnim = playSpriteAnim("hacker" + (_index % 3) + ".spriteanim", "idle_e");
 
     return hero;
 }
@@ -96,7 +97,7 @@ function heroes_render()
 
 function hero_renderGlow(hero)
 {
-
+    SpriteBatch.drawSpriteAnim(hero.spriteAnim, hero.position, Color.BLACK);
 }
 
 function hero_update(hero, dt)
@@ -109,25 +110,30 @@ function hero_update(hero, dt)
     // Apply collision to the movement
     hero.position = tiledMap.collision(hero.position, nextPosition, new Vector2(HERO_COLLISION_SIZE, HERO_COLLISION_SIZE));
 
+    var pickup = pickups_acquire(hero.position.add(HERO_PICKUP_OFFSET));
+    if(pickup != null)
+    {
+        // Do stuff with the pickup
+    }
+
+    // Pick anim
+    var anim = "idle";
+    if (leftThumb.length() > 0.1) anim = "run";
+
     // Point the character in the right direction
     if(Math.abs(leftThumb.x) > 0.001)
     {
         if(leftThumb.x > 0)
         {
-            hero.spriteAnim.play("idle_e")
+            hero.dir = "e";
         }
         else
         {
-            hero.spriteAnim.play("idle_w")
+            hero.dir = "w";
         }
     }
 
-    var pickup = pickups_acquire(hero.position.add(HERO_PICKUP_OFFSET));
-
-    if(pickup != null)
-    {
-        // Do stuff with the pickup
-    }
+    hero.spriteAnim.play(anim + "_" + hero.dir)
 }
 
 function heroes_update(dt)

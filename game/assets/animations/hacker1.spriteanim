@@ -1,0 +1,34 @@
+<sheet texture="hacker1.png" spriteWidth="24" spriteHeight="32" originX="12" originY="18">
+  <anim name="idle_e" fps="10" loop="true">
+    <frame id="0" flipH="true"/>
+    <frame id="1" flipH="true"/>
+    <frame id="2" flipH="true"/>
+    <frame id="3" flipH="true"/>
+  </anim>
+  <anim name="idle_w" fps="10" loop="true">
+    <frame id="0" flipH="false"/>
+    <frame id="1" flipH="false"/>
+    <frame id="2" flipH="false"/>
+    <frame id="3" flipH="false"/>
+  </anim>
+  <anim name="run_e" fps="13" loop="true">
+    <frame id="4" flipH="true"/>
+    <frame id="5" flipH="true"/>
+    <frame id="6" flipH="true"/>
+    <frame id="7" flipH="true"/>
+    <frame id="8" flipH="true"/>
+    <frame id="9" flipH="true"/>
+    <frame id="10" flipH="true"/>
+    <frame id="11" flipH="true"/>
+  </anim>
+  <anim name="run_w" fps="13" loop="true">
+    <frame id="4" flipH="false"/>
+    <frame id="5" flipH="false"/>
+    <frame id="6" flipH="false"/>
+    <frame id="7" flipH="false"/>
+    <frame id="8" flipH="false"/>
+    <frame id="9" flipH="false"/>
+    <frame id="10" flipH="false"/>
+    <frame id="11" flipH="false"/>
+  </anim>
+</sheet>
