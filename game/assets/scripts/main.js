@@ -9,16 +9,17 @@ var gameState = GameStateEnum.INIT;
 
 var tiledMap = getTiledMap("arena.tmx");
 var TILE_HEIGHT = tiledMap.getTileSize();
+var HALF_TILE_HEIGHT = TILE_HEIGHT * 0.5;
 
 var cameraTransform = new Matrix();
 var invCameraTransform = new Matrix();
 var resolution = new Vector2(480, 272);
 
 var heroes = [
-    hero_create(0, new Vector2(6, 2).mul(TILE_HEIGHT).add(TILE_HEIGHT * 0.5), new Color(1, 0, 0, 1)),
-    hero_create(1, new Vector2(28, 1).mul(TILE_HEIGHT).add(TILE_HEIGHT * 0.5), new Color(0, 1, 0, 1)),
-    hero_create(2, new Vector2(28, 15).mul(TILE_HEIGHT).add(TILE_HEIGHT * 0.5), new Color(0, 0, 1, 1)),
-    hero_create(3, new Vector2(6, 14).mul(TILE_HEIGHT).add(TILE_HEIGHT * 0.5), new Color(1, 1, 0, 1))
+    hero_create(0, new Vector2(6, 2).mul(TILE_HEIGHT).add(HALF_TILE_HEIGHT), new Color(1, 0, 0, 1)),
+    hero_create(1, new Vector2(28, 1).mul(TILE_HEIGHT).add(HALF_TILE_HEIGHT), new Color(0, 1, 0, 1)),
+    hero_create(2, new Vector2(28, 15).mul(TILE_HEIGHT).add(HALF_TILE_HEIGHT), new Color(0, 0, 1, 1)),
+    hero_create(3, new Vector2(6, 14).mul(TILE_HEIGHT).add(HALF_TILE_HEIGHT), new Color(1, 1, 0, 1))
 ];
 
 var bloomRT = Texture.createScreenRenderTarget();
