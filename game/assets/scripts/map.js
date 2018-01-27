@@ -1,5 +1,3 @@
-var CENTRE_TILE_PROXIMITY = 1.5;
-
 var heroesInCentre = 0;
 var rotatingLight = new NumberAnim();
 var angle = 0;
