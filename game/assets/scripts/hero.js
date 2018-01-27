@@ -1,7 +1,7 @@
 var HERO_COLLISION_SIZE = 10;
 var HERO_SPEED = 50;
 
-var hacker = playSpriteAnim("hacker.spriteanim", "idle");
+var hacker = playSpriteAnim("hacker.spriteanim", "idle_w");
 
 function hero_create(_index, _pos, _color)
 {

@@ -2,7 +2,7 @@
 resolution = 1280 x 720
 
 # Retro resolution if retro mode is enabled
-retroResolution = 560 x 304
+retroResolution = 480 x 272
 
 # Retro mode renders the game in a smaller resolution and fill the screen
 retroMode = false

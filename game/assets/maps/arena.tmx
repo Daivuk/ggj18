@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.0.1" orientation="orthogonal" renderorder="right-down" width="35" height="19" tilewidth="16" tileheight="16" nextobjectid="1">
+<map version="1.0" tiledversion="1.0.1" orientation="orthogonal" renderorder="right-down" width="30" height="17" tilewidth="16" tileheight="16" nextobjectid="1">
  <tileset firstgid="1" source="tileset.tsx"/>
- <layer name="tiles" width="35" height="19">
+ <layer name="tiles" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJzVVssOwyAM45pxg///16nSkCzXTmFw2A4RDc3DcQJtlFLix+U1IR2eL59K67BpH0HbE1g4Ju7xOmwGlrqBpUGdmFthCdrjlf12eUHeFWaHZUgn35m8vNco7swsrQrHVv10tt8K1oV5n+Izrw4zc59x7GpDPUTOGV5rudfnsATl4XnbwdIhVqM9zF0FTtQZi+prkJ/iNeMlw4KcKSxudjMs2bwo3c0Mn+0unk+d2ZnZw3xNvM/864PO8Vjn3mb3n7srV2pUs3DiG+DiOBt1X6/iwJlVc+3OguvBSj9WecHe8x0T5f4fw+s/yBv3WhqW
+   eJzNVEEOwCAI8+r4/3938dCQVmBiskOzKbpSKJtjjPlTPAvqfbfHcMLlOWztGaytiRe/F2HCk+Uc8TI+pge5unn9GaWR5WdJXlVzBiNnT32Fen3+3kcqx4rOXW+Vv7Iz9bW2GENOdq+jzsxH2f52zVE1ntUbeUTNsJ8XH6/qZT1T66jfN3nVXFX+G1E+GS9V+nsTL/n0Ezs=
   </data>
  </layer>
- <layer name="collisions" width="35" height="19" visible="0" opacity="0.49">
+ <layer name="collisions" width="30" height="17" visible="0" opacity="0.49">
   <data encoding="base64" compression="zlib">
-   eJzVld0KgDAIhbf3f+luIzx/5qCEsWxy/NKsvdbaH1+pbbCj2GkWJ66K6bKga3Tm1GeiLs/cLksV6+ZlLJ13yTHGgp5lMrfDUsUzZqbn1vjuO7NY6al7LN8kizI2k08/7ZHSVvodFjWHLFfKUs1+1cdT81tZ0qPTpr5/qkdKV/lv/gFIJ2FJOZK+dfp4igWds/0P6wL0BwEo
+   eJzNlVEOgCAMQ7f7X9r4u6xdOySRxCgy+0pBzYjIHx1uS3BGtSdcpa6rUbjoGo0p83bnWzkqt6tFfhB3s/ZIC+krHr/kdmPMH+ozfWf/M1/oHvJ1wlV8qe9Gfa5qKNlvuWxfTboOt+Z+I/Pa1JxvcNH3asp50pz6zn9BqWVcxnSy36zF+8wDMlkAuQ==
   </data>
  </layer>
 </map>
