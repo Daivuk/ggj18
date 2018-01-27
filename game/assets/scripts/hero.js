@@ -1,6 +1,7 @@
 var HERO_COLLISION_SIZE = 10;
 var HERO_SPEED = 50;
 var HERO_PICKUP_OFFSET = new Vector2(0, 0);
+var HERO_GLYPH_COLOR = new Color(1.0, 0.8, 0.0);
 
 function hero_create(_index, _pos, _color)
 {
@@ -42,7 +43,8 @@ function hero_createNewMessage(hero) {
 
         hero.glyphMap.push({
             encrypted: shiftedGlyph,
-            decrypted: originalGlyph.toUpperCase() // upper case are decrypted and visible on screen
+            decrypted: originalGlyph.toUpperCase(), // upper case are decrypted and visible on screen
+            color: new Color(HERO_GLYPH_COLOR)
         });
 
         hero.displayMessage += shiftedGlyph;
@@ -58,6 +60,7 @@ function hero_revealGlyph(hero, glyph)
         if (hero.glyphMap[i].encrypted == glyph)
         {
             hero.displayMessage = hero.displayMessage.replaceAt(i, hero.glyphMap[i].decrypted);
+            hero.glyphMap[i].color = new Color(Color.WHITE);
         }
     }
 }
@@ -85,7 +88,11 @@ function hero_render(hero)
 {
     SpriteBatch.drawSpriteAnim(hero.spriteAnim, hero.position);
     SpriteBatch.drawSpriteAnim(hero.spriteAnim, new Vector2(40, 48 + 70 * hero.index), Color.WHITE, 0, 2);
-    SpriteBatch.drawText(encryptedFont, hero.displayMessage, new Vector2(4, 4 + 70 * hero.index), Vector2.TOP_LEFT, new Color(1.0, 1.0, 1.0));
+    
+    for (var i = 0; i < hero.glyphMap.length; ++i)
+    {
+        SpriteBatch.drawText(encryptedFont, hero.displayMessage[i], new Vector2(4+(8*i), 4 + 70 * hero.index), Vector2.TOP_LEFT, hero.glyphMap[i].color);
+    }
 }
 
 function heroes_render()
