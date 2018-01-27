@@ -111,7 +111,7 @@ function renderGlow()
     SpriteBatch.setBlend(BlendMode.PREMULTIPLIED);
 
     // Render the map
-    tiledMap.renderLayer(2);
+    map_renderGlow();
 
     for(var i = 0; i < renderables.length; ++i)
     {
