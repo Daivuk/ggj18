@@ -23,14 +23,19 @@ function update(dt)
     updateCamera();
 }
 
+var hacker = playSpriteAnim("hacker.spriteanim", "idle");
+
 function render()
 {
     Renderer.clear(new Color(0, 0, 0, 1));
 
     SpriteBatch.begin(cameraTransform);
+    SpriteBatch.setFilter(FilterMode.NEAREST);
 
     // Render the map
     tiledMap.render();
+
+    SpriteBatch.drawSpriteAnim(hacker, new Vector2(100, 100));
 
     SpriteBatch.end();
 }
