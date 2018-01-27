@@ -35,9 +35,10 @@ function update(dt)
 
     updateCamera();
 
-    for(var i = 0; i < 4; ++i)
+    for(var i = 0; i < heroes.length; ++i)
     {
-        hero_update(heroes[i], dt);
+        var hero = heroes[i];
+        hero_update(hero, dt);
     }
 }
 
@@ -54,9 +55,10 @@ function renderWorld()
     tiledMap.renderLayer(0); // Ground
     tiledMap.renderLayer(1); // Walls
 
-    for(var i = 0; i < 4; ++i)
+    for(var i = 0; i < heroes.length; ++i)
     {
-        hero_render(heroes[i]);
+        var hero = heroes[i];
+        hero_render(hero);
     }
 
     SpriteBatch.end();
@@ -74,9 +76,10 @@ function renderGlow()
     // Render the map
     tiledMap.renderLayer(2);
 
-    for(var i = 0; i < 4; ++i)
+    for(var i = 0; i < heroes.length; ++i)
     {
-        hero_renderGlow(heroes[i]);
+        var hero = heroes[i];
+        hero_renderGlow(hero);
     }
 
     SpriteBatch.end();
