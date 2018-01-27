@@ -15,15 +15,21 @@ var uniqueGlyphs;
 
 function pickup_create(_pos)
 {
-    var index = Random.randInt(0, uniqueGlyphs.length - 1);
+    if (uniqueGlyphs.length == 0)
+    {
+        print("OUT OF UNIQUE GLYPHS!!")
+        return null;
+    }
 
     var pickup = {
         position: new Vector2(_pos),
-        glyph: uniqueGlyphs[index],
+        glyph: uniqueGlyphs[0],
         floatAnim: new NumberAnim(),
         renderFn: pickup_render,
         renderGlowFn: pickup_renderGlow,
     }
+
+    uniqueGlyphs = uniqueGlyphs.slice(1);
 
     pickup.floatAnim.playSingle(-2, 2, .5, Tween.EASE_BOTH, Loop.PING_PONG_LOOP);
 
@@ -76,7 +82,13 @@ function pickup_spawn()
         foundSpot = tiledMap.getCollision(tileX, tileY);
     }
     
-    pickups.push(pickup_create(spawnPos));
+    var pickup = pickup_create(spawnPos);
+
+    if (pickup)
+    {
+        pickups.push(pickup);
+    }
+
 }
 
 function pickup_getDrawPosition(pickup)
@@ -108,7 +120,7 @@ function pickups_update(dt)
 
     if(pickupSpawnTime < 0)
     {
-        if(pickups.length < MAX_PICKUPS)
+        if(uniqueGlyphs.length > 0 && pickups.length < MAX_PICKUPS)
         {
             pickup_spawn();
         }
@@ -134,8 +146,11 @@ function pickups_acquire(position)
                 if (renderables[j] == pickup)
                 {
                     renderables.splice(j, 1);
+                    break;
                 }
             }
+
+            uniqueGlyphs += pickup.glyph;
 
             return pickup;
         }

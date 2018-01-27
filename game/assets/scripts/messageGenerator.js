@@ -29,11 +29,21 @@ function generateWord(letterCount)
     {
         var db = _worddb[letterCount];
         var randomIndex = Random.randInt(0, db.length - 1);
-        var randomWord = db[randomIndex].word;
+        var randomWord = db[randomIndex].word.toLowerCase();
 
-        if (randomWord.indexOf(' ') >= 0) { continue; } // some words have spaces.. I dont' have time to clean them because it's a game jam lololol
+        var skipWord = false;
+        for (var i = 0; i < randomWord.length; ++i)
+        {
+            if (randomWord[i] < 'a' || randomWord[i] > 'z')  // quick gamejam filter
+            {
+                skipWord = true;
+                break;
+            }
+        }
 
-        return randomWord.toLowerCase();
+        if (skipWord) continue;
+
+        return randomWord;
     }
 }
 
