@@ -74,7 +74,7 @@ function hero_revealGlyph(hero, glyph)
         if (hero.glyphMap[i].encrypted == glyph)
         {
             hero.displayMessage = hero.displayMessage.replaceAt(i, hero.glyphMap[i].decrypted);
-            hero.glyphMap[i].color.playSingle(Color.WHITE, hero.color, 3, Tween.EASE_IN);
+            hero.glyphMap[i].color.playSingle(Color.WHITE, hero.color.mul(.5), 3, Tween.EASE_IN);
         }
     }
 }
@@ -136,7 +136,9 @@ function hero_renderGlow(hero)
     for (var i = 0; i < hero.glyphMap.length; ++i)
     {
         if (hero.glyphMap[i].color.isPlaying() || hasWord)
+        {
             SpriteBatch.drawText(encryptedFont, hero.displayMessage[i], new Vector2(4+(8*i), 4 + 70 * hero.index), Vector2.TOP_LEFT, hero.glyphMap[i].color.get());
+        }
     }
 }
 

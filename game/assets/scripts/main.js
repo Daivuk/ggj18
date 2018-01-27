@@ -110,6 +110,7 @@ function renderGlow()
     // Render the map
     tiledMap.renderLayer(2);
 
+    pickups_renderGlow();
     for(var i = 0; i < heroes.length; ++i)
     {
         var hero = heroes[i];

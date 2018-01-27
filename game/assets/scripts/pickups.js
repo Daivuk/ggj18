@@ -4,6 +4,9 @@ var PICKUP_SPAWN_INTERVAL_SEC = 0.1;
 var ACQUIRE_RADIUS = 10;
 
 
+var circuitTexture = getTexture("circuit.png");
+var pickupColor = Color.fromHexRGB(0xa1ef79);
+
 
 var pickupSpawnTime = PICKUP_SPAWN_INTERVAL_SEC;
 
@@ -13,8 +16,11 @@ var uniqueGlyphs;
 function pickup_create(_pos)
 {
     var pickup = {
-        position: new Vector2(_pos)
+        position: new Vector2(_pos),
+        floatAnim: new NumberAnim()
     }
+
+    pickup.floatAnim.playSingle(-2, 2, .5, Tween.EASE_BOTH, Loop.PING_PONG_LOOP);
 
     var index = Random.randInt(0, uniqueGlyphs.length - 1);
     pickup.glyph = uniqueGlyphs[index];
@@ -69,10 +75,27 @@ function pickup_spawn()
     pickups.push(pickup_create(spawnPos));
 }
 
+function pickup_getDrawPosition(pickup)
+{
+    var ret = new Vector2(pickup.position.x, pickup.position.y + pickup.floatAnim.get());
+    ret.y = Math.round(ret.y);
+    return ret;
+}
+
 function pickup_render(pickup)
 {
-    SpriteBatch.drawRect(null, new Rect(pickup.position.sub(new Vector2(5, 5)), new Vector2(10, 10)), new Color(0.3, 0.3, 0.3));
-    SpriteBatch.drawText(encryptedFont, pickup.glyph, pickup.position, Vector2.BOTTOM, new Color(1.0, 1.0, 1.0));
+    var pos = pickup_getDrawPosition(pickup);
+
+    SpriteBatch.drawSprite(circuitTexture, pos);
+    SpriteBatch.drawText(encryptedFont, pickup.glyph, new Vector2(pos.x - 1, pos.y - 2), Vector2.BOTTOM, pickupColor);
+}
+
+function pickup_renderGlow(pickup)
+{
+    var pos = pickup_getDrawPosition(pickup);
+
+    SpriteBatch.drawSprite(circuitTexture, pos, Color.BLACK);
+    SpriteBatch.drawText(encryptedFont, pickup.glyph, new Vector2(pos.x - 1, pos.y - 2), Vector2.BOTTOM, pickupColor);
 }
 
 function pickups_render()
@@ -80,6 +103,14 @@ function pickups_render()
     for(var i = 0; i < pickups.length; ++i)
     {
         pickup_render(pickups[i]);
+    }
+}
+
+function pickups_renderGlow()
+{
+    for(var i = 0; i < pickups.length; ++i)
+    {
+        pickup_renderGlow(pickups[i]);
     }
 }
 
