@@ -57,7 +57,7 @@ function hero_revealGlyph(hero, glyph)
     {
         if (hero.glyphMap[i].encrypted == glyph)
         {
-            hero.displayMessage[i] = hero.glyphMap[i].decrypted;
+            hero.displayMessage = hero.displayMessage.replaceAt(i, hero.glyphMap[i].decrypted);
         }
     }
 }
@@ -68,7 +68,7 @@ function hero_hideGlyph(hero, glyph)
     {
         if (hero.glyphMap[i].encrypted == glyph)
         {
-            hero.displayMessage[i] = hero.glyphMap[i].encrypted;
+            hero.displayMessage = hero.displayMessage.replaceAt(i, hero.glyphMap[i].encrypted);
         }
     }
 }
@@ -77,7 +77,7 @@ function hero_hideAllGlyph(hero)
 {
     for (var i = 0; i < hero.displayMessage.length; ++i)
     {
-        hero.displayMessage[i] = hero.glyphMap[i].encrypted;
+        hero.displayMessage = hero.displayMessage.replaceAt(i, hero.glyphMap[i].encrypted);
     }
 }
 
