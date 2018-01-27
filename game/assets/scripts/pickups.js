@@ -31,7 +31,7 @@ function pickup_create(_pos)
 
     uniqueGlyphs = uniqueGlyphs.slice(1);
 
-    pickup.floatAnim.playSingle(-2, 2, .5, Tween.EASE_BOTH, Loop.PING_PONG_LOOP);
+    pickup.floatAnim.playSingle(-2, 2, .45, Tween.EASE_BOTH, Loop.PING_PONG_LOOP);
 
 
     renderables.push(pickup);
