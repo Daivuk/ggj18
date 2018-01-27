@@ -1,3 +1,12 @@
+var GameStateEnum = {
+    INIT: 1,
+    MAIN_MENU: 2,
+    GAME: 3,
+    END_GAME: 4
+};
+
+var gameState = GameStateEnum.INIT;
+
 var tiledMap = getTiledMap("arena.tmx");
 var TILE_HEIGHT = tiledMap.getTileSize();
 
@@ -5,11 +14,12 @@ var cameraTransform = new Matrix();
 var invCameraTransform = new Matrix();
 var resolution = new Vector2(480, 272);
 
-var heroes = [];
-heroes.push(hero_create(0, new Vector2(6, 2).mul(TILE_HEIGHT).add(TILE_HEIGHT * 0.5), new Color(1, 0, 0, 1)));
-heroes.push(hero_create(1, new Vector2(28, 1).mul(TILE_HEIGHT).add(TILE_HEIGHT * 0.5), new Color(0, 1, 0, 1)));
-heroes.push(hero_create(2, new Vector2(28, 15).mul(TILE_HEIGHT).add(TILE_HEIGHT * 0.5), new Color(0, 0, 1, 1)));
-heroes.push(hero_create(3, new Vector2(6, 14).mul(TILE_HEIGHT).add(TILE_HEIGHT * 0.5), new Color(1, 1, 0, 1)));
+var heroes = [
+    hero_create(0, new Vector2(6, 2).mul(TILE_HEIGHT).add(TILE_HEIGHT * 0.5), new Color(1, 0, 0, 1)),
+    hero_create(1, new Vector2(28, 1).mul(TILE_HEIGHT).add(TILE_HEIGHT * 0.5), new Color(0, 1, 0, 1)),
+    hero_create(2, new Vector2(28, 15).mul(TILE_HEIGHT).add(TILE_HEIGHT * 0.5), new Color(0, 0, 1, 1)),
+    hero_create(3, new Vector2(6, 14).mul(TILE_HEIGHT).add(TILE_HEIGHT * 0.5), new Color(1, 1, 0, 1))
+];
 
 var bloomRT = Texture.createScreenRenderTarget();
 
@@ -33,12 +43,25 @@ function update(dt)
     // Quit game with escape
     if (Input.isJustDown(Key.ESCAPE)) quit();
 
+    // always update the camera regardless of the state.
     updateCamera();
 
-    for(var i = 0; i < heroes.length; ++i)
+    switch(gameState)
     {
-        var hero = heroes[i];
-        hero_update(hero, dt);
+        case GameStateEnum.INIT:
+            updateInit(dt);
+            break;
+        case GameStateEnum.MAIN_MENU:
+            updateMainMenu(dt);
+            break;
+        case GameStateEnum.GAME:
+            updateGame(dt);
+            break;
+        case GameStateEnum.END_GAME:
+            updateEndGame(dt);
+            break;
+        default:
+            break;
     }
 }
 
@@ -51,14 +74,22 @@ function renderWorld()
     SpriteBatch.setFilter(FilterMode.NEAREST);
     SpriteBatch.setBlend(BlendMode.PREMULTIPLIED);
 
-    // Render the map
-    tiledMap.renderLayer(0); // Ground
-    tiledMap.renderLayer(1); // Walls
-
-    for(var i = 0; i < heroes.length; ++i)
+    switch(gameState)
     {
-        var hero = heroes[i];
-        hero_render(hero);
+        case GameStateEnum.INIT:
+            renderInit();
+            break;
+        case GameStateEnum.MAIN_MENU:
+            renderMainMenu();
+            break;
+        case GameStateEnum.GAME:
+            renderGame();
+            break;
+        case GameStateEnum.END_GAME:
+            renderEndGame();
+            break;
+        default:
+            break;
     }
 
     SpriteBatch.end();
