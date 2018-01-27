@@ -153,7 +153,6 @@ function hero_update(hero, dt)
 
     if(pickup != null)
     {
-        print("picked up " + pickup.glyph);
         hero_revealGlyph(hero, pickup.glyph);
     }
 

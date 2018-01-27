@@ -17,7 +17,9 @@ function pickup_create(_pos)
         position: new Vector2(_pos)
     }
 
-    pickup.glyph = String.fromCharCode(Random.randInt(0, 25) + 97);
+    var index = Random.randInt(0, uniqueGlyphs.length - 1);
+    pickup.glyph = uniqueGlyphs[index];
+    //pickup.glyph = String.fromCharCode(Random.randInt(0, 25) + 97);
 
     return pickup;
 }
