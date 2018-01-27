@@ -13,6 +13,9 @@ heroes.push(hero_create(3, new Vector2(6, 14).mul(TILE_HEIGHT).add(TILE_HEIGHT *
 
 var bloomRT = Texture.createScreenRenderTarget();
 
+var encryptedFont = getFont("sga.fnt");
+
+
 function updateCamera()
 {
     // Fit the map into the display
