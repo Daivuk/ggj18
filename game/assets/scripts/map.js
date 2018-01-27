@@ -1,4 +1,4 @@
-var CENTER_TILE_PROXIMITY = 1.5;
+var CENTRE_TILE_PROXIMITY = 1.5;
 
 var heroesInCentre = 0;
 
@@ -24,5 +24,5 @@ function map_update(dt)
 
 function map_isInCentre(position)
 {
-    return Vector2.distance(position, CENTRE_POSITION) < CENTER_TILE_PROXIMITY * TILE_HEIGHT;
+    return Vector2.distance(position, CENTRE_POSITION) < CENTRE_TILE_PROXIMITY * TILE_HEIGHT;
 }

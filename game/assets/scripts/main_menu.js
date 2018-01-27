@@ -13,6 +13,18 @@ function updateMainMenu(dt)
     gameState = GameStateEnum.GAME
 }
 
+function regenerateUniqueGlyphs()
+{
+    uniqueGlyphs = ""
+    for(var i = 0; i < heroes.length; ++i)
+    {
+        var hero = heroes[i];
+        uniqueGlyphs += hero.displayMessage;
+    }
+
+    uniqueGlyphs = removeDuplicatesFromArray(uniqueGlyphs);
+}
+
 function renderMainMenu()
 {
     

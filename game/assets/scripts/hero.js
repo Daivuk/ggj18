@@ -26,7 +26,8 @@ function hero_create(_index, _pos, _color)
         disableTimer: HERO_DISABLE_TIME,
         spriteAnim: playSpriteAnim("hacker" + _index + ".spriteanim", "idle_e"),
         renderFn: hero_render,
-        renderGlowFn: hero_renderGlow
+        renderGlowFn: hero_renderGlow,
+        points: 0
     };
 
     renderables.push(hero);
@@ -225,9 +226,16 @@ function hero_update(hero, dt)
         }
     }
 
-    if(GamePad.isJustDown(hero.index, Button.X) && heroesInCentre < 2 && map_isInCentre(hero.position))
+    // Handle interacting with the transmitter
+    if(GamePad.isJustDown(hero.index, Button.X) && heroesInCentre < 2 && map_isInCentre(hero.position) && hero_hasFullMessage(hero))
     {
-        print("hero " + hero.index + " is entering a code");
+        hero.points++;
+
+        print("hero " + hero.index + " entered a code and now has " + hero.points + " points");
+
+        hero_createNewMessage(hero);
+
+        regenerateUniqueGlyphs();
     }
 
     // Pick anim

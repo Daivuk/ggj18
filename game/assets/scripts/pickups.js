@@ -1,6 +1,6 @@
-var PICKUP_HERO_COLLISION_RADIUS = 0;
-var MAX_PICKUPS = 20;
-var PICKUP_SPAWN_INTERVAL_SEC = 0.1;
+var PICKUP_HERO_COLLISION_TILE_RADIUS = 2;
+var MAX_PICKUPS = 50;
+var PICKUP_SPAWN_INTERVAL_SEC = 1;
 var ACQUIRE_RADIUS = 10;
 var PICKUP_CENTER_SPAWN_TILE_RADIUS = 3;
 
@@ -65,7 +65,7 @@ function pickup_spawn()
         }
 
         // Make sure we don't spawn too close to a player
-        foundCollision = hero_collision(spawnPos, PICKUP_HERO_COLLISION_RADIUS);
+        foundCollision = hero_collision(spawnPos, PICKUP_HERO_COLLISION_TILE_RADIUS * TILE_HEIGHT);
 
         if(foundCollision)
         {
