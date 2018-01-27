@@ -40,11 +40,43 @@ function hero_createNewMessage(hero) {
         }
 
         hero.glyphMap.push({
-            shifted: shiftedGlyph,
-            original: originalGlyph
+            encrypted: shiftedGlyph,
+            decrypted: originalGlyph.toUpperCase() // upper case are decrypted and visible on screen
         });
 
         hero.displayMessage += shiftedGlyph;
+    }
+
+    hero.message = hero.message.toUpperCase(); // decrypted
+}
+
+function hero_revealGlyph(hero, glyph)
+{
+    for (var i = 0; i < hero.glyphMap.length; ++i)
+    {
+        if (hero.glyphMap[i].encrypted == glyph)
+        {
+            hero.displayMessage[i] = hero.glyphMap[i].decrypted;
+        }
+    }
+}
+
+function hero_hideGlyph(hero, glyph)
+{
+    for (var i = 0; i < hero.glyphMap.length; ++i)
+    {
+        if (hero.glyphMap[i].encrypted == glyph)
+        {
+            hero.displayMessage[i] = hero.glyphMap[i].encrypted;
+        }
+    }
+}
+
+function hero_hideAllGlyph(hero)
+{
+    for (var i = 0; i < hero.displayMessage.length; ++i)
+    {
+        hero.displayMessage[i] = hero.glyphMap[i].encrypted;
     }
 }
 
