@@ -1,4 +1,4 @@
-<sheet texture="hacker3.png" spriteWidth="24" spriteHeight="32" originX="12" originY="18">
+<sheet texture="hacker3.png" spriteWidth="24" spriteHeight="32" originX="12" originY="20">
   <anim name="idle_e" fps="10" loop="true">
     <frame id="0" flipH="true"/>
     <frame id="1" flipH="true"/>

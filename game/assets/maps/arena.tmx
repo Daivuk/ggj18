@@ -3,17 +3,17 @@
  <tileset firstgid="1" source="tileset.tsx"/>
  <layer name="ground" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJylVNEOwjAI5Nta3R7c9qQ+GGOiUf//E6TJmjTsoOAeLqWUwoUeTUSUOhhXaLblQ/DWWhiTYU+GD8Gq2+Y/rmtW7GT4okD5T4wZ2Mnw/Vs3muvQ2Ddl9dT11pD3nowXWL0aHpv8mbB+y/kQ4OvR1STetNVl4XFmXBhX2upK8h6oP0ce3oXHfbUftNVC5S55e+pWjqjvBW/Gh/EVb55BbFTPcu5nkLvyk/dq7ODk4O1zzS3roFjPPGp6iPYtGr+QrgeZy9rLvvV4aH1u3zB39qlzFgGaC22P9Ln3/96LH9woibg=
+   eJzFVLsOwjAM9LeltB1oOwEDQkg8//8TcKRGWO45sVkYTnGd5HyyL01ElBoYV1hxLYfgrbUwpko8VXIItbqSv1/XzohTJRcF4t8zZhCnSu7XulGunYjPxuqp662h790Yd7B6PTwK/o6wf/P+ENDr8dWkZip9mXUcGEfGiba+0roHar8jj+6s47LGV9p6oWjXuj11i0bU94wn48V4q5l34GzUz/rdz4C76NP3ytnBqcHb58Kt66Cznvdo+SHat+j5hWw/tLjkvu5b667VZznDMt+z+u4BD9qLQM4w/4Me9P0PoRlbPvsXPh5Xig0=
   </data>
  </layer>
  <layer name="tiles" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJydVdtOwzAM9QNsVFyExEACIQQMOoEQEmy0XAblF3jkgf//DY5FpnnGp013pKM4cepL7KSFiBSOW+AQHIC74BR8Ah/BmZOnibO0proqrVVOX6VxL/BZJF8L+y+yRGnkifxHGaxFuCB+R8T+PZHb1iIcE78ba9jy+CKj4ibDbx+cGfmbjAqW7w6xW4Nz8AN8DvRRzSOw+m6Cd+AVeG32N7Lsy3PwxOjH4G2mX5bvqO0jA197O6+DuDU2zeeS+O1b359gre1O5dR3nOKOzt32kZ83bq8Fq29uvta2xvfZsvfUyOwe5dZ3XbBz1n72/aBnvN/Tvq9Dl1+W74Gs3tu6Y14SXd9z3pbVGjYd8wnRsb46lL836R18S7K+Uw8kHgZ2l9g5679X/8EDIw9JPAt5HsivQewqH4G/OuIevg==
+   eJydVcFOwzAMzQE2qgFCYiANITQYdAKhSbDRbmxQfoEjBz4AbvD/B55FpnnGr6R70lMcO7UdO0mzEEJmuAO2wRa4B47BB/AenBh5HDmJOrEVUVcYexHHfSdmFmMt/c/CCrmSh+Evckfn4ZzE7RL/IyLX6Tz0SNytDXxZvJJRcJ0QtwnOlPxGRgHb7y7xW4IL8BmcOnav5x5Yf7fBW/ASvFLrq7A6l33wRNkH4E1iXLbfbt1HCrb3el46eUtusp8LErdpf98dXd2dSunvIObt1V2fIzuvzFoN1t/U/Wrfkt9LzdpTJbN7lNrfTcHqLOfZngep8UFD/7YP/8Vl+z0M6/f2A/xU89LYc2JrWudOWO/hF/it5pWxD4mNnauj8PsmPYHzKMs7dUfyYWB3idVZ/r3yD24puU3yWcoLR350chf5GPwBUqEfhg==
   </data>
  </layer>
  <layer name="glow" width="30" height="17">
   <data encoding="base64" compression="zlib">
-   eJxjYMAONHCIaxPBxqePWHWjgDgQjIOmBZBFYkfjoMkB+gy40xu1ACxd6SKJGTBgpjeYvDSN3UMs0IfSyO4GuY2a+SSeimbBACz8sIW7LJpaZL4BmlpqAmSzB0v8kgvQ0wM5AD0eqAX0CfCJlSMVGBDgEyuHD9C6nEK3QwOLGLl6kPkAYpgJ6Q==
+   eJxjYMAONHCIaxPBxqePWHWjgDgQjIOmBZBFYkfjoMkB+gy40xu1ACxd6SKJGTBgpjeYvDSN3UMs0IfSyO4GuY2a+SSeimbBACz8sIW7LJpaZL4BmlpqAmSzB0v8kgvQ0wM5AD0eqAWygTgHia+PSyEBOVJBMRCXIPEN8KjFJ4cP0LqcQrdDA4sYuXqQ+QBJSgtI
   </data>
  </layer>
  <layer name="collisions" width="30" height="17" visible="0" opacity="0.49">
