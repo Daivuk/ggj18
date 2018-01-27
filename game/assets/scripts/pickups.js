@@ -2,6 +2,7 @@ var PICKUP_HERO_COLLISION_RADIUS = 0;
 var MAX_PICKUPS = 4;
 var PICKUP_SPAWN_INTERVAL_SEC = 5;
 var CENTRE_POSITION = new Vector2(0, 0);
+var ACQUIRE_RADIUS = 10;
 
 var pickupSpawnTime = PICKUP_SPAWN_INTERVAL_SEC;
 
@@ -102,4 +103,20 @@ function pickups_update(dt)
 
         pickupSpawnTime = PICKUP_SPAWN_INTERVAL_SEC;
     }
+}
+
+function pickups_acquire(position)
+{
+    var collisionIndex = -1;
+
+    // Check for collision against other pickups
+    for(var i = 0; i < pickups.length; ++i)
+    {
+        if(Vector2.distance(pickups[i].position, position) < ACQUIRE_RADIUS)
+        {
+            return pickups.splice(i, 1);
+        }
+    }
+
+    return null;
 }

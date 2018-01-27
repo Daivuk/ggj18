@@ -1,5 +1,6 @@
 var HERO_COLLISION_SIZE = 10;
 var HERO_SPEED = 50;
+var HERO_PICKUP_OFFSET = new Vector2(0, 0);
 
 function hero_create(_index, _pos, _color)
 {
@@ -87,6 +88,13 @@ function hero_update(hero, dt)
         {
             hero.spriteAnim.play("idle_w")
         }
+    }
+
+    var pickup = pickups_acquire(hero.position.add(HERO_PICKUP_OFFSET));
+
+    if(pickup != null)
+    {
+        // Do stuff with the pickup
     }
 }
 
