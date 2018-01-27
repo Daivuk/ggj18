@@ -4,9 +4,12 @@ var PICKUP_SPAWN_INTERVAL_SEC = 0.1;
 var CENTRE_POSITION = new Vector2(0, 0);
 var ACQUIRE_RADIUS = 10;
 
+
+
 var pickupSpawnTime = PICKUP_SPAWN_INTERVAL_SEC;
 
 var pickups = [];
+var uniqueGlyphs;
 
 function pickup_create(_pos)
 {
