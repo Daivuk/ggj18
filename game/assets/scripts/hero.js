@@ -11,7 +11,7 @@ function hero_create(_index, _pos, _color)
         dir: "w"
     };
 
-    hero.spriteAnim = playSpriteAnim("hacker" + (_index % 3) + ".spriteanim", "idle_e");
+    hero.spriteAnim = playSpriteAnim("hacker" + _index + ".spriteanim", "idle_e");
 
     return hero;
 }
