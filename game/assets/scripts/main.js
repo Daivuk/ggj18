@@ -1,3 +1,11 @@
+var TILE_HEIGHT = 16;
+
+var heroes = [];
+heroes.push(hero_create(0, new Vector2(6, 1).mul(TILE_HEIGHT).add(TILE_HEIGHT * 0.5), new Color(1, 0, 0, 1)));
+heroes.push(hero_create(1, new Vector2(28, 1).mul(TILE_HEIGHT).add(TILE_HEIGHT * 0.5), new Color(0, 1, 0, 1)));
+heroes.push(hero_create(2, new Vector2(28, 16).mul(TILE_HEIGHT).add(TILE_HEIGHT * 0.5), new Color(0, 0, 1, 1)));
+heroes.push(hero_create(3, new Vector2(6, 17).mul(TILE_HEIGHT).add(TILE_HEIGHT * 0.5), new Color(1, 1, 0, 1)));
+
 var tiledMap = getTiledMap("arena.tmx");
 var cameraTransform = new Matrix();
 var invCameraTransform = new Matrix();
@@ -17,13 +25,17 @@ function updateCamera()
 
 function update(dt)
 {
+    
     // Quit game with escape
     if (Input.isJustDown(Key.ESCAPE)) quit();
 
     updateCamera();
-}
 
-var hacker = playSpriteAnim("hacker.spriteanim", "idle");
+    for(var i = 0; i < 4; ++i)
+    {
+        hero_update(heroes[i], dt);
+    }
+}
 
 function render()
 {
@@ -35,7 +47,10 @@ function render()
     // Render the map
     tiledMap.render();
 
-    SpriteBatch.drawSpriteAnim(hacker, new Vector2(100, 100));
+    for(var i = 0; i < 4; ++i)
+    {
+        hero_render(heroes[i]);
+    }
 
     SpriteBatch.end();
 }
