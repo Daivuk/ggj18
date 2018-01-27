@@ -112,13 +112,23 @@ function heroes_render()
     }
 }
 
+function hero_hasFullMessage(hero)
+{
+    for (var i = 0; i < hero.glyphMap.length; ++i)
+    {
+        var c = hero.displayMessage[i];
+        if ((c < "A" || c > "Z") && c != " ") return false;
+    }
+    return true;
+}
+
 function hero_renderGlow(hero)
 {
     SpriteBatch.drawSpriteAnim(hero.spriteAnim, hero.position, Color.BLACK);
-
+    var hasWord = hero_hasFullMessage(hero);
     for (var i = 0; i < hero.glyphMap.length; ++i)
     {
-        if (hero.glyphMap[i].color.isPlaying())
+        if (hero.glyphMap[i].color.isPlaying() || hasWord)
             SpriteBatch.drawText(encryptedFont, hero.displayMessage[i], new Vector2(4+(8*i), 4 + 70 * hero.index), Vector2.TOP_LEFT, hero.glyphMap[i].color.get());
     }
 }
