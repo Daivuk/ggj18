@@ -2,7 +2,7 @@
 resolution = 1280 x 720
 
 # Retro resolution if retro mode is enabled
-retroResolution = 1280 x 720
+retroResolution = 560 x 304
 
 # Retro mode renders the game in a smaller resolution and fill the screen
 retroMode = false
@@ -11,7 +11,7 @@ retroMode = false
 gameName = Global Game Jam 2018
 
 # If the window is resizable and can be maximized
-resizableWindow = true
+resizableWindow = false
 
 # Run the game in full screen.This is borderless fullscreen taking up your desktop resolution
 fullscreen = false
