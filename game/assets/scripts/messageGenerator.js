@@ -33,7 +33,7 @@ function generateWord(letterCount)
 
         if (randomWord.indexOf(' ') >= 0) { continue; } // some words have spaces.. I dont' have time to clean them because it's a game jam lololol
 
-        return randomWord;
+        return randomWord.toLowerCase();
     }
 }
 

@@ -25,7 +25,7 @@ var heroes = [
 var bloomRT = Texture.createScreenRenderTarget();
 
 var encryptedFont = getFont("sga.fnt");
-
+var encryptedMessage;
 
 function updateCamera()
 {
