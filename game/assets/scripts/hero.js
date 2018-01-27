@@ -23,10 +23,13 @@ function hero_create(_index, _pos, _color)
         taserCharge: 0,
         tasered: false,
         disabled: false,
-        disableTimer: HERO_DISABLE_TIME
+        disableTimer: HERO_DISABLE_TIME,
+        spriteAnim: playSpriteAnim("hacker" + _index + ".spriteanim", "idle_e"),
+        renderFn: hero_render,
+        renderGlowFn: hero_renderGlow
     };
 
-    hero.spriteAnim = playSpriteAnim("hacker" + _index + ".spriteanim", "idle_e");
+    renderables.push(hero);
 
     return hero;
 }
@@ -106,14 +109,6 @@ function hero_render(hero)
     for (var i = 0; i < hero.glyphMap.length; ++i)
     {
         SpriteBatch.drawText(encryptedFont, hero.displayMessage[i], new Vector2(4+(8*i), 4 + 70 * hero.index), Vector2.TOP_LEFT, hero.glyphMap[i].color.get());
-    }
-}
-
-function heroes_render()
-{
-    for(var i = 0; i < heroes.length; ++i)
-    {
-        hero_render(heroes[i]);
     }
 }
 

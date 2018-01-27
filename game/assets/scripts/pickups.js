@@ -15,16 +15,20 @@ var uniqueGlyphs;
 
 function pickup_create(_pos)
 {
+    var index = Random.randInt(0, uniqueGlyphs.length - 1);
+
     var pickup = {
         position: new Vector2(_pos),
-        floatAnim: new NumberAnim()
+        glyph: uniqueGlyphs[index],
+        floatAnim: new NumberAnim(),
+        renderFn: pickup_render,
+        renderGlowFn: pickup_renderGlow,
     }
 
     pickup.floatAnim.playSingle(-2, 2, .5, Tween.EASE_BOTH, Loop.PING_PONG_LOOP);
 
-    var index = Random.randInt(0, uniqueGlyphs.length - 1);
-    pickup.glyph = uniqueGlyphs[index];
-    //pickup.glyph = String.fromCharCode(Random.randInt(0, 25) + 97);
+
+    renderables.push(pickup);
 
     return pickup;
 }
@@ -98,22 +102,6 @@ function pickup_renderGlow(pickup)
     SpriteBatch.drawText(encryptedFont, pickup.glyph, new Vector2(pos.x - 1, pos.y - 2), Vector2.BOTTOM, pickupColor);
 }
 
-function pickups_render()
-{
-    for(var i = 0; i < pickups.length; ++i)
-    {
-        pickup_render(pickups[i]);
-    }
-}
-
-function pickups_renderGlow()
-{
-    for(var i = 0; i < pickups.length; ++i)
-    {
-        pickup_renderGlow(pickups[i]);
-    }
-}
-
 function pickups_update(dt)
 {
     pickupSpawnTime -= dt;
@@ -138,7 +126,18 @@ function pickups_acquire(position)
     {
         if(Vector2.distance(pickups[i].position, position) < ACQUIRE_RADIUS)
         {
-            return pickups.splice(i, 1)[0];
+            var pickup = pickups.splice(i, 1)[0];
+
+            // remove from renderables since it has been acquired by the hero
+            for(var j = 0; j < renderables.length; ++j)
+            {
+                if (renderables[j] == pickup)
+                {
+                    renderables.splice(j, 1);
+                }
+            }
+
+            return pickup;
         }
     }
 

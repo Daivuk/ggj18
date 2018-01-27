@@ -13,7 +13,12 @@ function renderGame()
     tiledMap.renderLayer(0); // Ground
     tiledMap.renderLayer(1); // Walls
 
-    pickups_render();
+    // Draw entities
+    renderables.sort(function(a, b){return a.position.y < b.position.y ? -1 : 1});
+    for (var i = 0; i < renderables.length; ++i)
+    {
+        var entity = renderables[i];
+        entity.renderFn(entity);
+    }
 
-    heroes_render();
 }

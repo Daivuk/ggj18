@@ -7,6 +7,8 @@ var GameStateEnum = {
 
 var gameState = GameStateEnum.INIT;
 
+var renderables = [];
+
 var tiledMap = getTiledMap("arena.tmx");
 var TILE_HEIGHT = tiledMap.getTileSize();
 var HALF_TILE_HEIGHT = TILE_HEIGHT * 0.5;
@@ -111,11 +113,10 @@ function renderGlow()
     // Render the map
     tiledMap.renderLayer(2);
 
-    pickups_renderGlow();
-    for(var i = 0; i < heroes.length; ++i)
+    for(var i = 0; i < renderables.length; ++i)
     {
-        var hero = heroes[i];
-        hero_renderGlow(hero);
+        var entity = renderables[i];
+        entity.renderGlowFn(entity);
     }
 
     SpriteBatch.end();
