@@ -10,6 +10,15 @@ var HERO_SPAWN_CENTER_TILE_RADIUS = 7;
 
 var glowCircleTexture = getTexture("glowCircle.png")
 
+var HeroState = {
+    IDLE: 1,
+    TASED: 2,
+    TASER_CHARGING: 3,
+    TASER_CHARGED: 4,
+    TASER_DISCHARGING: 5,
+    DISABLED: 6
+}
+
 function hero_create(_index, _pos, _color)
 {
     var hero = {
@@ -17,14 +26,11 @@ function hero_create(_index, _pos, _color)
         position: new Vector2(_pos),
         color: new Color(_color),
         dir: "w",
-        taserEnabled: false,
-        taserTimer: HERO_TASER_USE_INTERVAL,
-        taserOn: false,
         taserCharge: 0,
-        tasered: false,
-        disabled: false,
+        state: HeroState.IDLE,
         disableTimer: HERO_DISABLE_TIME,
         spriteAnim: playSpriteAnim("hacker" + _index + ".spriteanim", "idle_e"),
+        taseReadySpriteAnim: playSpriteAnim("taseReady.spriteanim", "idle_e"),
         renderFn: hero_render,
         renderGlowFn: hero_renderGlow,
         points: 0
@@ -102,6 +108,21 @@ function hero_hideAllGlyph(hero)
     }
 }
 
+function hero_getTaserPos(hero)
+{
+    if (hero.dir == "e")
+    {
+        if (hero.state == HeroState.TASER_DISCHARGING)
+            return new Vector2(hero.position.x + 21, hero.position.y - 1);
+        else
+            return new Vector2(hero.position.x + 15, hero.position.y - 1);
+    }
+    else
+    {
+        return new Vector2(hero.position.x - 9, hero.position.y - 1);
+    }
+}
+
 function hero_render(hero)
 {
     SpriteBatch.drawSpriteAnim(hero.spriteAnim, hero.position);
@@ -110,6 +131,15 @@ function hero_render(hero)
     for (var i = 0; i < hero.glyphMap.length; ++i)
     {
         SpriteBatch.drawText(encryptedFont, hero.displayMessage[i], new Vector2(4+(8*i), 4 + 70 * hero.index), Vector2.TOP_LEFT, hero.glyphMap[i].color.get());
+    }
+
+    if (hero.state == HeroState.TASER_CHARGED)
+    {
+        SpriteBatch.drawSpriteAnim(hero.taseReadySpriteAnim, hero_getTaserPos(hero));
+    }
+    if (hero.state == HeroState.TASER_DISCHARGING)
+    {
+        SpriteBatch.drawSpriteAnim(hero.taseReadySpriteAnim, hero_getTaserPos(hero), Color.WHITE, 0, 2);
     }
 }
 
@@ -136,11 +166,20 @@ function hero_renderGlow(hero)
             SpriteBatch.drawText(encryptedFont, hero.displayMessage[i], new Vector2(4+(8*i), 4 + 70 * hero.index), Vector2.TOP_LEFT, hero.glyphMap[i].color.get());
         }
     }
+
+    if (hero.state == HeroState.TASER_CHARGED)
+    {
+        SpriteBatch.drawSpriteAnim(hero.taseReadySpriteAnim, hero_getTaserPos(hero), new Color(.5));
+    }
+    if (hero.state == HeroState.TASER_DISCHARGING)
+    {
+        SpriteBatch.drawSpriteAnim(hero.taseReadySpriteAnim, hero_getTaserPos(hero), new Color(.5), 0, 2);
+    }
 }
 
 function hero_update(hero, dt)
 {
-    if(hero.disabled)
+    if(hero.state == HeroState.DISABLED)
     {
         return;
     }
@@ -151,7 +190,10 @@ function hero_update(hero, dt)
     var nextPosition = new Vector2(hero.position.add(leftThumb.mul(dt * HERO_SPEED)));
 
     // Apply collision to the movement
-    hero.position = tiledMap.collision(hero.position, nextPosition, new Vector2(HERO_COLLISION_SIZE, HERO_COLLISION_SIZE));
+    if (hero.state != HeroState.TASER_DISCHARGING)
+    {
+        hero.position = tiledMap.collision(hero.position, nextPosition, new Vector2(HERO_COLLISION_SIZE, HERO_COLLISION_SIZE));
+    }
 
     // Pick up items
     var pickup = pickups_acquire(hero.position.add(HERO_PICKUP_OFFSET));
@@ -162,40 +204,38 @@ function hero_update(hero, dt)
     }
 
     // Handle taser
-    if(hero.taserEnabled)
+    switch (hero.state)
     {
-        if(GamePad.isDown(hero.index, Button.A))
+        case HeroState.IDLE:
         {
-            if(!hero.taserOn)
+            if (GamePad.isDown(hero.index, Button.A))
             {
-                print("hero " + hero.index + " taser on");
-                hero.taserOn = true;
+                hero.state = HeroState.TASER_CHARGING;
             }
-
-            hero.taserCharge += dt;
-
-            if(hero.taserCharge > HERO_TASER_CHARGE_TIME)
-            {
-                hero.taserCharge = HERO_TASER_CHARGE_TIME + 1;
-            }
+            break;
         }
-        else
+        case HeroState.TASER_CHARGING:
         {
-            if(hero.taserOn)
+            if (GamePad.isDown(hero.index, Button.A))
             {
-                var chargeAmount = hero.taserCharge;
-                hero.taserOn = false;
-                hero.taserEnabled = false;
-                hero.taserCharge = 0;
-
-                if(chargeAmount < HERO_TASER_CHARGE_TIME)
+                hero.taserCharge += dt;
+                if(hero.taserCharge > HERO_TASER_CHARGE_TIME)
                 {
-                    print("hero " + hero.index + " fired taser without enough charge");
-                    return;
+                    hero.state = HeroState.TASER_CHARGED;
+                    hero.taserCharge = HERO_TASER_CHARGE_TIME;
                 }
-
-                print("hero " + hero.index + " fired taser");
-
+            }
+            else
+            {
+                hero.taserCharge = 0;
+                hero.state = HeroState.IDLE;
+            }
+            break;
+        }
+        case HeroState.TASER_CHARGED:
+        {
+            if (!GamePad.isDown(hero.index, Button.A))
+            {
                 for(var i = 0; i < heroes.length; ++i)
                 {
                     if(i == hero.index)
@@ -205,24 +245,25 @@ function hero_update(hero, dt)
                     else
                     {
                         var otherHero = heroes[i];
-
+    
                         if(Vector2.distance(hero.position, otherHero.position) < HERO_TASER_PROXIMITY)
                         {
                             hero_tasered(otherHero);
                         }
                     }
                 }
+                hero.state = HeroState.TASER_DISCHARGING;
             }
+            break;
         }
-    }
-    else
-    {
-        hero.taserTimer -= dt;
-
-        if(hero.taserTimer < 0)
+        case HeroState.TASER_DISCHARGING:
         {
-            hero.taserEnabled = true;
-            hero.taserTimer = HERO_TASER_USE_INTERVAL;
+            hero.taserCharge -= dt * 2;
+            if (hero.taserCharge <= 0)
+            {
+                hero.state = HeroState.IDLE;
+            }
+            break;
         }
     }
 
@@ -241,10 +282,15 @@ function hero_update(hero, dt)
     // Pick anim
     var anim = "idle";
     if (leftThumb.length() > 0.1) anim = "run";
-    if (hero.taserOn) anim += "taser";
+
+    if (hero.state == HeroState.TASER_CHARGED ||
+        hero.state == HeroState.TASER_CHARGING ||
+        hero.state == HeroState.TASER_DISCHARGING)
+        anim += "taser";
 
     // Point the character in the right direction
-    if(Math.abs(leftThumb.x) > 0.001)
+    if (Math.abs(leftThumb.x) > 0.001 &&
+        hero.state != HeroState.TASER_DISCHARGING)
     {
         if(leftThumb.x > 0)
         {
@@ -256,14 +302,24 @@ function hero_update(hero, dt)
         }
     }
 
-    hero.spriteAnim.play(anim + "_" + hero.dir)
+    if (hero.state == HeroState.TASER_CHARGING)
+    {
+        hero.taseReadySpriteAnim.play("idle_" + hero.dir);
+    }
+    if (hero.state == HeroState.TASER_DISCHARGING)
+    {
+        hero.taseReadySpriteAnim.play("tase_" + hero.dir);
+        anim = "idle";
+    }
+
+    hero.spriteAnim.play(anim + "_" + hero.dir);
 }
 
 function hero_taser_update(hero, dt)
 {
-    if(hero.tasered || hero.disabled)
+    if(hero.state == HeroState.TASED || hero.state == HeroState.DISABLED)
     {
-        hero.disabled = true;
+        hero.state = HeroState.DISABLED
 
         hero.disableTimer -= dt;
 
@@ -326,10 +382,9 @@ function hero_respawn(hero)
 
 function hero_tasered(hero)
 {
-    if(!hero.disabled && !hero.tasered)
+    if(hero.state != HeroState.DISABLED)
     {
-        print("hero " + hero.index + " tasered");
-        hero.tasered = true;
+        hero.state = HeroState.TASED;
     }
 }
 

@@ -1,0 +1,36 @@
+<sheet texture="taseReady.png" spriteWidth="16" spriteHeight="16" originX="11" originY="8">
+  <anim name="start_e" fps="10" next="idle_e">
+    <frame id="0" flipH="true"/>
+    <frame id="1" flipH="true"/>
+    <frame id="2" flipH="true"/>
+  </anim>
+  <anim name="idle_e" fps="10" loop="true">
+    <frame id="3" flipH="true"/>
+    <frame id="4" flipH="true"/>
+    <frame id="5" flipH="true"/>
+    <frame id="6" flipH="true"/>
+    <frame id="7" flipH="true"/>
+  </anim>
+  <anim name="tase_e" fps="20" loop="true">
+    <frame id="8" flipH="true"/>
+    <frame id="9" flipH="true"/>
+    <frame id="10" flipH="true"/>
+  </anim>
+  <anim name="start_w" fps="10" next="idle_e">
+    <frame id="0" flipH="false"/>
+    <frame id="1" flipH="false"/>
+    <frame id="2" flipH="false"/>
+  </anim>
+  <anim name="idle_w" fps="10" loop="true">
+    <frame id="3" flipH="false"/>
+    <frame id="4" flipH="false"/>
+    <frame id="5" flipH="false"/>
+    <frame id="6" flipH="false"/>
+    <frame id="7" flipH="false"/>
+  </anim>
+  <anim name="tase_w" fps="20" loop="true">
+    <frame id="8" flipH="false"/>
+    <frame id="9" flipH="false"/>
+    <frame id="10" flipH="false"/>
+  </anim>
+</sheet>
