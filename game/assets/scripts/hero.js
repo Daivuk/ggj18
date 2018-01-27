@@ -84,7 +84,7 @@ function hero_hideAllGlyph(hero)
 function hero_render(hero)
 {
     SpriteBatch.drawSpriteAnim(hero.spriteAnim, hero.position);
-    SpriteBatch.drawSpriteAnim(hero.spriteAnim, new Vector2(16, 32 + 70 * hero.index));
+    SpriteBatch.drawSpriteAnim(hero.spriteAnim, new Vector2(40, 48 + 70 * hero.index), Color.WHITE, 0, 2);
     SpriteBatch.drawText(encryptedFont, hero.displayMessage, new Vector2(4, 4 + 70 * hero.index), Vector2.TOP_LEFT, new Color(1.0, 1.0, 1.0));
 }
 
