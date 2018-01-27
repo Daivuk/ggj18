@@ -19,6 +19,14 @@ function hero_render(hero)
     SpriteBatch.drawSpriteAnim(hero.spriteAnim, hero.position);
 }
 
+function heroes_render()
+{
+    for(var i = 0; i < heroes.length; ++i)
+    {
+        hero_render(heroes[i]);
+    }
+}
+
 function hero_renderGlow(hero)
 {
 
@@ -45,5 +53,13 @@ function hero_update(hero, dt)
         {
             hero.spriteAnim.play("idle_w")
         }
+    }
+}
+
+function heroes_update(dt)
+{
+    for(var i = 0; i < heroes.length; ++i)
+    {
+        hero_update(heroes[i], dt);
     }
 }

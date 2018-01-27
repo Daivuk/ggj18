@@ -1,12 +1,8 @@
 function updateGame(dt)
 {
-    for(var i = 0; i < heroes.length; ++i)
-    {
-        var hero = heroes[i];
-        hero_update(hero, dt);
-    }
+    heroes_update(dt)
 
-    pickup_update(dt);
+    pickups_update(dt);
 }
 
 function renderGame()
@@ -15,11 +11,7 @@ function renderGame()
     tiledMap.renderLayer(0); // Ground
     tiledMap.renderLayer(1); // Walls
 
-    pickup_render();
+    pickups_render();
 
-    for(var i = 0; i < heroes.length; ++i)
-    {
-        var hero = heroes[i];
-        hero_render(hero);
-    }
+    heroes_render();
 }

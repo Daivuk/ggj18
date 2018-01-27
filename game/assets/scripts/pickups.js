@@ -76,15 +76,20 @@ function pickup_spawn()
     pickups.push(pickup_create(spawnPos));
 }
 
-function pickup_render()
+function pickup_render(pickup)
+{
+    SpriteBatch.drawRect(null, new Rect(pickup.position.sub(new Vector2(5, 5)), new Vector2(10, 10)));
+}
+
+function pickups_render()
 {
     for(var i = 0; i < pickups.length; ++i)
     {
-        SpriteBatch.drawRect(null, new Rect(pickups[i].position.sub(new Vector2(5, 5)), new Vector2(10, 10)));
+        pickup_render(pickups[i]);
     }
 }
 
-function pickup_update(dt)
+function pickups_update(dt)
 {
     pickupSpawnTime -= dt;
 
