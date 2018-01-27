@@ -1,7 +1,6 @@
 var HERO_COLLISION_SIZE = 10;
 var HERO_SPEED = 50;
 var HERO_PICKUP_OFFSET = new Vector2(0, 0);
-var HERO_GLYPH_COLOR = new Color(1.0, 0.8, 0.0);
 var HERO_DISABLE_TIME = 2;
 var HERO_TASER_USE_INTERVAL = 3;
 var HERO_TASER_CHARGE_TIME = 1;
@@ -54,7 +53,7 @@ function hero_createNewMessage(hero) {
         hero.glyphMap.push({
             encrypted: shiftedGlyph,
             decrypted: originalGlyph.toUpperCase(), // upper case are decrypted and visible on screen
-            color: new Color(HERO_GLYPH_COLOR)
+            color: new Color(hero.color)
         });
 
         hero.displayMessage += shiftedGlyph;
@@ -123,6 +122,12 @@ function hero_update(hero, dt)
     if(hero.disabled)
     {
         return;
+    }
+
+    // cool down the glyphmap colors
+    for(var i = 0; i < hero.glyphMap.length; ++i)
+    {
+        hero.glyphMap[i].color = Color.lerp(hero.glyphMap[i].color, hero.color, dt*0.5); 
     }
 
     var leftThumb = GamePad.getLeftThumb(hero.index);

@@ -16,10 +16,10 @@ var invCameraTransform = new Matrix();
 var resolution = new Vector2(480, 272);
 
 var heroes = [
-    hero_create(0, new Vector2(6, 2).mul(TILE_HEIGHT).add(HALF_TILE_HEIGHT), new Color(1, 0, 0, 1)),
-    hero_create(1, new Vector2(28, 1).mul(TILE_HEIGHT).add(HALF_TILE_HEIGHT), new Color(0, 1, 0, 1)),
-    hero_create(2, new Vector2(28, 15).mul(TILE_HEIGHT).add(HALF_TILE_HEIGHT), new Color(0, 0, 1, 1)),
-    hero_create(3, new Vector2(6, 14).mul(TILE_HEIGHT).add(HALF_TILE_HEIGHT), new Color(1, 1, 0, 1))
+    hero_create(0, new Vector2(6, 2).mul(TILE_HEIGHT).add(HALF_TILE_HEIGHT), Color.fromHexRGB(0x007dc7)),
+    hero_create(1, new Vector2(28, 1).mul(TILE_HEIGHT).add(HALF_TILE_HEIGHT), Color.fromHexRGB(0x3fc778)),
+    hero_create(2, new Vector2(28, 15).mul(TILE_HEIGHT).add(HALF_TILE_HEIGHT), Color.fromHexRGB(0xffce00)),
+    hero_create(3, new Vector2(6, 14).mul(TILE_HEIGHT).add(HALF_TILE_HEIGHT), Color.fromHexRGB(0xff8b9c))
 ];
 
 var bloomRT = Texture.createScreenRenderTarget();
