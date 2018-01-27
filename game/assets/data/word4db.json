@@ -1,0 +1,4002 @@
+[
+  {
+    "word": "bear",
+    "score": 17099
+  },
+  {
+    "word": "over",
+    "score": 11015
+  },
+  {
+    "word": "back",
+    "score": 9122
+  },
+  {
+    "word": "bird",
+    "score": 8860
+  },
+  {
+    "word": "blue",
+    "score": 8599
+  },
+  {
+    "word": "away",
+    "score": 8298
+  },
+  {
+    "word": "book",
+    "score": 7683
+  },
+  {
+    "word": "acid",
+    "score": 7555
+  },
+  {
+    "word": "beat",
+    "score": 7257
+  },
+  {
+    "word": "into",
+    "score": 5676
+  },
+  {
+    "word": "unit",
+    "score": 5519
+  },
+  {
+    "word": "bend",
+    "score": 5364
+  },
+  {
+    "word": "body",
+    "score": 5107
+  },
+  {
+    "word": "bind",
+    "score": 4955
+  },
+  {
+    "word": "ball",
+    "score": 4756
+  },
+  {
+    "word": "blow",
+    "score": 4652
+  },
+  {
+    "word": "bite",
+    "score": 4617
+  },
+  {
+    "word": "bond",
+    "score": 4364
+  },
+  {
+    "word": "bank",
+    "score": 4227
+  },
+  {
+    "word": "base",
+    "score": 4134
+  },
+  {
+    "word": "bust",
+    "score": 3855
+  },
+  {
+    "word": "upon",
+    "score": 3843
+  },
+  {
+    "word": "iron",
+    "score": 3826
+  },
+  {
+    "word": "bean",
+    "score": 3824
+  },
+  {
+    "word": "burn",
+    "score": 3468
+  },
+  {
+    "word": "bill",
+    "score": 3410
+  },
+  {
+    "word": "bone",
+    "score": 3318
+  },
+  {
+    "word": "bias",
+    "score": 3220
+  },
+  {
+    "word": "area",
+    "score": 3119
+  },
+  {
+    "word": "bomb",
+    "score": 3074
+  },
+  {
+    "word": "arch",
+    "score": 3017
+  },
+  {
+    "word": "band",
+    "score": 2936
+  },
+  {
+    "word": "boot",
+    "score": 2673
+  },
+  {
+    "word": "best",
+    "score": 2648
+  },
+  {
+    "word": "belt",
+    "score": 2638
+  },
+  {
+    "word": "open",
+    "score": 2624
+  },
+  {
+    "word": "bolt",
+    "score": 2556
+  },
+  {
+    "word": "beam",
+    "score": 2533
+  },
+  {
+    "word": "bush",
+    "score": 2533
+  },
+  {
+    "word": "boat",
+    "score": 2471
+  },
+  {
+    "word": "bore",
+    "score": 2314
+  },
+  {
+    "word": "ally",
+    "score": 2254
+  },
+  {
+    "word": "baby",
+    "score": 2230
+  },
+  {
+    "word": "buff",
+    "score": 2225
+  },
+  {
+    "word": "bare",
+    "score": 2198
+  },
+  {
+    "word": "buck",
+    "score": 2169
+  },
+  {
+    "word": "bell",
+    "score": 2154
+  },
+  {
+    "word": "bold",
+    "score": 2142
+  },
+  {
+    "word": "axis",
+    "score": 2132
+  },
+  {
+    "word": "bowl",
+    "score": 2107
+  },
+  {
+    "word": "butt",
+    "score": 2099
+  },
+  {
+    "word": "iris",
+    "score": 2022
+  },
+  {
+    "word": "avid",
+    "score": 2007
+  },
+  {
+    "word": "idle",
+    "score": 2000
+  },
+  {
+    "word": "idea",
+    "score": 1978
+  },
+  {
+    "word": "bass",
+    "score": 1959
+  },
+  {
+    "word": "aura",
+    "score": 1948
+  },
+  {
+    "word": "aver",
+    "score": 1916
+  },
+  {
+    "word": "urge",
+    "score": 1900
+  },
+  {
+    "word": "bath",
+    "score": 1899
+  },
+  {
+    "word": "once",
+    "score": 1894
+  },
+  {
+    "word": "ante",
+    "score": 1875
+  },
+  {
+    "word": "buoy",
+    "score": 1870
+  },
+  {
+    "word": "bull",
+    "score": 1865
+  },
+  {
+    "word": "boon",
+    "score": 1863
+  },
+  {
+    "word": "bane",
+    "score": 1858
+  },
+  {
+    "word": "only",
+    "score": 1833
+  },
+  {
+    "word": "apex",
+    "score": 1818
+  },
+  {
+    "word": "icon",
+    "score": 1786
+  },
+  {
+    "word": "uber",
+    "score": 1775
+  },
+  {
+    "word": "bark",
+    "score": 1769
+  },
+  {
+    "word": "akin",
+    "score": 1743
+  },
+  {
+    "word": "bail",
+    "score": 1730
+  },
+  {
+    "word": "boom",
+    "score": 1728
+  },
+  {
+    "word": "amid",
+    "score": 1727
+  },
+  {
+    "word": "bump",
+    "score": 1693
+  },
+  {
+    "word": "boss",
+    "score": 1682
+  },
+  {
+    "word": "awry",
+    "score": 1656
+  },
+  {
+    "word": "arts",
+    "score": 1650
+  },
+  {
+    "word": "arms",
+    "score": 1628
+  },
+  {
+    "word": "anon",
+    "score": 1603
+  },
+  {
+    "word": "onus",
+    "score": 1594
+  },
+  {
+    "word": "aqua",
+    "score": 1593
+  },
+  {
+    "word": "beer",
+    "score": 1575
+  },
+  {
+    "word": "bang",
+    "score": 1551
+  },
+  {
+    "word": "buzz",
+    "score": 1549
+  },
+  {
+    "word": "alas",
+    "score": 1537
+  },
+  {
+    "word": "balk",
+    "score": 1496
+  },
+  {
+    "word": "born",
+    "score": 1494
+  },
+  {
+    "word": "army",
+    "score": 1469
+  },
+  {
+    "word": "onto",
+    "score": 1468
+  },
+  {
+    "word": "bulk",
+    "score": 1463
+  },
+  {
+    "word": "agar",
+    "score": 1461
+  },
+  {
+    "word": "able",
+    "score": 1443
+  },
+  {
+    "word": "also",
+    "score": 1440
+  },
+  {
+    "word": "odds",
+    "score": 1421
+  },
+  {
+    "word": "aide",
+    "score": 1409
+  },
+  {
+    "word": "opus",
+    "score": 1409
+  },
+  {
+    "word": "beef",
+    "score": 1386
+  },
+  {
+    "word": "acme",
+    "score": 1385
+  },
+  {
+    "word": "busy",
+    "score": 1380
+  },
+  {
+    "word": "bent",
+    "score": 1350
+  },
+  {
+    "word": "blur",
+    "score": 1341
+  },
+  {
+    "word": "item",
+    "score": 1341
+  },
+  {
+    "word": "arid",
+    "score": 1306
+  },
+  {
+    "word": "isle",
+    "score": 1295
+  },
+  {
+    "word": "brew",
+    "score": 1282
+  },
+  {
+    "word": "abut",
+    "score": 1279
+  },
+  {
+    "word": "alum",
+    "score": 1279
+  },
+  {
+    "word": "bike",
+    "score": 1278
+  },
+  {
+    "word": "atom",
+    "score": 1276
+  },
+  {
+    "word": "bout",
+    "score": 1274
+  },
+  {
+    "word": "bawk",
+    "score": 1273
+  },
+  {
+    "word": "ague",
+    "score": 1269
+  },
+  {
+    "word": "aria",
+    "score": 1267
+  },
+  {
+    "word": "auto",
+    "score": 1248
+  },
+  {
+    "word": "abet",
+    "score": 1247
+  },
+  {
+    "word": "omen",
+    "score": 1243
+  },
+  {
+    "word": "bait",
+    "score": 1212
+  },
+  {
+    "word": "bash",
+    "score": 1205
+  },
+  {
+    "word": "ache",
+    "score": 1203
+  },
+  {
+    "word": "aunt",
+    "score": 1201
+  },
+  {
+    "word": "onel",
+    "score": 1197
+  },
+  {
+    "word": "aeon",
+    "score": 1185
+  },
+  {
+    "word": "beau",
+    "score": 1171
+  },
+  {
+    "word": "omit",
+    "score": 1165
+  },
+  {
+    "word": "ogle",
+    "score": 1164
+  },
+  {
+    "word": "boor",
+    "score": 1163
+  },
+  {
+    "word": "brio",
+    "score": 1163
+  },
+  {
+    "word": "bale",
+    "score": 1159
+  },
+  {
+    "word": "otto",
+    "score": 1157
+  },
+  {
+    "word": "burr",
+    "score": 1147
+  },
+  {
+    "word": "bulb",
+    "score": 1146
+  },
+  {
+    "word": "amen",
+    "score": 1142
+  },
+  {
+    "word": "balm",
+    "score": 1141
+  },
+  {
+    "word": "blog",
+    "score": 1135
+  },
+  {
+    "word": "inch",
+    "score": 1127
+  },
+  {
+    "word": "iota",
+    "score": 1125
+  },
+  {
+    "word": "itch",
+    "score": 1125
+  },
+  {
+    "word": "bair",
+    "score": 1121
+  },
+  {
+    "word": "idol",
+    "score": 1120
+  },
+  {
+    "word": "oath",
+    "score": 1110
+  },
+  {
+    "word": "brag",
+    "score": 1106
+  },
+  {
+    "word": "agog",
+    "score": 1104
+  },
+  {
+    "word": "isis",
+    "score": 1098
+  },
+  {
+    "word": "asia",
+    "score": 1093
+  },
+  {
+    "word": "oven",
+    "score": 1080
+  },
+  {
+    "word": "alot",
+    "score": 1077
+  },
+  {
+    "word": "ibis",
+    "score": 1077
+  },
+  {
+    "word": "bead",
+    "score": 1064
+  },
+  {
+    "word": "anal",
+    "score": 1062
+  },
+  {
+    "word": "asea",
+    "score": 1060
+  },
+  {
+    "word": "beet",
+    "score": 1052
+  },
+  {
+    "word": "bury",
+    "score": 1052
+  },
+  {
+    "word": "omni",
+    "score": 1045
+  },
+  {
+    "word": "undo",
+    "score": 1031
+  },
+  {
+    "word": "orca",
+    "score": 1029
+  },
+  {
+    "word": "brat",
+    "score": 1026
+  },
+  {
+    "word": "alga",
+    "score": 1025
+  },
+  {
+    "word": "alba",
+    "score": 1024
+  },
+  {
+    "word": "apse",
+    "score": 1019
+  },
+  {
+    "word": "bask",
+    "score": 1019
+  },
+  {
+    "word": "beta",
+    "score": 1018
+  },
+  {
+    "word": "onyx",
+    "score": 1018
+  },
+  {
+    "word": "bloc",
+    "score": 1012
+  },
+  {
+    "word": "alps",
+    "score": 1005
+  },
+  {
+    "word": "barb",
+    "score": 1005
+  },
+  {
+    "word": "okay",
+    "score": 997
+  },
+  {
+    "word": "barn",
+    "score": 986
+  },
+  {
+    "word": "bier",
+    "score": 986
+  },
+  {
+    "word": "amok",
+    "score": 983
+  },
+  {
+    "word": "ambo",
+    "score": 982
+  },
+  {
+    "word": "bevy",
+    "score": 981
+  },
+  {
+    "word": "berg",
+    "score": 977
+  },
+  {
+    "word": "user",
+    "score": 972
+  },
+  {
+    "word": "bard",
+    "score": 968
+  },
+  {
+    "word": "ooze",
+    "score": 968
+  },
+  {
+    "word": "bode",
+    "score": 967
+  },
+  {
+    "word": "boil",
+    "score": 964
+  },
+  {
+    "word": "used",
+    "score": 961
+  },
+  {
+    "word": "acre",
+    "score": 955
+  },
+  {
+    "word": "anti",
+    "score": 946
+  },
+  {
+    "word": "oral",
+    "score": 943
+  },
+  {
+    "word": "bunk",
+    "score": 941
+  },
+  {
+    "word": "bing",
+    "score": 935
+  },
+  {
+    "word": "oreo",
+    "score": 934
+  },
+  {
+    "word": "berm",
+    "score": 928
+  },
+  {
+    "word": "oval",
+    "score": 921
+  },
+  {
+    "word": "ibid",
+    "score": 920
+  },
+  {
+    "word": "obey",
+    "score": 920
+  },
+  {
+    "word": "anil",
+    "score": 912
+  },
+  {
+    "word": "axle",
+    "score": 909
+  },
+  {
+    "word": "bain",
+    "score": 904
+  },
+  {
+    "word": "orex",
+    "score": 903
+  },
+  {
+    "word": "okra",
+    "score": 900
+  },
+  {
+    "word": "odor",
+    "score": 899
+  },
+  {
+    "word": "bile",
+    "score": 894
+  },
+  {
+    "word": "bake",
+    "score": 893
+  },
+  {
+    "word": "both",
+    "score": 890
+  },
+  {
+    "word": "odah",
+    "score": 889
+  },
+  {
+    "word": "argo",
+    "score": 888
+  },
+  {
+    "word": "arab",
+    "score": 887
+  },
+  {
+    "word": "umph",
+    "score": 886
+  },
+  {
+    "word": "blip",
+    "score": 879
+  },
+  {
+    "word": "ogre",
+    "score": 878
+  },
+  {
+    "word": "bowe",
+    "score": 877
+  },
+  {
+    "word": "orgy",
+    "score": 873
+  },
+  {
+    "word": "adam",
+    "score": 869
+  },
+  {
+    "word": "anna",
+    "score": 869
+  },
+  {
+    "word": "alms",
+    "score": 866
+  },
+  {
+    "word": "ajar",
+    "score": 864
+  },
+  {
+    "word": "brow",
+    "score": 864
+  },
+  {
+    "word": "blot",
+    "score": 863
+  },
+  {
+    "word": "boob",
+    "score": 859
+  },
+  {
+    "word": "boar",
+    "score": 854
+  },
+  {
+    "word": "ugly",
+    "score": 852
+  },
+  {
+    "word": "bars",
+    "score": 851
+  },
+  {
+    "word": "alee",
+    "score": 849
+  },
+  {
+    "word": "alto",
+    "score": 849
+  },
+  {
+    "word": "acne",
+    "score": 847
+  },
+  {
+    "word": "adze",
+    "score": 847
+  },
+  {
+    "word": "anew",
+    "score": 846
+  },
+  {
+    "word": "arum",
+    "score": 844
+  },
+  {
+    "word": "been",
+    "score": 842
+  },
+  {
+    "word": "opal",
+    "score": 841
+  },
+  {
+    "word": "aloe",
+    "score": 839
+  },
+  {
+    "word": "olio",
+    "score": 839
+  },
+  {
+    "word": "aero",
+    "score": 838
+  },
+  {
+    "word": "oust",
+    "score": 833
+  },
+  {
+    "word": "bate",
+    "score": 831
+  },
+  {
+    "word": "adit",
+    "score": 828
+  },
+  {
+    "word": "bely",
+    "score": 828
+  },
+  {
+    "word": "brim",
+    "score": 827
+  },
+  {
+    "word": "bald",
+    "score": 825
+  },
+  {
+    "word": "airy",
+    "score": 819
+  },
+  {
+    "word": "otic",
+    "score": 819
+  },
+  {
+    "word": "acer",
+    "score": 816
+  },
+  {
+    "word": "amor",
+    "score": 815
+  },
+  {
+    "word": "axon",
+    "score": 815
+  },
+  {
+    "word": "avon",
+    "score": 813
+  },
+  {
+    "word": "abba",
+    "score": 807
+  },
+  {
+    "word": "aden",
+    "score": 803
+  },
+  {
+    "word": "bole",
+    "score": 796
+  },
+  {
+    "word": "oner",
+    "score": 795
+  },
+  {
+    "word": "bide",
+    "score": 794
+  },
+  {
+    "word": "bray",
+    "score": 794
+  },
+  {
+    "word": "alia",
+    "score": 787
+  },
+  {
+    "word": "anoa",
+    "score": 784
+  },
+  {
+    "word": "oleo",
+    "score": 783
+  },
+  {
+    "word": "bono",
+    "score": 778
+  },
+  {
+    "word": "bunt",
+    "score": 777
+  },
+  {
+    "word": "beak",
+    "score": 774
+  },
+  {
+    "word": "ares",
+    "score": 769
+  },
+  {
+    "word": "ikat",
+    "score": 769
+  },
+  {
+    "word": "aire",
+    "score": 768
+  },
+  {
+    "word": "asap",
+    "score": 767
+  },
+  {
+    "word": "boff",
+    "score": 756
+  },
+  {
+    "word": "imam",
+    "score": 753
+  },
+  {
+    "word": "bung",
+    "score": 750
+  },
+  {
+    "word": "avis",
+    "score": 748
+  },
+  {
+    "word": "baba",
+    "score": 744
+  },
+  {
+    "word": "unto",
+    "score": 744
+  },
+  {
+    "word": "bong",
+    "score": 740
+  },
+  {
+    "word": "iffy",
+    "score": 738
+  },
+  {
+    "word": "ouze",
+    "score": 734
+  },
+  {
+    "word": "ides",
+    "score": 732
+  },
+  {
+    "word": "awol",
+    "score": 726
+  },
+  {
+    "word": "babe",
+    "score": 724
+  },
+  {
+    "word": "aged",
+    "score": 722
+  },
+  {
+    "word": "alar",
+    "score": 722
+  },
+  {
+    "word": "ankh",
+    "score": 718
+  },
+  {
+    "word": "agon",
+    "score": 717
+  },
+  {
+    "word": "arco",
+    "score": 715
+  },
+  {
+    "word": "alex",
+    "score": 713
+  },
+  {
+    "word": "ibex",
+    "score": 708
+  },
+  {
+    "word": "ogee",
+    "score": 708
+  },
+  {
+    "word": "axel",
+    "score": 707
+  },
+  {
+    "word": "ulna",
+    "score": 705
+  },
+  {
+    "word": "odin",
+    "score": 704
+  },
+  {
+    "word": "arie",
+    "score": 703
+  },
+  {
+    "word": "bene",
+    "score": 703
+  },
+  {
+    "word": "brad",
+    "score": 702
+  },
+  {
+    "word": "bade",
+    "score": 701
+  },
+  {
+    "word": "bilk",
+    "score": 699
+  },
+  {
+    "word": "indo",
+    "score": 699
+  },
+  {
+    "word": "avow",
+    "score": 692
+  },
+  {
+    "word": "inca",
+    "score": 692
+  },
+  {
+    "word": "bach",
+    "score": 685
+  },
+  {
+    "word": "blob",
+    "score": 679
+  },
+  {
+    "word": "anus",
+    "score": 673
+  },
+  {
+    "word": "agni",
+    "score": 670
+  },
+  {
+    "word": "osha",
+    "score": 670
+  },
+  {
+    "word": "blat",
+    "score": 668
+  },
+  {
+    "word": "bawl",
+    "score": 664
+  },
+  {
+    "word": "brae",
+    "score": 658
+  },
+  {
+    "word": "arse",
+    "score": 654
+  },
+  {
+    "word": "oman",
+    "score": 652
+  },
+  {
+    "word": "beck",
+    "score": 651
+  },
+  {
+    "word": "atop",
+    "score": 648
+  },
+  {
+    "word": "bran",
+    "score": 648
+  },
+  {
+    "word": "oboe",
+    "score": 648
+  },
+  {
+    "word": "bilt",
+    "score": 645
+  },
+  {
+    "word": "idem",
+    "score": 643
+  },
+  {
+    "word": "umbo",
+    "score": 640
+  },
+  {
+    "word": "acai",
+    "score": 636
+  },
+  {
+    "word": "ammo",
+    "score": 634
+  },
+  {
+    "word": "blah",
+    "score": 625
+  },
+  {
+    "word": "ones",
+    "score": 625
+  },
+  {
+    "word": "brie",
+    "score": 622
+  },
+  {
+    "word": "obit",
+    "score": 617
+  },
+  {
+    "word": "aces",
+    "score": 615
+  },
+  {
+    "word": "brut",
+    "score": 614
+  },
+  {
+    "word": "ovum",
+    "score": 611
+  },
+  {
+    "word": "amie",
+    "score": 608
+  },
+  {
+    "word": "amos",
+    "score": 607
+  },
+  {
+    "word": "beep",
+    "score": 601
+  },
+  {
+    "word": "aids",
+    "score": 599
+  },
+  {
+    "word": "auma",
+    "score": 599
+  },
+  {
+    "word": "agio",
+    "score": 598
+  },
+  {
+    "word": "iraq",
+    "score": 595
+  },
+  {
+    "word": "iowa",
+    "score": 593
+  },
+  {
+    "word": "ages",
+    "score": 592
+  },
+  {
+    "word": "brig",
+    "score": 592
+  },
+  {
+    "word": "bine",
+    "score": 591
+  },
+  {
+    "word": "bled",
+    "score": 591
+  },
+  {
+    "word": "bosh",
+    "score": 591
+  },
+  {
+    "word": "omar",
+    "score": 591
+  },
+  {
+    "word": "oryx",
+    "score": 591
+  },
+  {
+    "word": "aril",
+    "score": 590
+  },
+  {
+    "word": "afar",
+    "score": 588
+  },
+  {
+    "word": "buss",
+    "score": 588
+  },
+  {
+    "word": "oric",
+    "score": 588
+  },
+  {
+    "word": "amah",
+    "score": 587
+  },
+  {
+    "word": "agra",
+    "score": 584
+  },
+  {
+    "word": "abel",
+    "score": 583
+  },
+  {
+    "word": "atip",
+    "score": 582
+  },
+  {
+    "word": "bund",
+    "score": 582
+  },
+  {
+    "word": "burp",
+    "score": 582
+  },
+  {
+    "word": "iamb",
+    "score": 577
+  },
+  {
+    "word": "awed",
+    "score": 575
+  },
+  {
+    "word": "anne",
+    "score": 574
+  },
+  {
+    "word": "barf",
+    "score": 572
+  },
+  {
+    "word": "olla",
+    "score": 570
+  },
+  {
+    "word": "ashe",
+    "score": 569
+  },
+  {
+    "word": "bonk",
+    "score": 567
+  },
+  {
+    "word": "alma",
+    "score": 564
+  },
+  {
+    "word": "idly",
+    "score": 564
+  },
+  {
+    "word": "bolo",
+    "score": 562
+  },
+  {
+    "word": "burl",
+    "score": 562
+  },
+  {
+    "word": "ouch",
+    "score": 560
+  },
+  {
+    "word": "uvea",
+    "score": 560
+  },
+  {
+    "word": "buet",
+    "score": 557
+  },
+  {
+    "word": "otis",
+    "score": 556
+  },
+  {
+    "word": "icky",
+    "score": 555
+  },
+  {
+    "word": "urdu",
+    "score": 555
+  },
+  {
+    "word": "byte",
+    "score": 553
+  },
+  {
+    "word": "ossa",
+    "score": 550
+  },
+  {
+    "word": "iran",
+    "score": 544
+  },
+  {
+    "word": "agee",
+    "score": 539
+  },
+  {
+    "word": "oche",
+    "score": 539
+  },
+  {
+    "word": "ugli",
+    "score": 538
+  },
+  {
+    "word": "ahoy",
+    "score": 536
+  },
+  {
+    "word": "apps",
+    "score": 535
+  },
+  {
+    "word": "boys",
+    "score": 535
+  },
+  {
+    "word": "amix",
+    "score": 534
+  },
+  {
+    "word": "aves",
+    "score": 533
+  },
+  {
+    "word": "inst",
+    "score": 532
+  },
+  {
+    "word": "oder",
+    "score": 532
+  },
+  {
+    "word": "oops",
+    "score": 532
+  },
+  {
+    "word": "bern",
+    "score": 530
+  },
+  {
+    "word": "bora",
+    "score": 525
+  },
+  {
+    "word": "afro",
+    "score": 523
+  },
+  {
+    "word": "bozo",
+    "score": 522
+  },
+  {
+    "word": "abed",
+    "score": 521
+  },
+  {
+    "word": "alan",
+    "score": 521
+  },
+  {
+    "word": "opah",
+    "score": 521
+  },
+  {
+    "word": "bast",
+    "score": 516
+  },
+  {
+    "word": "alfa",
+    "score": 515
+  },
+  {
+    "word": "byre",
+    "score": 515
+  },
+  {
+    "word": "beem",
+    "score": 514
+  },
+  {
+    "word": "bony",
+    "score": 514
+  },
+  {
+    "word": "bred",
+    "score": 513
+  },
+  {
+    "word": "baal",
+    "score": 512
+  },
+  {
+    "word": "asle",
+    "score": 507
+  },
+  {
+    "word": "aint",
+    "score": 505
+  },
+  {
+    "word": "bits",
+    "score": 504
+  },
+  {
+    "word": "olid",
+    "score": 502
+  },
+  {
+    "word": "urea",
+    "score": 498
+  },
+  {
+    "word": "arty",
+    "score": 496
+  },
+  {
+    "word": "aida",
+    "score": 495
+  },
+  {
+    "word": "beim",
+    "score": 495
+  },
+  {
+    "word": "ashy",
+    "score": 494
+  },
+  {
+    "word": "bleu",
+    "score": 494
+  },
+  {
+    "word": "iago",
+    "score": 493
+  },
+  {
+    "word": "arno",
+    "score": 489
+  },
+  {
+    "word": "acts",
+    "score": 487
+  },
+  {
+    "word": "ably",
+    "score": 486
+  },
+  {
+    "word": "orzo",
+    "score": 486
+  },
+  {
+    "word": "bish",
+    "score": 485
+  },
+  {
+    "word": "bola",
+    "score": 484
+  },
+  {
+    "word": "oats",
+    "score": 484
+  },
+  {
+    "word": "ilex",
+    "score": 483
+  },
+  {
+    "word": "oink",
+    "score": 483
+  },
+  {
+    "word": "ovae",
+    "score": 482
+  },
+  {
+    "word": "oxen",
+    "score": 482
+  },
+  {
+    "word": "utah",
+    "score": 482
+  },
+  {
+    "word": "ives",
+    "score": 480
+  },
+  {
+    "word": "oahu",
+    "score": 479
+  },
+  {
+    "word": "ired",
+    "score": 476
+  },
+  {
+    "word": "bede",
+    "score": 472
+  },
+  {
+    "word": "bute",
+    "score": 472
+  },
+  {
+    "word": "info",
+    "score": 470
+  },
+  {
+    "word": "orle",
+    "score": 469
+  },
+  {
+    "word": "opti",
+    "score": 468
+  },
+  {
+    "word": "ovid",
+    "score": 468
+  },
+  {
+    "word": "oast",
+    "score": 465
+  },
+  {
+    "word": "alla",
+    "score": 464
+  },
+  {
+    "word": "ance",
+    "score": 463
+  },
+  {
+    "word": "abbe",
+    "score": 457
+  },
+  {
+    "word": "boll",
+    "score": 457
+  },
+  {
+    "word": "upas",
+    "score": 456
+  },
+  {
+    "word": "orfe",
+    "score": 454
+  },
+  {
+    "word": "ajax",
+    "score": 451
+  },
+  {
+    "word": "ohio",
+    "score": 451
+  },
+  {
+    "word": "up to",
+    "score": 450
+  },
+  {
+    "word": "adin",
+    "score": 448
+  },
+  {
+    "word": "boop",
+    "score": 448
+  },
+  {
+    "word": "axio",
+    "score": 446
+  },
+  {
+    "word": "bize",
+    "score": 446
+  },
+  {
+    "word": "brit",
+    "score": 446
+  },
+  {
+    "word": "burg",
+    "score": 445
+  },
+  {
+    "word": "ados",
+    "score": 444
+  },
+  {
+    "word": "ahab",
+    "score": 444
+  },
+  {
+    "word": "owen",
+    "score": 442
+  },
+  {
+    "word": "unco",
+    "score": 442
+  },
+  {
+    "word": "amir",
+    "score": 441
+  },
+  {
+    "word": "ager",
+    "score": 440
+  },
+  {
+    "word": "omsk",
+    "score": 440
+  },
+  {
+    "word": "axes",
+    "score": 439
+  },
+  {
+    "word": "as of",
+    "score": 438
+  },
+  {
+    "word": "opec",
+    "score": 436
+  },
+  {
+    "word": "batt",
+    "score": 434
+  },
+  {
+    "word": "agin",
+    "score": 431
+  },
+  {
+    "word": "agua",
+    "score": 431
+  },
+  {
+    "word": "blub",
+    "score": 431
+  },
+  {
+    "word": "bags",
+    "score": 429
+  },
+  {
+    "word": "busk",
+    "score": 424
+  },
+  {
+    "word": "byrd",
+    "score": 424
+  },
+  {
+    "word": "biff",
+    "score": 423
+  },
+  {
+    "word": "oslo",
+    "score": 422
+  },
+  {
+    "word": "bart",
+    "score": 421
+  },
+  {
+    "word": "bema",
+    "score": 421
+  },
+  {
+    "word": "airs",
+    "score": 420
+  },
+  {
+    "word": "asti",
+    "score": 419
+  },
+  {
+    "word": "baud",
+    "score": 419
+  },
+  {
+    "word": "icer",
+    "score": 417
+  },
+  {
+    "word": "ural",
+    "score": 416
+  },
+  {
+    "word": "a lot",
+    "score": 414
+  },
+  {
+    "word": "banc",
+    "score": 413
+  },
+  {
+    "word": "ouzo",
+    "score": 413
+  },
+  {
+    "word": "irma",
+    "score": 412
+  },
+  {
+    "word": "ikon",
+    "score": 411
+  },
+  {
+    "word": "odom",
+    "score": 411
+  },
+  {
+    "word": "blab",
+    "score": 410
+  },
+  {
+    "word": "ange",
+    "score": 407
+  },
+  {
+    "word": "aine",
+    "score": 406
+  },
+  {
+    "word": "baht",
+    "score": 406
+  },
+  {
+    "word": "ansi",
+    "score": 405
+  },
+  {
+    "word": "bali",
+    "score": 404
+  },
+  {
+    "word": "biro",
+    "score": 403
+  },
+  {
+    "word": "ixia",
+    "score": 403
+  },
+  {
+    "word": "beal",
+    "score": 402
+  },
+  {
+    "word": "ouse",
+    "score": 402
+  },
+  {
+    "word": "alec",
+    "score": 400
+  },
+  {
+    "word": "blew",
+    "score": 400
+  },
+  {
+    "word": "bowa",
+    "score": 400
+  },
+  {
+    "word": "asto",
+    "score": 399
+  },
+  {
+    "word": "audi",
+    "score": 399
+  },
+  {
+    "word": "oily",
+    "score": 398
+  },
+  {
+    "word": "adhd",
+    "score": 396
+  },
+  {
+    "word": "andy",
+    "score": 396
+  },
+  {
+    "word": "bees",
+    "score": 396
+  },
+  {
+    "word": "boxy",
+    "score": 396
+  },
+  {
+    "word": "bith",
+    "score": 395
+  },
+  {
+    "word": "ussr",
+    "score": 394
+  },
+  {
+    "word": "ilia",
+    "score": 393
+  },
+  {
+    "word": "inge",
+    "score": 393
+  },
+  {
+    "word": "anta",
+    "score": 391
+  },
+  {
+    "word": "olga",
+    "score": 390
+  },
+  {
+    "word": "abcs",
+    "score": 389
+  },
+  {
+    "word": "atta",
+    "score": 389
+  },
+  {
+    "word": "opie",
+    "score": 389
+  },
+  {
+    "word": "abby",
+    "score": 387
+  },
+  {
+    "word": "inky",
+    "score": 387
+  },
+  {
+    "word": "alit",
+    "score": 385
+  },
+  {
+    "word": "anas",
+    "score": 384
+  },
+  {
+    "word": "aval",
+    "score": 383
+  },
+  {
+    "word": "outs",
+    "score": 382
+  },
+  {
+    "word": "inno",
+    "score": 381
+  },
+  {
+    "word": "acro",
+    "score": 380
+  },
+  {
+    "word": "omer",
+    "score": 380
+  },
+  {
+    "word": "ibet",
+    "score": 379
+  },
+  {
+    "word": "aman",
+    "score": 376
+  },
+  {
+    "word": "bats",
+    "score": 376
+  },
+  {
+    "word": "orly",
+    "score": 375
+  },
+  {
+    "word": "amin",
+    "score": 374
+  },
+  {
+    "word": "axil",
+    "score": 374
+  },
+  {
+    "word": "bort",
+    "score": 374
+  },
+  {
+    "word": "iman",
+    "score": 373
+  },
+  {
+    "word": "opps",
+    "score": 373
+  },
+  {
+    "word": "baku",
+    "score": 369
+  },
+  {
+    "word": "boer",
+    "score": 369
+  },
+  {
+    "word": "aery",
+    "score": 368
+  },
+  {
+    "word": "agro",
+    "score": 368
+  },
+  {
+    "word": "baso",
+    "score": 368
+  },
+  {
+    "word": "beth",
+    "score": 368
+  },
+  {
+    "word": "bimp",
+    "score": 365
+  },
+  {
+    "word": "opel",
+    "score": 365
+  },
+  {
+    "word": "ilse",
+    "score": 364
+  },
+  {
+    "word": "bice",
+    "score": 363
+  },
+  {
+    "word": "achy",
+    "score": 362
+  },
+  {
+    "word": "amex",
+    "score": 361
+  },
+  {
+    "word": "buns",
+    "score": 361
+  },
+  {
+    "word": "issa",
+    "score": 361
+  },
+  {
+    "word": "bari",
+    "score": 360
+  },
+  {
+    "word": "bawd",
+    "score": 360
+  },
+  {
+    "word": "ursa",
+    "score": 359
+  },
+  {
+    "word": "aten",
+    "score": 358
+  },
+  {
+    "word": "berk",
+    "score": 358
+  },
+  {
+    "word": "bork",
+    "score": 355
+  },
+  {
+    "word": "oyez",
+    "score": 355
+  },
+  {
+    "word": "aglo",
+    "score": 353
+  },
+  {
+    "word": "amis",
+    "score": 353
+  },
+  {
+    "word": "arte",
+    "score": 353
+  },
+  {
+    "word": "orso",
+    "score": 353
+  },
+  {
+    "word": "asin",
+    "score": 352
+  },
+  {
+    "word": "bitt",
+    "score": 352
+  },
+  {
+    "word": "apon",
+    "score": 350
+  },
+  {
+    "word": "agha",
+    "score": 349
+  },
+  {
+    "word": "anen",
+    "score": 346
+  },
+  {
+    "word": "braw",
+    "score": 346
+  },
+  {
+    "word": "oems",
+    "score": 346
+  },
+  {
+    "word": "ivan",
+    "score": 345
+  },
+  {
+    "word": "oozy",
+    "score": 345
+  },
+  {
+    "word": "ainu",
+    "score": 344
+  },
+  {
+    "word": "asis",
+    "score": 344
+  },
+  {
+    "word": "babu",
+    "score": 344
+  },
+  {
+    "word": "bios",
+    "score": 344
+  },
+  {
+    "word": "bubu",
+    "score": 344
+  },
+  {
+    "word": "oran",
+    "score": 344
+  },
+  {
+    "word": "obol",
+    "score": 342
+  },
+  {
+    "word": "bleb",
+    "score": 341
+  },
+  {
+    "word": "unix",
+    "score": 340
+  },
+  {
+    "word": "ahem",
+    "score": 339
+  },
+  {
+    "word": "amoy",
+    "score": 338
+  },
+  {
+    "word": "boca",
+    "score": 338
+  },
+  {
+    "word": "bomp",
+    "score": 338
+  },
+  {
+    "word": "as to",
+    "score": 336
+  },
+  {
+    "word": "birl",
+    "score": 336
+  },
+  {
+    "word": "amon",
+    "score": 335
+  },
+  {
+    "word": "asif",
+    "score": 335
+  },
+  {
+    "word": "bris",
+    "score": 335
+  },
+  {
+    "word": "odea",
+    "score": 335
+  },
+  {
+    "word": "bise",
+    "score": 334
+  },
+  {
+    "word": "bere",
+    "score": 333
+  },
+  {
+    "word": "inro",
+    "score": 332
+  },
+  {
+    "word": "birr",
+    "score": 331
+  },
+  {
+    "word": "benz",
+    "score": 330
+  },
+  {
+    "word": "bebe",
+    "score": 329
+  },
+  {
+    "word": "bree",
+    "score": 329
+  },
+  {
+    "word": "udon",
+    "score": 329
+  },
+  {
+    "word": "apis",
+    "score": 327
+  },
+  {
+    "word": "intj",
+    "score": 327
+  },
+  {
+    "word": "ayah",
+    "score": 324
+  },
+  {
+    "word": "biga",
+    "score": 324
+  },
+  {
+    "word": "impi",
+    "score": 324
+  },
+  {
+    "word": "olan",
+    "score": 324
+  },
+  {
+    "word": "alae",
+    "score": 323
+  },
+  {
+    "word": "ours",
+    "score": 323
+  },
+  {
+    "word": "aper",
+    "score": 320
+  },
+  {
+    "word": "init",
+    "score": 320
+  },
+  {
+    "word": "bock",
+    "score": 319
+  },
+  {
+    "word": "idyl",
+    "score": 319
+  },
+  {
+    "word": "baum",
+    "score": 316
+  },
+  {
+    "word": "anse",
+    "score": 315
+  },
+  {
+    "word": "aldo",
+    "score": 313
+  },
+  {
+    "word": "bint",
+    "score": 313
+  },
+  {
+    "word": "bobo",
+    "score": 313
+  },
+  {
+    "word": "aler",
+    "score": 311
+  },
+  {
+    "word": "auld",
+    "score": 311
+  },
+  {
+    "word": "blug",
+    "score": 311
+  },
+  {
+    "word": "bugs",
+    "score": 311
+  },
+  {
+    "word": "agal",
+    "score": 310
+  },
+  {
+    "word": "orth",
+    "score": 310
+  },
+  {
+    "word": "acta",
+    "score": 309
+  },
+  {
+    "word": "alta",
+    "score": 309
+  },
+  {
+    "word": "bert",
+    "score": 308
+  },
+  {
+    "word": "ojai",
+    "score": 307
+  },
+  {
+    "word": "adar",
+    "score": 306
+  },
+  {
+    "word": "asci",
+    "score": 306
+  },
+  {
+    "word": "azan",
+    "score": 306
+  },
+  {
+    "word": "bona",
+    "score": 306
+  },
+  {
+    "word": "unau",
+    "score": 306
+  },
+  {
+    "word": "bink",
+    "score": 305
+  },
+  {
+    "word": "arda",
+    "score": 304
+  },
+  {
+    "word": "burk",
+    "score": 304
+  },
+  {
+    "word": "a la",
+    "score": 303
+  },
+  {
+    "word": "bott",
+    "score": 303
+  },
+  {
+    "word": "ansa",
+    "score": 301
+  },
+  {
+    "word": "bren",
+    "score": 299
+  },
+  {
+    "word": "urus",
+    "score": 299
+  },
+  {
+    "word": "anis",
+    "score": 297
+  },
+  {
+    "word": "arak",
+    "score": 297
+  },
+  {
+    "word": "arca",
+    "score": 297
+  },
+  {
+    "word": "agae",
+    "score": 296
+  },
+  {
+    "word": "asta",
+    "score": 296
+  },
+  {
+    "word": "boho",
+    "score": 296
+  },
+  {
+    "word": "bois",
+    "score": 296
+  },
+  {
+    "word": "amer",
+    "score": 295
+  },
+  {
+    "word": "blae",
+    "score": 295
+  },
+  {
+    "word": "bose",
+    "score": 295
+  },
+  {
+    "word": "barm",
+    "score": 294
+  },
+  {
+    "word": "oort",
+    "score": 294
+  },
+  {
+    "word": "apec",
+    "score": 293
+  },
+  {
+    "word": "as is",
+    "score": 293
+  },
+  {
+    "word": "agri",
+    "score": 292
+  },
+  {
+    "word": "iter",
+    "score": 292
+  },
+  {
+    "word": "buds",
+    "score": 290
+  },
+  {
+    "word": "inti",
+    "score": 290
+  },
+  {
+    "word": "oyer",
+    "score": 290
+  },
+  {
+    "word": "iona",
+    "score": 289
+  },
+  {
+    "word": "alpo",
+    "score": 286
+  },
+  {
+    "word": "amur",
+    "score": 286
+  },
+  {
+    "word": "anex",
+    "score": 285
+  },
+  {
+    "word": "ants",
+    "score": 285
+  },
+  {
+    "word": "aare",
+    "score": 284
+  },
+  {
+    "word": "aims",
+    "score": 284
+  },
+  {
+    "word": "apia",
+    "score": 283
+  },
+  {
+    "word": "allo",
+    "score": 282
+  },
+  {
+    "word": "olde",
+    "score": 282
+  },
+  {
+    "word": "auel",
+    "score": 281
+  },
+  {
+    "word": "bdsm",
+    "score": 281
+  },
+  {
+    "word": "burt",
+    "score": 281
+  },
+  {
+    "word": "olea",
+    "score": 281
+  },
+  {
+    "word": "beno",
+    "score": 280
+  },
+  {
+    "word": "iglu",
+    "score": 280
+  },
+  {
+    "word": "obie",
+    "score": 280
+  },
+  {
+    "word": "usda",
+    "score": 280
+  },
+  {
+    "word": "ames",
+    "score": 279
+  },
+  {
+    "word": "bess",
+    "score": 279
+  },
+  {
+    "word": "avia",
+    "score": 278
+  },
+  {
+    "word": "aram",
+    "score": 276
+  },
+  {
+    "word": "alva",
+    "score": 274
+  },
+  {
+    "word": "blea",
+    "score": 272
+  },
+  {
+    "word": "buch",
+    "score": 272
+  },
+  {
+    "word": "alam",
+    "score": 271
+  },
+  {
+    "word": "arvo",
+    "score": 271
+  },
+  {
+    "word": "atar",
+    "score": 271
+  },
+  {
+    "word": "baer",
+    "score": 271
+  },
+  {
+    "word": "igor",
+    "score": 271
+  },
+  {
+    "word": "ofay",
+    "score": 271
+  },
+  {
+    "word": "bubo",
+    "score": 270
+  },
+  {
+    "word": "itis",
+    "score": 270
+  },
+  {
+    "word": "anet",
+    "score": 268
+  },
+  {
+    "word": "barr",
+    "score": 268
+  },
+  {
+    "word": "owed",
+    "score": 268
+  },
+  {
+    "word": "idis",
+    "score": 267
+  },
+  {
+    "word": "acon",
+    "score": 266
+  },
+  {
+    "word": "apes",
+    "score": 266
+  },
+  {
+    "word": "agen",
+    "score": 265
+  },
+  {
+    "word": "alai",
+    "score": 265
+  },
+  {
+    "word": "akee",
+    "score": 264
+  },
+  {
+    "word": "orff",
+    "score": 264
+  },
+  {
+    "word": "asse",
+    "score": 262
+  },
+  {
+    "word": "baff",
+    "score": 262
+  },
+  {
+    "word": "okie",
+    "score": 262
+  },
+  {
+    "word": "ovex",
+    "score": 262
+  },
+  {
+    "word": "oars",
+    "score": 261
+  },
+  {
+    "word": "otoe",
+    "score": 256
+  },
+  {
+    "word": "bany",
+    "score": 255
+  },
+  {
+    "word": "airt",
+    "score": 254
+  },
+  {
+    "word": "ambi",
+    "score": 254
+  },
+  {
+    "word": "ical",
+    "score": 254
+  },
+  {
+    "word": "boyd",
+    "score": 253
+  },
+  {
+    "word": "orad",
+    "score": 253
+  },
+  {
+    "word": "apee",
+    "score": 252
+  },
+  {
+    "word": "aral",
+    "score": 252
+  },
+  {
+    "word": "avec",
+    "score": 252
+  },
+  {
+    "word": "uses",
+    "score": 252
+  },
+  {
+    "word": "irae",
+    "score": 251
+  },
+  {
+    "word": "izzy",
+    "score": 251
+  },
+  {
+    "word": "afts",
+    "score": 250
+  },
+  {
+    "word": "byss",
+    "score": 250
+  },
+  {
+    "word": "izar",
+    "score": 248
+  },
+  {
+    "word": "aryl",
+    "score": 246
+  },
+  {
+    "word": "borg",
+    "score": 246
+  },
+  {
+    "word": "inri",
+    "score": 246
+  },
+  {
+    "word": "anno",
+    "score": 245
+  },
+  {
+    "word": "bant",
+    "score": 245
+  },
+  {
+    "word": "boos",
+    "score": 245
+  },
+  {
+    "word": "brer",
+    "score": 245
+  },
+  {
+    "word": "octa",
+    "score": 245
+  },
+  {
+    "word": "odic",
+    "score": 245
+  },
+  {
+    "word": "arne",
+    "score": 243
+  },
+  {
+    "word": "octo",
+    "score": 243
+  },
+  {
+    "word": "amyl",
+    "score": 242
+  },
+  {
+    "word": "brin",
+    "score": 242
+  },
+  {
+    "word": "ital",
+    "score": 242
+  },
+  {
+    "word": "ochs",
+    "score": 242
+  },
+  {
+    "word": "ovis",
+    "score": 242
+  },
+  {
+    "word": "aber",
+    "score": 241
+  },
+  {
+    "word": "aris",
+    "score": 241
+  },
+  {
+    "word": "abit",
+    "score": 240
+  },
+  {
+    "word": "atit",
+    "score": 239
+  },
+  {
+    "word": "bruh",
+    "score": 239
+  },
+  {
+    "word": "indy",
+    "score": 239
+  },
+  {
+    "word": "abri",
+    "score": 238
+  },
+  {
+    "word": "aime",
+    "score": 238
+  },
+  {
+    "word": "amat",
+    "score": 237
+  },
+  {
+    "word": "aped",
+    "score": 237
+  },
+  {
+    "word": "asic",
+    "score": 237
+  },
+  {
+    "word": "aran",
+    "score": 236
+  },
+  {
+    "word": "ipad",
+    "score": 236
+  },
+  {
+    "word": "adds",
+    "score": 235
+  },
+  {
+    "word": "akka",
+    "score": 235
+  },
+  {
+    "word": "baas",
+    "score": 235
+  },
+  {
+    "word": "amia",
+    "score": 234
+  },
+  {
+    "word": "ills",
+    "score": 234
+  },
+  {
+    "word": "ulva",
+    "score": 234
+  },
+  {
+    "word": "ikea",
+    "score": 233
+  },
+  {
+    "word": "as if",
+    "score": 232
+  },
+  {
+    "word": "icao",
+    "score": 232
+  },
+  {
+    "word": "oise",
+    "score": 232
+  },
+  {
+    "word": "assi",
+    "score": 231
+  },
+  {
+    "word": "ince",
+    "score": 231
+  },
+  {
+    "word": "opto",
+    "score": 231
+  },
+  {
+    "word": "aile",
+    "score": 230
+  },
+  {
+    "word": "ayin",
+    "score": 230
+  },
+  {
+    "word": "bala",
+    "score": 230
+  },
+  {
+    "word": "beds",
+    "score": 230
+  },
+  {
+    "word": "brac",
+    "score": 230
+  },
+  {
+    "word": "aras",
+    "score": 229
+  },
+  {
+    "word": "bobs",
+    "score": 229
+  },
+  {
+    "word": "bouy",
+    "score": 229
+  },
+  {
+    "word": "oris",
+    "score": 229
+  },
+  {
+    "word": "bumf",
+    "score": 228
+  },
+  {
+    "word": "isla",
+    "score": 228
+  },
+  {
+    "word": "ammi",
+    "score": 227
+  },
+  {
+    "word": "apod",
+    "score": 227
+  },
+  {
+    "word": "blag",
+    "score": 227
+  },
+  {
+    "word": "blum",
+    "score": 227
+  },
+  {
+    "word": "anat",
+    "score": 226
+  },
+  {
+    "word": "azul",
+    "score": 226
+  },
+  {
+    "word": "bosc",
+    "score": 226
+  },
+  {
+    "word": "orbi",
+    "score": 226
+  },
+  {
+    "word": "algo",
+    "score": 225
+  },
+  {
+    "word": "aced",
+    "score": 224
+  },
+  {
+    "word": "alph",
+    "score": 224
+  },
+  {
+    "word": "bord",
+    "score": 224
+  },
+  {
+    "word": "bros",
+    "score": 224
+  },
+  {
+    "word": "ines",
+    "score": 224
+  },
+  {
+    "word": "utes",
+    "score": 224
+  },
+  {
+    "word": "ates",
+    "score": 223
+  },
+  {
+    "word": "oecd",
+    "score": 223
+  },
+  {
+    "word": "bien",
+    "score": 222
+  },
+  {
+    "word": "olin",
+    "score": 222
+  },
+  {
+    "word": "uxor",
+    "score": 222
+  },
+  {
+    "word": "amps",
+    "score": 221
+  },
+  {
+    "word": "bool",
+    "score": 221
+  },
+  {
+    "word": "brun",
+    "score": 220
+  },
+  {
+    "word": "imho",
+    "score": 220
+  },
+  {
+    "word": "baus",
+    "score": 219
+  },
+  {
+    "word": "owls",
+    "score": 219
+  },
+  {
+    "word": "igbo",
+    "score": 218
+  },
+  {
+    "word": "acor",
+    "score": 217
+  },
+  {
+    "word": "asab",
+    "score": 217
+  },
+  {
+    "word": "asch",
+    "score": 216
+  },
+  {
+    "word": "bani",
+    "score": 216
+  },
+  {
+    "word": "boma",
+    "score": 216
+  },
+  {
+    "word": "aube",
+    "score": 215
+  },
+  {
+    "word": "oxer",
+    "score": 215
+  },
+  {
+    "word": "umma",
+    "score": 215
+  },
+  {
+    "word": "aarp",
+    "score": 214
+  },
+  {
+    "word": "abas",
+    "score": 214
+  },
+  {
+    "word": "abid",
+    "score": 214
+  },
+  {
+    "word": "agit",
+    "score": 214
+  },
+  {
+    "word": "baja",
+    "score": 214
+  },
+  {
+    "word": "bela",
+    "score": 213
+  },
+  {
+    "word": "oaks",
+    "score": 213
+  },
+  {
+    "word": "odle",
+    "score": 213
+  },
+  {
+    "word": "usaf",
+    "score": 213
+  },
+  {
+    "word": "imps",
+    "score": 212
+  },
+  {
+    "word": "olaf",
+    "score": 212
+  },
+  {
+    "word": "oped",
+    "score": 212
+  },
+  {
+    "word": "aron",
+    "score": 211
+  },
+  {
+    "word": "balt",
+    "score": 211
+  },
+  {
+    "word": "bete",
+    "score": 211
+  },
+  {
+    "word": "boke",
+    "score": 211
+  },
+  {
+    "word": "inee",
+    "score": 211
+  },
+  {
+    "word": "iced",
+    "score": 210
+  },
+  {
+    "word": "ohia",
+    "score": 210
+  },
+  {
+    "word": "oils",
+    "score": 210
+  },
+  {
+    "word": "blam",
+    "score": 209
+  },
+  {
+    "word": "ieee",
+    "score": 209
+  },
+  {
+    "word": "ores",
+    "score": 209
+  },
+  {
+    "word": "alef",
+    "score": 208
+  },
+  {
+    "word": "beed",
+    "score": 208
+  },
+  {
+    "word": "boba",
+    "score": 208
+  },
+  {
+    "word": "bots",
+    "score": 208
+  },
+  {
+    "word": "orbs",
+    "score": 208
+  },
+  {
+    "word": "icbm",
+    "score": 207
+  },
+  {
+    "word": "aton",
+    "score": 206
+  },
+  {
+    "word": "bara",
+    "score": 206
+  },
+  {
+    "word": "ilea",
+    "score": 206
+  },
+  {
+    "word": "oaky",
+    "score": 206
+  },
+  {
+    "word": "olay",
+    "score": 206
+  },
+  {
+    "word": "upto",
+    "score": 206
+  },
+  {
+    "word": "ancy",
+    "score": 205
+  },
+  {
+    "word": "blox",
+    "score": 205
+  },
+  {
+    "word": "bufo",
+    "score": 204
+  },
+  {
+    "word": "ipso",
+    "score": 204
+  },
+  {
+    "word": "abra",
+    "score": 203
+  },
+  {
+    "word": "beni",
+    "score": 203
+  },
+  {
+    "word": "osar",
+    "score": 202
+  },
+  {
+    "word": "bera",
+    "score": 201
+  },
+  {
+    "word": "boaz",
+    "score": 201
+  },
+  {
+    "word": "ideo",
+    "score": 201
+  },
+  {
+    "word": "anan",
+    "score": 200
+  },
+  {
+    "word": "opic",
+    "score": 200
+  },
+  {
+    "word": "aldi",
+    "score": 199
+  },
+  {
+    "word": "indi",
+    "score": 199
+  },
+  {
+    "word": "orts",
+    "score": 199
+  },
+  {
+    "word": "baid",
+    "score": 198
+  },
+  {
+    "word": "bura",
+    "score": 198
+  },
+  {
+    "word": "owse",
+    "score": 198
+  },
+  {
+    "word": "babs",
+    "score": 197
+  },
+  {
+    "word": "unio",
+    "score": 197
+  },
+  {
+    "word": "alls",
+    "score": 196
+  },
+  {
+    "word": "bawn",
+    "score": 196
+  },
+  {
+    "word": "bohr",
+    "score": 196
+  },
+  {
+    "word": "inia",
+    "score": 195
+  },
+  {
+    "word": "orne",
+    "score": 195
+  },
+  {
+    "word": "ades",
+    "score": 194
+  },
+  {
+    "word": "aesc",
+    "score": 194
+  },
+  {
+    "word": "aviv",
+    "score": 194
+  },
+  {
+    "word": "alay",
+    "score": 193
+  },
+  {
+    "word": "updo",
+    "score": 193
+  },
+  {
+    "word": "bafe",
+    "score": 192
+  },
+  {
+    "word": "birk",
+    "score": 192
+  },
+  {
+    "word": "bist",
+    "score": 192
+  },
+  {
+    "word": "bows",
+    "score": 192
+  },
+  {
+    "word": "omei",
+    "score": 192
+  },
+  {
+    "word": "ordo",
+    "score": 192
+  },
+  {
+    "word": "otta",
+    "score": 192
+  },
+  {
+    "word": "blin",
+    "score": 191
+  },
+  {
+    "word": "uric",
+    "score": 191
+  },
+  {
+    "word": "ajee",
+    "score": 190
+  },
+  {
+    "word": "apar",
+    "score": 190
+  },
+  {
+    "word": "beit",
+    "score": 190
+  },
+  {
+    "word": "blet",
+    "score": 189
+  },
+  {
+    "word": "ales",
+    "score": 188
+  },
+  {
+    "word": "alow",
+    "score": 188
+  },
+  {
+    "word": "bote",
+    "score": 188
+  },
+  {
+    "word": "amma",
+    "score": 187
+  },
+  {
+    "word": "bime",
+    "score": 187
+  },
+  {
+    "word": "in re",
+    "score": 187
+  },
+  {
+    "word": "ivry",
+    "score": 187
+  },
+  {
+    "word": "accu",
+    "score": 186
+  },
+  {
+    "word": "ajot",
+    "score": 186
+  },
+  {
+    "word": "apeg",
+    "score": 186
+  },
+  {
+    "word": "ossi",
+    "score": 186
+  },
+  {
+    "word": "azov",
+    "score": 185
+  },
+  {
+    "word": "bota",
+    "score": 185
+  },
+  {
+    "word": "idee",
+    "score": 185
+  },
+  {
+    "word": "igbt",
+    "score": 185
+  },
+  {
+    "word": "isbn",
+    "score": 185
+  },
+  {
+    "word": "oled",
+    "score": 184
+  },
+  {
+    "word": "acol",
+    "score": 183
+  },
+  {
+    "word": "addy",
+    "score": 183
+  },
+  {
+    "word": "ails",
+    "score": 183
+  },
+  {
+    "word": "amar",
+    "score": 183
+  },
+  {
+    "word": "blaw",
+    "score": 183
+  },
+  {
+    "word": "bonn",
+    "score": 183
+  },
+  {
+    "word": "amas",
+    "score": 182
+  },
+  {
+    "word": "arcs",
+    "score": 182
+  },
+  {
+    "word": "aziz",
+    "score": 182
+  },
+  {
+    "word": "odie",
+    "score": 182
+  },
+  {
+    "word": "amit",
+    "score": 181
+  },
+  {
+    "word": "baca",
+    "score": 181
+  },
+  {
+    "word": "bogy",
+    "score": 181
+  },
+  {
+    "word": "bryn",
+    "score": 181
+  },
+  {
+    "word": "unde",
+    "score": 181
+  },
+  {
+    "word": "bome",
+    "score": 180
+  },
+  {
+    "word": "ogam",
+    "score": 180
+  },
+  {
+    "word": "adex",
+    "score": 179
+  },
+  {
+    "word": "arra",
+    "score": 179
+  },
+  {
+    "word": "atmo",
+    "score": 179
+  },
+  {
+    "word": "atob",
+    "score": 179
+  },
+  {
+    "word": "a few",
+    "score": 178
+  },
+  {
+    "word": "aclu",
+    "score": 178
+  },
+  {
+    "word": "alle",
+    "score": 178
+  },
+  {
+    "word": "acru",
+    "score": 177
+  },
+  {
+    "word": "acti",
+    "score": 177
+  },
+  {
+    "word": "attu",
+    "score": 177
+  },
+  {
+    "word": "boyo",
+    "score": 177
+  },
+  {
+    "word": "ipod",
+    "score": 177
+  },
+  {
+    "word": "argh",
+    "score": 176
+  },
+  {
+    "word": "abay",
+    "score": 175
+  },
+  {
+    "word": "asio",
+    "score": 175
+  },
+  {
+    "word": "ions",
+    "score": 175
+  },
+  {
+    "word": "acth",
+    "score": 174
+  },
+  {
+    "word": "arlo",
+    "score": 174
+  },
+  {
+    "word": "atty",
+    "score": 174
+  },
+  {
+    "word": "affy",
+    "score": 173
+  },
+  {
+    "word": "ayer",
+    "score": 173
+  },
+  {
+    "word": "bata",
+    "score": 173
+  },
+  {
+    "word": "obia",
+    "score": 173
+  },
+  {
+    "word": "ocra",
+    "score": 173
+  },
+  {
+    "word": "anya",
+    "score": 172
+  },
+  {
+    "word": "brod",
+    "score": 172
+  },
+  {
+    "word": "illy",
+    "score": 172
+  },
+  {
+    "word": "irid",
+    "score": 172
+  },
+  {
+    "word": "ices",
+    "score": 171
+  },
+  {
+    "word": "offs",
+    "score": 171
+  },
+  {
+    "word": "ible",
+    "score": 170
+  },
+  {
+    "word": "ulta",
+    "score": 170
+  },
+  {
+    "word": "abye",
+    "score": 169
+  },
+  {
+    "word": "ahey",
+    "score": 169
+  },
+  {
+    "word": "auth",
+    "score": 169
+  },
+  {
+    "word": "blay",
+    "score": 169
+  },
+  {
+    "word": "aion",
+    "score": 168
+  },
+  {
+    "word": "arma",
+    "score": 168
+  },
+  {
+    "word": "asat",
+    "score": 168
+  },
+  {
+    "word": "aust",
+    "score": 168
+  },
+  {
+    "word": "ayes",
+    "score": 168
+  },
+  {
+    "word": "otoh",
+    "score": 168
+  },
+  {
+    "word": "asks",
+    "score": 167
+  },
+  {
+    "word": "bley",
+    "score": 167
+  },
+  {
+    "word": "urva",
+    "score": 167
+  },
+  {
+    "word": "aven",
+    "score": 166
+  },
+  {
+    "word": "azon",
+    "score": 166
+  },
+  {
+    "word": "ucla",
+    "score": 166
+  },
+  {
+    "word": "alco",
+    "score": 165
+  },
+  {
+    "word": "apso",
+    "score": 165
+  },
+  {
+    "word": "asur",
+    "score": 165
+  },
+  {
+    "word": "beda",
+    "score": 165
+  },
+  {
+    "word": "bets",
+    "score": 165
+  },
+  {
+    "word": "buna",
+    "score": 165
+  },
+  {
+    "word": "osse",
+    "score": 165
+  },
+  {
+    "word": "uart",
+    "score": 165
+  },
+  {
+    "word": "afer",
+    "score": 164
+  },
+  {
+    "word": "baez",
+    "score": 164
+  },
+  {
+    "word": "usps",
+    "score": 164
+  },
+  {
+    "word": "abib",
+    "score": 163
+  },
+  {
+    "word": "bann",
+    "score": 163
+  },
+  {
+    "word": "asma",
+    "score": 162
+  },
+  {
+    "word": "bibs",
+    "score": 162
+  },
+  {
+    "word": "bras",
+    "score": 162
+  },
+  {
+    "word": "ingo",
+    "score": 162
+  },
+  {
+    "word": "ious",
+    "score": 162
+  },
+  {
+    "word": "arpa",
+    "score": 161
+  },
+  {
+    "word": "atto",
+    "score": 161
+  },
+  {
+    "word": "bret",
+    "score": 161
+  },
+  {
+    "word": "offa",
+    "score": 161
+  },
+  {
+    "word": "ohms",
+    "score": 161
+  },
+  {
+    "word": "ooty",
+    "score": 161
+  },
+  {
+    "word": "orel",
+    "score": 161
+  },
+  {
+    "word": "osis",
+    "score": 161
+  },
+  {
+    "word": "alif",
+    "score": 159
+  },
+  {
+    "word": "auch",
+    "score": 159
+  },
+  {
+    "word": "bibi",
+    "score": 159
+  },
+  {
+    "word": "blut",
+    "score": 159
+  },
+  {
+    "word": "bost",
+    "score": 159
+  },
+  {
+    "word": "idio",
+    "score": 159
+  },
+  {
+    "word": "irks",
+    "score": 159
+  },
+  {
+    "word": "oden",
+    "score": 159
+  },
+  {
+    "word": "opac",
+    "score": 159
+  },
+  {
+    "word": "oppo",
+    "score": 159
+  },
+  {
+    "word": "orra",
+    "score": 159
+  },
+  {
+    "word": "akan",
+    "score": 158
+  },
+  {
+    "word": "astm",
+    "score": 158
+  },
+  {
+    "word": "bein",
+    "score": 158
+  },
+  {
+    "word": "bram",
+    "score": 158
+  },
+  {
+    "word": "osmo",
+    "score": 158
+  },
+  {
+    "word": "bays",
+    "score": 157
+  },
+  {
+    "word": "iirc",
+    "score": 157
+  },
+  {
+    "word": "avel",
+    "score": 156
+  },
+  {
+    "word": "buja",
+    "score": 156
+  },
+  {
+    "word": "imax",
+    "score": 156
+  },
+  {
+    "word": "ione",
+    "score": 156
+  },
+  {
+    "word": "ulan",
+    "score": 156
+  },
+  {
+    "word": "isha",
+    "score": 155
+  },
+  {
+    "word": "olly",
+    "score": 155
+  },
+  {
+    "word": "ower",
+    "score": 155
+  },
+  {
+    "word": "alea",
+    "score": 153
+  },
+  {
+    "word": "alis",
+    "score": 153
+  },
+  {
+    "word": "isdn",
+    "score": 153
+  },
+  {
+    "word": "ombu",
+    "score": 153
+  },
+  {
+    "word": "ador",
+    "score": 152
+  },
+  {
+    "word": "aret",
+    "score": 152
+  }
+]
