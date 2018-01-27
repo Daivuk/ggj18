@@ -4,6 +4,9 @@ var HERO_PICKUP_OFFSET = new Vector2(0, 0);
 var HERO_DISABLE_TIME = 2;
 var HERO_TASER_USE_INTERVAL = 3;
 var HERO_TASER_CHARGE_TIME = 1;
+var HERO_TASER_PROXIMITY = 10;
+var HERO_SPAWN_PROXIMITY = 0;
+var HERO_SPAWN_CENTER_TILE_RADIUS = 7;
 
 var glowCircleTexture = getTexture("glowCircle.png")
 
@@ -205,7 +208,7 @@ function hero_update(hero, dt)
                     {
                         var otherHero = heroes[i];
 
-                        if(Vector2.distance(hero.position, otherHero.position) < 10)
+                        if(Vector2.distance(hero.position, otherHero.position) < HERO_TASER_PROXIMITY)
                         {
                             hero_tasered(otherHero);
                         }
@@ -256,11 +259,59 @@ function hero_taser_update(hero, dt)
 
         if(hero.disableTimer < 0)
         {
-            hero.disabled = false;
-            hero.tasered = false;
-            hero.disableTimer = HERO_DISABLE_TIME;
+            hero_respawn(hero);
         }
     }
+}
+
+function hero_respawn(hero)
+{
+    hero.disabled = false;
+    hero.tasered = false;
+    hero.disableTimer = HERO_DISABLE_TIME;
+
+    var foundSpot = false;
+    var spawnPos = new Vector2(0, 0);
+
+    while(!foundSpot)
+    {
+        var foundCollision = false;
+
+        // Get a random tile spot
+        var tileX = Random.randInt(0, tiledMap.getSize().x);
+        var tileY = Random.randInt(0, tiledMap.getSize().y);
+
+        // Get the actual spawn position for the pickup
+        spawnPos.x = tileX * TILE_HEIGHT + HALF_TILE_HEIGHT;
+        spawnPos.y = tileY * TILE_HEIGHT + HALF_TILE_HEIGHT;
+
+        // Check for collision against the centre area
+        if(Vector2.distance(CENTRE_POSITION, spawnPos) < HERO_SPAWN_CENTER_TILE_RADIUS * TILE_HEIGHT)
+        {
+            continue;
+        }
+
+        // Check for collision against pickups
+        foundCollision = pickup_collision(spawnPos, 0.001);
+        
+        if(foundCollision)
+        {
+            continue;
+        }
+
+        // Make sure we don't spawn too close to a player
+        foundCollision = hero_collision(spawnPos, HERO_SPAWN_PROXIMITY);
+
+        if(foundCollision)
+        {
+            continue;
+        }
+
+        // Returns true if we didn't collide with any walls in the map
+        foundSpot = tiledMap.getCollision(tileX, tileY);
+    }
+    
+    hero.position = spawnPos;
 }
 
 function hero_tasered(hero)
@@ -283,4 +334,17 @@ function heroes_update(dt)
     {
         hero_taser_update(heroes[i], dt);
     }
+}
+
+function hero_collision(position, radius)
+{
+    for(var i = 0; i < heroes.length; ++i)
+    {
+        if(Vector2.distance(heroes[i].position, position) < radius)
+        {
+            return true;
+        }
+    }
+
+    return false;
 }

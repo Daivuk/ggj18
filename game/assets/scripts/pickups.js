@@ -1,7 +1,6 @@
 var PICKUP_HERO_COLLISION_RADIUS = 0;
 var MAX_PICKUPS = 20;
 var PICKUP_SPAWN_INTERVAL_SEC = 0.1;
-var CENTRE_POSITION = new Vector2(0, 0);
 var ACQUIRE_RADIUS = 10;
 
 
@@ -48,29 +47,15 @@ function pickup_spawn()
         }
 
         // Check for collision against other pickups
-        for(var i = 0; i < pickups.length; ++i)
-        {
-            if(Vector2.distanceSquared(pickups[i].position, spawnPos) < 0.001)
-            {
-                foundCollision = true;
-                break;
-            }
-        }
-
+        foundCollision = pickup_collision(spawnPos, 0.001);
+        
         if(foundCollision)
         {
             continue;
         }
 
         // Make sure we don't spawn too close to a player
-        for(var i = 0; i < heroes.length; ++i)
-        {
-            if(Vector2.distance(heroes[i].position, spawnPos) < PICKUP_HERO_COLLISION_RADIUS)
-            {
-                foundCollision = true;
-                break;
-            }
-        }
+        foundCollision = hero_collision(spawnPos, PICKUP_HERO_COLLISION_RADIUS);
 
         if(foundCollision)
         {
@@ -127,4 +112,17 @@ function pickups_acquire(position)
     }
 
     return null;
+}
+
+function pickup_collision(position, radius)
+{
+    for(var i = 0; i < pickups.length; ++i)
+    {
+        if(Vector2.distance(pickups[i].position, position) < radius)
+        {
+            return true;
+        }
+    }
+    
+    return false;
 }

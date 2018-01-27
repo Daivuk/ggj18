@@ -10,6 +10,7 @@ var gameState = GameStateEnum.INIT;
 var tiledMap = getTiledMap("arena.tmx");
 var TILE_HEIGHT = tiledMap.getTileSize();
 var HALF_TILE_HEIGHT = TILE_HEIGHT * 0.5;
+var CENTRE_POSITION = new Vector2(17 * TILE_HEIGHT + HALF_TILE_HEIGHT, 8 * TILE_HEIGHT + HALF_TILE_HEIGHT);
 
 var cameraTransform = new Matrix();
 var invCameraTransform = new Matrix();
