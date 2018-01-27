@@ -23,6 +23,7 @@ var heroes = [
     hero_create(3, new Vector2(6, 14).mul(TILE_HEIGHT).add(HALF_TILE_HEIGHT), Color.fromHexRGB(0xff8b9c))
 ];
 
+var mainRT = Texture.createScreenRenderTarget();
 var bloomRT = Texture.createScreenRenderTarget();
 
 var encryptedFont = getFont("sga.fnt");
@@ -130,6 +131,7 @@ function render()
     bloomRT.blur(16);
 
     // Draw the world on the main RT
+    Renderer.pushRenderTarget(mainRT);
     Renderer.clear(new Color(0, 0, 0, 1));
     renderWorld();
 
@@ -138,6 +140,15 @@ function render()
     SpriteBatch.setFilter(FilterMode.LINEAR);
     SpriteBatch.setBlend(BlendMode.ADD);
     SpriteBatch.drawRect(bloomRT, new Rect(0, 0, Renderer.getResolution()), new Color(3));
+    SpriteBatch.end();
+    Renderer.popRenderTarget();
+
+    // Draw the final image
+    Renderer.clear(new Color(0, 0, 0, 1));
+    SpriteBatch.begin();
+    SpriteBatch.setFilter(FilterMode.LINEAR);
+    SpriteBatch.setBlend(BlendMode.OPAQUE);
+    SpriteBatch.drawRect(mainRT, new Rect(0, 0, Renderer.getResolution()));
     SpriteBatch.end();
 }
 
