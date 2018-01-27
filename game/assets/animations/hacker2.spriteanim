@@ -32,35 +32,35 @@
     <frame id="11" flipH="false"/>
   </anim>
   <anim name="idletaser_e" fps="10" loop="true">
-    <frame id="0" flipH="true"/>
-    <frame id="1" flipH="true"/>
-    <frame id="2" flipH="true"/>
-    <frame id="3" flipH="true"/>
+    <frame id="12" flipH="true"/>
+    <frame id="13" flipH="true"/>
+    <frame id="14" flipH="true"/>
+    <frame id="15" flipH="true"/>
   </anim>
   <anim name="idletaser_w" fps="10" loop="true">
-    <frame id="0" flipH="false"/>
-    <frame id="1" flipH="false"/>
-    <frame id="2" flipH="false"/>
-    <frame id="3" flipH="false"/>
+    <frame id="12" flipH="false"/>
+    <frame id="13" flipH="false"/>
+    <frame id="14" flipH="false"/>
+    <frame id="15" flipH="false"/>
   </anim>
   <anim name="runtaser_e" fps="13" loop="true">
-    <frame id="4" flipH="true"/>
-    <frame id="5" flipH="true"/>
-    <frame id="6" flipH="true"/>
-    <frame id="7" flipH="true"/>
-    <frame id="8" flipH="true"/>
-    <frame id="9" flipH="true"/>
-    <frame id="10" flipH="true"/>
-    <frame id="11" flipH="true"/>
+    <frame id="16" flipH="true"/>
+    <frame id="17" flipH="true"/>
+    <frame id="18" flipH="true"/>
+    <frame id="19" flipH="true"/>
+    <frame id="20" flipH="true"/>
+    <frame id="21" flipH="true"/>
+    <frame id="22" flipH="true"/>
+    <frame id="23" flipH="true"/>
   </anim>
   <anim name="runtaser_w" fps="13" loop="true">
-    <frame id="4" flipH="false"/>
-    <frame id="5" flipH="false"/>
-    <frame id="6" flipH="false"/>
-    <frame id="7" flipH="false"/>
-    <frame id="8" flipH="false"/>
-    <frame id="9" flipH="false"/>
-    <frame id="10" flipH="false"/>
-    <frame id="11" flipH="false"/>
+    <frame id="16" flipH="false"/>
+    <frame id="17" flipH="false"/>
+    <frame id="18" flipH="false"/>
+    <frame id="19" flipH="false"/>
+    <frame id="20" flipH="false"/>
+    <frame id="21" flipH="false"/>
+    <frame id="22" flipH="false"/>
+    <frame id="23" flipH="false"/>
   </anim>
 </sheet>

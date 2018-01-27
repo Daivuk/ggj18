@@ -53,7 +53,7 @@ function hero_createNewMessage(hero) {
         hero.glyphMap.push({
             encrypted: shiftedGlyph,
             decrypted: originalGlyph.toUpperCase(), // upper case are decrypted and visible on screen
-            color: new Color(hero.color)
+            color: new ColorAnim(hero.color)
         });
 
         hero.displayMessage += shiftedGlyph;
@@ -69,7 +69,7 @@ function hero_revealGlyph(hero, glyph)
         if (hero.glyphMap[i].encrypted == glyph)
         {
             hero.displayMessage = hero.displayMessage.replaceAt(i, hero.glyphMap[i].decrypted);
-            hero.glyphMap[i].color = new Color(Color.WHITE);
+            hero.glyphMap[i].color.playSingle(Color.WHITE, hero.color, 3, Tween.EASE_IN);
         }
     }
 }
@@ -100,7 +100,7 @@ function hero_render(hero)
     
     for (var i = 0; i < hero.glyphMap.length; ++i)
     {
-        SpriteBatch.drawText(encryptedFont, hero.displayMessage[i], new Vector2(4+(8*i), 4 + 70 * hero.index), Vector2.TOP_LEFT, hero.glyphMap[i].color);
+        SpriteBatch.drawText(encryptedFont, hero.displayMessage[i], new Vector2(4+(8*i), 4 + 70 * hero.index), Vector2.TOP_LEFT, hero.glyphMap[i].color.get());
     }
 }
 
@@ -115,6 +115,12 @@ function heroes_render()
 function hero_renderGlow(hero)
 {
     SpriteBatch.drawSpriteAnim(hero.spriteAnim, hero.position, Color.BLACK);
+
+    for (var i = 0; i < hero.glyphMap.length; ++i)
+    {
+        if (hero.glyphMap[i].color.isPlaying())
+            SpriteBatch.drawText(encryptedFont, hero.displayMessage[i], new Vector2(4+(8*i), 4 + 70 * hero.index), Vector2.TOP_LEFT, hero.glyphMap[i].color.get());
+    }
 }
 
 function hero_update(hero, dt)
@@ -124,12 +130,6 @@ function hero_update(hero, dt)
         return;
     }
 
-    // cool down the glyphmap colors
-    for(var i = 0; i < hero.glyphMap.length; ++i)
-    {
-        hero.glyphMap[i].color = Color.lerp(hero.glyphMap[i].color, hero.color, dt*0.5); 
-    }
-
     var leftThumb = GamePad.getLeftThumb(hero.index);
 
     // Get the next position according to thumb movement
@@ -137,25 +137,6 @@ function hero_update(hero, dt)
 
     // Apply collision to the movement
     hero.position = tiledMap.collision(hero.position, nextPosition, new Vector2(HERO_COLLISION_SIZE, HERO_COLLISION_SIZE));
-
-    // Pick anim
-    var anim = "idle";
-    if (leftThumb.length() > 0.1) anim = "run";
-
-    // Point the character in the right direction
-    if(Math.abs(leftThumb.x) > 0.001)
-    {
-        if(leftThumb.x > 0)
-        {
-            hero.dir = "e";
-        }
-        else
-        {
-            hero.dir = "w";
-        }
-    }
-
-    hero.spriteAnim.play(anim + "_" + hero.dir)
 
     // Pick up items
     var pickup = pickups_acquire(hero.position.add(HERO_PICKUP_OFFSET));
@@ -230,6 +211,26 @@ function hero_update(hero, dt)
             hero.taserTimer = HERO_TASER_USE_INTERVAL;
         }
     }
+
+    // Pick anim
+    var anim = "idle";
+    if (leftThumb.length() > 0.1) anim = "run";
+    if (hero.taserOn) anim += "taser";
+
+    // Point the character in the right direction
+    if(Math.abs(leftThumb.x) > 0.001)
+    {
+        if(leftThumb.x > 0)
+        {
+            hero.dir = "e";
+        }
+        else
+        {
+            hero.dir = "w";
+        }
+    }
+
+    hero.spriteAnim.play(anim + "_" + hero.dir)
 }
 
 function hero_taser_update(hero, dt)
