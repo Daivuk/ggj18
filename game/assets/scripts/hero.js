@@ -110,12 +110,6 @@ function hero_update(hero, dt)
     // Apply collision to the movement
     hero.position = tiledMap.collision(hero.position, nextPosition, new Vector2(HERO_COLLISION_SIZE, HERO_COLLISION_SIZE));
 
-    var pickup = pickups_acquire(hero.position.add(HERO_PICKUP_OFFSET));
-    if(pickup != null)
-    {
-        // Do stuff with the pickup
-    }
-
     // Pick anim
     var anim = "idle";
     if (leftThumb.length() > 0.1) anim = "run";
@@ -134,7 +128,7 @@ function hero_update(hero, dt)
     }
 
     hero.spriteAnim.play(anim + "_" + hero.dir)
-    
+
     var pickup = pickups_acquire(hero.position.add(HERO_PICKUP_OFFSET));
 
     if(pickup != null)
