@@ -1,5 +1,8 @@
 <sheet texture="hacker.png" spriteWidth="24" spriteHeight="32" originX="12" originY="18">
-  <anim name="idle" fps="1" loop="true">
-    <frame id="0" />
+  <anim name="idle_e" fps="1" loop="true">
+    <frame id="0" flipH="true"/>
+  </anim>
+  <anim name="idle_w" fps="1" loop="true">
+    <frame id="0" flipH="false"/>
   </anim>
 </sheet>

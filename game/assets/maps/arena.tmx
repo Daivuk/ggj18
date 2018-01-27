@@ -3,10 +3,10 @@
  <tileset firstgid="1" source="tileset.tsx"/>
  <layer name="tiles" width="35" height="19">
   <data encoding="base64" compression="zlib">
-   eJy9lMEOwCAIQ73O///g3QmFVyc7EE1AKLaw11o72PODxZrKnNj4Jp5f89NYEpfFnGJRd+Uj/6OwOHzG2hRLFkvrdrhdLVEuFBbVy83aTp+VVhRPlaboWzKLhMtO31FHt7C4GqA4CUdd7i7/CZZuDqleCJZs9jMep+aX8Em0OY1F7b+OI0ezZO+6/0H3Np1l0hf1nfA4hUX5q9PFMm1Z3Rfxshkk
+   eJzVVssOwyAM45pxg///16nSkCzXTmFw2A4RDc3DcQJtlFLix+U1IR2eL59K67BpH0HbE1g4Ju7xOmwGlrqBpUGdmFthCdrjlf12eUHeFWaHZUgn35m8vNco7swsrQrHVv10tt8K1oV5n+Izrw4zc59x7GpDPUTOGV5rudfnsATl4XnbwdIhVqM9zF0FTtQZi+prkJ/iNeMlw4KcKSxudjMs2bwo3c0Mn+0unk+d2ZnZw3xNvM/864PO8Vjn3mb3n7srV2pUs3DiG+DiOBt1X6/iwJlVc+3OguvBSj9WecHe8x0T5f4fw+s/yBv3WhqW
   </data>
  </layer>
- <layer name="collisions" width="35" height="19" opacity="0.49">
+ <layer name="collisions" width="35" height="19" visible="0" opacity="0.49">
   <data encoding="base64" compression="zlib">
    eJzVld0KgDAIhbf3f+luIzx/5qCEsWxy/NKsvdbaH1+pbbCj2GkWJ66K6bKga3Tm1GeiLs/cLksV6+ZlLJ13yTHGgp5lMrfDUsUzZqbn1vjuO7NY6al7LN8kizI2k08/7ZHSVvodFjWHLFfKUs1+1cdT81tZ0qPTpr5/qkdKV/lv/gFIJ2FJOZK+dfp4igWds/0P6wL0BwEo
   </data>
