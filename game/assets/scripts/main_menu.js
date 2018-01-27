@@ -23,6 +23,8 @@ function regenerateUniqueGlyphs()
     }
 
     uniqueGlyphs = removeDuplicatesFromArray(uniqueGlyphs);
+
+    uniqueGlyphs = pickup_removeExistingFromArray(uniqueGlyphs);
 }
 
 function renderMainMenu()

@@ -39,6 +39,36 @@ function pickup_create(_pos)
     return pickup;
 }
 
+function pickup_removeExistingFromArray(characters)
+{
+    print("input characters " + characters);
+
+    var existingCharacters = "";
+
+    for(var i = 0; i < pickups.length; ++i)
+    {
+        existingCharacters += pickups[i].glyph;
+
+        for(var c = 0; c < characters.length; ++c)
+        {
+            if(characters[c] == pickups[i].glyph)
+            {
+                var newString = characters.slice(0, c);
+                newString += characters.slice(c + 1, -1);
+
+                characters = newString;
+
+                break;
+            }
+        }
+    }
+
+    print("existing characters " + existingCharacters);
+    print("output characters " + characters);
+
+    return characters;
+}
+
 function pickup_spawn()
 {
     var foundSpot = false;
