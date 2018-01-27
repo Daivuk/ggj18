@@ -1,6 +1,7 @@
 var PICKUP_HERO_COLLISION_RADIUS = 0;
 var MAX_PICKUPS = 4;
 var PICKUP_SPAWN_INTERVAL_SEC = 5;
+var CENTRE_POSITION = new Vector2(0, 0);
 
 var pickupSpawnTime = PICKUP_SPAWN_INTERVAL_SEC;
 
@@ -31,6 +32,12 @@ function pickup_spawn()
         // Get the actual spawn position for the pickup
         spawnPos.x = tileX * TILE_HEIGHT + HALF_TILE_HEIGHT;
         spawnPos.y = tileY * TILE_HEIGHT + HALF_TILE_HEIGHT;
+
+        // Check for collision against the centre area
+        if(Vector2.distance(CENTRE_POSITION, spawnPos) < 3 * TILE_HEIGHT)
+        {
+            continue;
+        }
 
         // Check for collision against other pickups
         for(var i = 0; i < pickups.length; ++i)
