@@ -41,14 +41,8 @@ function pickup_create(_pos)
 
 function pickup_removeExistingFromArray(characters)
 {
-    print("input characters " + characters);
-
-    var existingCharacters = "";
-
     for(var i = 0; i < pickups.length; ++i)
     {
-        existingCharacters += pickups[i].glyph;
-
         for(var c = 0; c < characters.length; ++c)
         {
             if(characters[c] == pickups[i].glyph)
@@ -62,9 +56,6 @@ function pickup_removeExistingFromArray(characters)
             }
         }
     }
-
-    print("existing characters " + existingCharacters);
-    print("output characters " + characters);
 
     return characters;
 }
