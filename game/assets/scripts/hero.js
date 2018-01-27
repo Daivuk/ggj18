@@ -5,6 +5,8 @@ var HERO_DISABLE_TIME = 2;
 var HERO_TASER_USE_INTERVAL = 3;
 var HERO_TASER_CHARGE_TIME = 1;
 
+var glowCircleTexture = getTexture("glowCircle.png")
+
 function hero_create(_index, _pos, _color)
 {
     var hero = {
@@ -124,6 +126,8 @@ function hero_hasFullMessage(hero)
 
 function hero_renderGlow(hero)
 {
+    SpriteBatch.drawSprite(glowCircleTexture, new Vector2(hero.position.x, hero.position.y + 2), hero.color);
+
     SpriteBatch.drawSpriteAnim(hero.spriteAnim, hero.position, Color.BLACK);
     var hasWord = hero_hasFullMessage(hero);
     for (var i = 0; i < hero.glyphMap.length; ++i)
