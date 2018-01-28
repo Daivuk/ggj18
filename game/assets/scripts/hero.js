@@ -10,6 +10,7 @@ var HERO_SPAWN_CENTER_TILE_RADIUS = 7;
 var HERO_INTERACTION_PROGRESS_MAX = 3.0;
 var INTERACTION_BAR_WIDTH = 50;
 var INTERACTION_BAR_HEIGHT = 5;
+var HERO_SPAWN_TIME = .5;
 
 var glowCircleTexture = getTexture("glowCircle.png")
 
@@ -21,7 +22,8 @@ var HeroState = {
     TASER_DISCHARGING: 5,
     DISABLED: 6,
     ELECTROCUTED: 7,
-    INTERACTING: 8
+    INTERACTING: 8,
+    SPAWNING: 9
 }
 
 function hero_create(_index, _pos, _color)
@@ -32,14 +34,15 @@ function hero_create(_index, _pos, _color)
         color: new Color(_color),
         dir: "w",
         taserCharge: 0,
-        state: HeroState.IDLE,
+        state: HeroState.SPAWNING,
         disableTimer: HERO_DISABLE_TIME,
         interactionProgress: 0,
         spriteAnim: playSpriteAnim("hacker" + _index + ".spriteanim", "idle_e"),
         taseReadySpriteAnim: playSpriteAnim("taseReady.spriteanim", "idle_e"),
         renderFn: hero_render,
         renderGlowFn: hero_renderGlow,
-        points: 0
+        points: 0,
+        spawnTime: HERO_SPAWN_TIME
     };
 
     renderables.push(hero);
@@ -155,6 +158,15 @@ function hero_render(hero)
         var barSize = new Vector2(INTERACTION_BAR_WIDTH * hero.interactionProgress / HERO_INTERACTION_PROGRESS_MAX, INTERACTION_BAR_HEIGHT);
         SpriteBatch.drawRect(null, new Rect(barPosition, barSize), new Color(1, 0, 0, 1));
     }
+
+    if (hero.state == HeroState.SPAWNING)
+    {
+        var invPercent = hero.spawnTime / HERO_SPAWN_TIME;
+        var percent = 1 - invPercent;
+        SpriteBatch.drawBeam(null, hero.position, 
+            new Vector2(hero.position.x, hero.position.y - 1000),
+            percent * 8, hero.color.mul(invPercent));
+    }
 }
 
 function hero_hasFullMessage(hero)
@@ -194,10 +206,28 @@ function hero_renderGlow(hero)
     {
         SpriteBatch.drawSpriteAnim(hero.taseReadySpriteAnim, hero_getTaserPos(hero), new Color(.5), 0, 2);
     }
+
+    if (hero.state == HeroState.SPAWNING)
+    {
+        var invPercent = hero.spawnTime / HERO_SPAWN_TIME;
+        var percent = 1 - invPercent;
+        SpriteBatch.drawBeam(null, hero.position, 
+            new Vector2(hero.position.x, hero.position.y - 1000),
+            percent * 4, hero.color.mul(invPercent));
+    }
 }
 
 function hero_update(hero, dt)
 {
+    if (hero.state == HeroState.SPAWNING)
+    {
+        hero.spawnTime -= dt;
+        if (hero.spawnTime <= 0)
+        {
+            hero.state = HeroState.IDLE;
+        }
+        return;
+    }
     if (hero.state == HeroState.DISABLED ||
         hero.state == HeroState.ELECTROCUTED)
     {
@@ -432,11 +462,12 @@ function hero_interactionSuccess(hero)
 function hero_respawn(hero)
 {
     hero.taserCharge = 0;
-    hero.state = HeroState.IDLE;
+    hero.state = HeroState.SPAWNING;
     hero.disableTimer = HERO_DISABLE_TIME;
     hero.spriteAnim = playSpriteAnim("hacker" + hero.index + ".spriteanim", "idle_e");
     hero.taseReadySpriteAnim = playSpriteAnim("taseReady.spriteanim", "idle_e");
     hero.interactionProgress = 0;
+    hero.spawnTime = HERO_SPAWN_TIME;
 
     var foundSpot = false;
     var spawnPos = new Vector2(0, 0);
