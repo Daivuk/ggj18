@@ -78,6 +78,11 @@ function pickup_create(_pos)
         renderGlowFn: pickup_renderGlow,
     }
 
+    var charIndex = pickup.glyph.charCodeAt() - ("a").charCodeAt();
+    var x = charIndex >= 13 ? (charIndex - 13) : charIndex;
+    var y = charIndex >= 13 ? .5 : 0;
+    pickup.uvs = new Vector4(x / 13, y, (x + 1) / 13, y + .25);
+    
     pickup.floatAnim.playSingle(-2, 2, .45, Tween.EASE_BOTH, Loop.PING_PONG_LOOP);
 
     renderables.push(pickup);
