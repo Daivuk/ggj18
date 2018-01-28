@@ -174,9 +174,23 @@ function hero_render(hero)
 
 function hero_drawHUD(hero)
 {
+    var x = 0;
+    var y = 4 + 70 * hero.index;
     for (var i = 0; i < hero.glyphMap.length; ++i)
     {
-        SpriteBatch.drawText(encryptedFont, hero.displayMessage[i], new Vector2(4+(8*i), 4 + 70 * hero.index), Vector2.TOP_LEFT, hero.glyphMap[i].color.get());
+        if (hero.displayMessage[i] == " ")
+        {
+            y += 8;
+            x = 0;
+            continue;
+        }
+        SpriteBatch.drawText(
+            encryptedFont, 
+            hero.displayMessage[i], 
+            new Vector2(4+x, y), 
+            Vector2.TOP_LEFT, 
+            hero.glyphMap[i].color.get());
+        x += 8;
     }
 
     if (hero.state == HeroState.DISABLED ||
