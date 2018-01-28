@@ -17,10 +17,11 @@ function map_update(dt)
     {
         var hero = heroes[i];
 
+        if(!hero.playing) continue;
+
         if(map_isInCentre(hero.position) && hero.state != HeroState.DISABLED)
         {
             heroesInCentre++;
-            
         }
 
         centerReady |= hero_hasFullMessage(hero);
