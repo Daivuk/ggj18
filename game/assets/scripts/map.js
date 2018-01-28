@@ -56,12 +56,17 @@ function map_update(dt)
         }
     }
 
+    var pos = new Vector2(17.5, 8.5).mul(TILE_HEIGHT);
     for (var i = 0; i < flyingSymbols.length; ++i)
     {
         var flyingSymbol = flyingSymbols[i];
         flyingSymbol.delay -= dt;
         if (flyingSymbol.delay <= 0)
         {
+            if (flyingSymbol.progress == 0)
+            {
+                ping_create(new Vector2(pos.x + flyingSymbol.xOffset, pos.y), glowCircleTexture, new Color(0, 1, 1));
+            }
             flyingSymbol.progress += dt * 300;
             if (flyingSymbol.progress > 1000)
             {
