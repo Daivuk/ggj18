@@ -51,8 +51,6 @@ function startGame()
 
     }
 
-    regenerateUniqueGlyphs();
-
     gameState = GameStateEnum.GAME
 
     for (var i = 0; i < heroes.length; ++i)
@@ -61,10 +59,11 @@ function startGame()
 
         if(hero.playing)
         {
-            var delayIndex = Random.getNext(delays.length);
+            /*var delayIndex = Random.getNext(delays.length);
             var delay = delays[delayIndex];
             delays.splice(delayIndex, 1);
-            delayed_spawn(hero, delay);
+            delayed_spawn(hero, delay);*/
+            hero_respawn(hero);
         }
     }
 }
