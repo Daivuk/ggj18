@@ -190,23 +190,38 @@ function hero_render(hero)
 
 function hero_drawHUD(hero)
 {
+    var blockY = (resolution.y / 4) * hero.index;
     var x = 0;
-    var y = 4 + 70 * hero.index;
+    var y = blockY;
+
+    var count = [0, 0];
+    var countI = 0;
     for (var i = 0; i < hero.glyphMap.length; ++i)
     {
         if (hero.displayMessage[i] == " ")
         {
-            y += 8;
+            ++countI;
+            continue;
+        }
+        count[countI]++;
+    }
+    var offsetX = 40 - (count[0] * 12 / 2);
+    for (var i = 0; i < hero.glyphMap.length; ++i)
+    {
+        if (hero.displayMessage[i] == " ")
+        {
+            y += 12;
             x = 0;
+            offsetX = 40 - (count[1] * 12 / 2);
             continue;
         }
         SpriteBatch.drawText(
             encryptedFont, 
             hero.displayMessage[i], 
-            new Vector2(4+x, y), 
+            new Vector2(offsetX + x, 4 + y), 
             Vector2.TOP_LEFT, 
             hero.glyphMap[i].color.get());
-        x += 8;
+        x += 12;
     }
 
     if (hero.state == HeroState.DISABLED ||
@@ -215,7 +230,7 @@ function hero_drawHUD(hero)
         return;
     }
 
-    SpriteBatch.drawSpriteAnim(hero.spriteAnim, new Vector2(40, 48 + 70 * hero.index), Color.WHITE, 0, 2);
+    SpriteBatch.drawSpriteAnim(hero.spriteAnim, new Vector2(40, 60 + blockY), Color.WHITE, 0, 1.5);
 }
 
 function hero_drawGLOW(hero)
