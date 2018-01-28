@@ -427,7 +427,7 @@ function hero_taser_update(hero, dt)
 
         if (hero.state == HeroState.ELECTROCUTED)
         {
-            if(hero.disableTimer > 1)
+            if(hero.disableTimer > HERO_DISABLE_TIME - 1)
             {
                 return;
             }
