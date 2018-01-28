@@ -89,6 +89,7 @@ function pickup_spawn()
     if (pickup)
     {
         pickups.push(pickup);
+        playSound("GGJ18SFX_InfoSpawn0" + Random.randInt(1, 4) + ".wav");
     }
 
 }
@@ -158,6 +159,8 @@ function pickups_acquire(position)
         if(Vector2.distance(pickups[i].position, position) < ACQUIRE_RADIUS)
         {
             var pickup = pickups.splice(i, 1)[0];
+
+            playSound("GGJ18SFX_CollectDecode0" + Random.randInt(1, 4) + ".wav");
 
             // remove from renderables since it has been acquired by the hero
             for(var j = 0; j < renderables.length; ++j)

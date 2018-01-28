@@ -46,6 +46,7 @@ function gibs_spawn(_sourcePosition)
                 Random.randNumber(GIB_MIN_VELOCITY_Y, GIB_MAX_VELOCITY_Y),
                 Random.randNumber(-GIB_ANGULAR_SPEED, GIB_ANGULAR_SPEED)));
     }
+    playSound("GGJ18SFX_PlayerExplode0" + Random.randInt(1, 3) + ".wav");
 }
 
 function gib_bounce(gib, h)

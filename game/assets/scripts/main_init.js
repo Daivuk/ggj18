@@ -1,5 +1,6 @@
 var CENTER_RECT = new Rect();
 var CENTRE_TILE_PROXIMITY = 1.5;
+var music;
 
 function updateInit(dt)
 {
@@ -11,6 +12,13 @@ function updateInit(dt)
         CENTRE_TILE_PROXIMITY * TILE_HEIGHT * 2);
 
     gameState = GameStateEnum.MAIN_MENU;
+
+    //playMusic("ingame.ogg", true);
+    //if (Random.randBool()) music = getMusic("GG18musicA.ogg");
+    //else music = getMusic("GG18musicB.ogg");
+    music = getMusic("GG18musicB.ogg");
+    music.setVolume(.5);
+    music.play(true);
 }
 
 function renderInit()

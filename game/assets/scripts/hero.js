@@ -23,7 +23,8 @@ var HeroState = {
     DISABLED: 6,
     ELECTROCUTED: 7,
     INTERACTING: 8,
-    SPAWNING: 9
+    SPAWNING: 9,
+    VOID: 10
 }
 
 function hero_create(_index, _pos, _color)
@@ -34,8 +35,8 @@ function hero_create(_index, _pos, _color)
         color: new Color(_color),
         dir: "w",
         taserCharge: 0,
-        state: HeroState.SPAWNING,
-        disableTimer: HERO_DISABLE_TIME,
+        state: HeroState.VOID,
+        disableTimer: 0,
         interactionProgress: 0,
         spriteAnim: playSpriteAnim("hacker" + _index + ".spriteanim", "idle_e"),
         taseReadySpriteAnim: playSpriteAnim("taseReady.spriteanim", "idle_e"),
@@ -85,6 +86,7 @@ function hero_createNewMessage(hero) {
 
 function hero_revealGlyph(hero, glyph)
 {
+    var hadFullMessage = hero_hasFullMessage(hero);
     for (var i = 0; i < hero.glyphMap.length; ++i)
     {
         if (hero.glyphMap[i].encrypted == glyph)
@@ -92,6 +94,11 @@ function hero_revealGlyph(hero, glyph)
             hero.displayMessage = hero.displayMessage.replaceAt(i, hero.glyphMap[i].decrypted);
             hero.glyphMap[i].color.playSingle(Color.WHITE, hero.color.mul(.5), 3, Tween.EASE_IN);
         }
+    }
+
+    if (hero_hasFullMessage(hero) && !hadFullMessage)
+    {
+        playSound("GGJ18SFX_FullyDecoded.wav");
     }
 }
 
@@ -136,7 +143,8 @@ function hero_render(hero)
         SpriteBatch.drawText(encryptedFont, hero.displayMessage[i], new Vector2(4+(8*i), 4 + 70 * hero.index), Vector2.TOP_LEFT, hero.glyphMap[i].color.get());
     }
 
-    if (hero.state == HeroState.DISABLED)
+    if (hero.state == HeroState.DISABLED ||
+        hero.state == HeroState.VOID)
     {
         return;
     }
@@ -181,7 +189,8 @@ function hero_hasFullMessage(hero)
 
 function hero_renderGlow(hero)
 {
-    if (hero.state == HeroState.DISABLED)
+    if (hero.state == HeroState.DISABLED ||
+        hero.state == HeroState.VOID)
     {
         return;
     }
@@ -229,7 +238,8 @@ function hero_update(hero, dt)
         return;
     }
     if (hero.state == HeroState.DISABLED ||
-        hero.state == HeroState.ELECTROCUTED)
+        hero.state == HeroState.ELECTROCUTED ||
+        hero.state == HeroState.VOID)
     {
         return;
     }
@@ -344,6 +354,7 @@ function hero_handle_taser(hero, dt)
             if (GamePad.isDown(hero.index, Button.A))
             {
                 hero.state = HeroState.TASER_CHARGING;
+                playSound("GGJ18SFX_TaserOut.wav");
             }
             break;
         }
@@ -356,6 +367,7 @@ function hero_handle_taser(hero, dt)
                 {
                     hero.state = HeroState.TASER_CHARGED;
                     hero.taserCharge = HERO_TASER_CHARGE_TIME;
+                    playSound("GGJ18SFX_TaserCharged.wav");
                 }
             }
             else
@@ -396,6 +408,7 @@ function hero_handle_taser(hero, dt)
                     }
                 }
                 hero.state = HeroState.TASER_DISCHARGING;
+                playSound("GGJ18SFX_TaserFire.wav");
             }
             break;
         }
@@ -418,6 +431,8 @@ function hero_taser_update(hero, dt)
     {
         if (hero.state == HeroState.TASED)
         {
+            hero.electrocuteSound = getSound("GGJ18SFX_PlayerElectrocuted.wav").createInstance();
+            hero.electrocuteSound.play();
             hero.spriteAnim = playSpriteAnim("electrocute.spriteanim", "idle");
             hero.state = HeroState.ELECTROCUTED;
             return;
@@ -433,6 +448,8 @@ function hero_taser_update(hero, dt)
             }
             else
             {
+                hero.electrocuteSound.stop();
+                hero.electrocuteSound = null;
                 gibs_spawn(hero.position);
             }
         }
@@ -461,6 +478,8 @@ function hero_interactionSuccess(hero)
 
 function hero_respawn(hero)
 {
+    playSound("GGJ18SFX_PlayerRespawn.wav");
+
     hero.taserCharge = 0;
     hero.state = HeroState.SPAWNING;
     hero.disableTimer = HERO_DISABLE_TIME;

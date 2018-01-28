@@ -1,3 +1,5 @@
+Random.randomizeSeed(); // QBASIC equivalent: RANDOMIZE TIMER
+
 var GameStateEnum = {
     INIT: 1,
     MAIN_MENU: 2,
@@ -24,6 +26,24 @@ var heroes = [
     hero_create(2, new Vector2(28, 15).mul(TILE_HEIGHT).add(HALF_TILE_HEIGHT), Color.fromHexRGB(0xffce00)),
     hero_create(3, new Vector2(6, 14).mul(TILE_HEIGHT).add(HALF_TILE_HEIGHT), Color.fromHexRGB(0xff8b9c))
 ];
+
+function delayed_spawn(hero, delay)
+{
+    setTimeout(function()
+    {
+        hero_respawn(hero);
+    }, delay * 1000);
+}
+
+var delays = [1, 1.5, 2, 2.5];
+for (var i = 0; i < heroes.length; ++i)
+{
+    var hero = heroes[i];
+    var delayIndex = Random.getNext(delays.length);
+    var delay = delays[delayIndex];
+    delays.splice(delayIndex, 1);
+    delayed_spawn(hero, delay);
+}
 
 var mainRT = Texture.createScreenRenderTarget();
 var bloomRT = Texture.createScreenRenderTarget();
