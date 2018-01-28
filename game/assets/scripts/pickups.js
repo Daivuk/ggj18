@@ -6,6 +6,7 @@ var PICKUP_CENTER_SPAWN_TILE_RADIUS = 3;
 
 var circuitTexture = getTexture("circuit.png");
 var pickupColor = Color.fromHexRGB(0xa1ef79);
+var glyphTexture = getTexture("sga.png");
 
 
 var pickupSpawnTime = PICKUP_SPAWN_INTERVAL_SEC;
@@ -33,6 +34,11 @@ function pickup_create(_pos)
         renderFn: pickup_render,
         renderGlowFn: pickup_renderGlow,
     }
+
+    var charIndex = pickup.glyph.charCodeAt() - ("a").charCodeAt();
+    var x = charIndex >= 13 ? (charIndex - 13) : charIndex;
+    var y = charIndex >= 13 ? .5 : 0;
+    pickup.uvs = new Vector4(x / 13, y, (x + 1) / 13, y + .25);
 
     uniqueGlyphs = uniqueGlyphs.replaceAt(glyphIndex, '');
 
@@ -152,7 +158,8 @@ function pickups_clear()
 function pickup_getDrawPosition(pickup)
 {
     var ret = new Vector2(pickup.position.x, pickup.position.y + pickup.floatAnim.get());
-    ret.y = Math.round(ret.y);
+    // ret.x = Math.round(ret.x);
+    // ret.y = Math.round(ret.y);
     return ret;
 }
 
@@ -161,7 +168,7 @@ function pickup_render(pickup)
     var pos = pickup_getDrawPosition(pickup);
 
     SpriteBatch.drawSprite(circuitTexture, pos);
-    SpriteBatch.drawText(encryptedFont, pickup.glyph, new Vector2(pos.x - 1, pos.y - 2), Vector2.BOTTOM, pickupColor);
+    SpriteBatch.drawSpriteWithUVs(glyphTexture, pos, pickup.uvs, pickupColor);
 }
 
 function pickup_renderGlow(pickup)
@@ -169,7 +176,7 @@ function pickup_renderGlow(pickup)
     var pos = pickup_getDrawPosition(pickup);
 
     SpriteBatch.drawSprite(circuitTexture, pos, Color.BLACK);
-    SpriteBatch.drawText(encryptedFont, pickup.glyph, new Vector2(pos.x - 1, pos.y - 2), Vector2.BOTTOM, pickupColor);
+    SpriteBatch.drawSpriteWithUVs(glyphTexture, pos, pickup.uvs, pickupColor.mul(.5));
 }
 
 function pickups_update(dt)

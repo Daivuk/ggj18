@@ -190,7 +190,7 @@ function hero_render(hero)
 
 function hero_drawHUD(hero)
 {
-    var blockY = (resolution.y / 4) * hero.index;
+    var blockY = (resolution.y / 4) * hero.index - 4;
     var x = 0;
     var y = blockY;
 
@@ -205,23 +205,29 @@ function hero_drawHUD(hero)
         }
         count[countI]++;
     }
-    var offsetX = 40 - (count[0] * 12 / 2);
+    var offsetX = 40 - (count[0] * 14 / 2);
     for (var i = 0; i < hero.glyphMap.length; ++i)
     {
         if (hero.displayMessage[i] == " ")
         {
-            y += 12;
+            y += 14;
             x = 0;
-            offsetX = 40 - (count[1] * 12 / 2);
+            offsetX = 40 - (count[1] * 14 / 2);
             continue;
         }
+        SpriteBatch.drawText(
+            encryptedFont, 
+            hero.displayMessage[i], 
+            new Vector2(offsetX + x + 2, 4 + y + 2), 
+            Vector2.TOP_LEFT, 
+            Color.BLACK);
         SpriteBatch.drawText(
             encryptedFont, 
             hero.displayMessage[i], 
             new Vector2(offsetX + x, 4 + y), 
             Vector2.TOP_LEFT, 
             hero.glyphMap[i].color.get());
-        x += 12;
+        x += 14;
     }
 
     if (hero.state == HeroState.DISABLED ||
@@ -236,12 +242,43 @@ function hero_drawHUD(hero)
 function hero_drawGLOW(hero)
 {
     var hasWord = hero_hasFullMessage(hero);
+    var blockY = (resolution.y / 4) * hero.index - 4;
+    var x = 0;
+    var y = blockY;
+
+    var count = [0, 0];
+    var countI = 0;
     for (var i = 0; i < hero.glyphMap.length; ++i)
     {
+        if (hero.displayMessage[i] == " ")
+        {
+            ++countI;
+            continue;
+        }
+        count[countI]++;
+    }
+    var offsetX = 40 - (count[0] * 14 / 2);
+    for (var i = 0; i < hero.glyphMap.length; ++i)
+    {
+        if (hero.displayMessage[i] == " ")
+        {
+            y += 14;
+            x = 0;
+            offsetX = 40 - (count[1] * 14 / 2);
+            continue;
+        }
+
         if (hero.glyphMap[i].color.isPlaying() || hasWord)
         {
-            SpriteBatch.drawText(encryptedFont, hero.displayMessage[i], new Vector2(4+(8*i), 4 + 70 * hero.index), Vector2.TOP_LEFT, hero.glyphMap[i].color.get());
+            SpriteBatch.drawText(
+                encryptedFont, 
+                hero.displayMessage[i], 
+                new Vector2(offsetX + x, 4 + y), 
+                Vector2.TOP_LEFT, 
+                hero.glyphMap[i].color.get().mul(.5));
         }
+
+        x += 14;
     }
 }
 

@@ -46,4 +46,11 @@ function renderGameGlow()
         var entity = renderables[i];
         entity.renderGlowFn(entity);
     }
+
+    // hud
+    for (var i = 0; i < heroes.length; ++i)
+    {
+        var hero = heroes[i];
+        hero_drawGLOW(hero);
+    }
 }
