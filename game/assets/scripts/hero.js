@@ -82,6 +82,8 @@ function hero_createNewMessage(hero) {
 
         hero.displayMessage += shiftedGlyph;
     }
+
+    pickup_spawn(hero_getRandomEncryptedGlyph(hero));
 }
 
 function hero_getRandomEncryptedGlyph(hero)
@@ -102,6 +104,7 @@ function hero_getRandomEncryptedGlyph(hero)
 
 function hero_revealGlyph(hero, glyph)
 {
+    var revealed = false;
     var hadFullMessage = hero_hasFullMessage(hero);
     for (var i = 0; i < hero.displayMessage.length; ++i)
     {
@@ -109,6 +112,7 @@ function hero_revealGlyph(hero, glyph)
         {
             hero.displayMessage = hero.displayMessage.replaceAt(i, hero.glyphMap[i].decrypted);
             hero.glyphMap[i].color.playSingle(Color.WHITE, hero.color.mul(.5), 3, Tween.EASE_IN);
+            revealed = true;
             break; // only reveal one glyph at a time.
         }
     }
@@ -117,6 +121,8 @@ function hero_revealGlyph(hero, glyph)
     {
         playSound("GGJ18SFX_FullyDecoded.wav");
     }
+
+    return revealed;
 }
 
 function hero_hideGlyph(hero, glyph)
@@ -397,7 +403,18 @@ function hero_update(hero, dt)
 
             if(pickup != null)
             {
-                hero_revealGlyph(hero, pickup.glyph);
+                if (hero_revealGlyph(hero, pickup.glyph)) // if the hero picked up a glyph he/she needs...
+                {
+                    var glyph = hero_getRandomEncryptedGlyph(hero);
+                    if (glyph != '')
+                    {
+                        pickup_spawn(glyph);
+                    }
+                }   
+                else // or else, put it back to the game (anywhere else)
+                {
+                    pickup_spawn(pickup.glyph);
+                }                 
             }
         }
 

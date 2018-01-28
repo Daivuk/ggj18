@@ -13,7 +13,6 @@ var pickupSpawnTime = PICKUP_SPAWN_INTERVAL_SEC;
 
 var pickups = [];
 var uniqueGlyphs;
-var pickupHeroIndex = 0;
 
 
 /*
@@ -51,28 +50,11 @@ function pickup_create(_pos)
 }
 */
 
-function pickup_create(_pos)
+function pickup_create(_pos, glyph)
 {
-    var glyphCandidate = null;
-    while(glyphCandidate == null)
-    {
-        var glyphCandidate = hero_getRandomEncryptedGlyph(heroes[pickupHeroIndex]);
-        for (var i = 0; i < pickups.length; ++i)
-        {
-            if (pickups[i].glyph == glyphCandidate) {
-                glyphCandidate = null;
-                break;
-            }
-        }
-    }
-
-    pickupHeroIndex = ((pickupHeroIndex + 1) % heroes.length);
-
-    if (glyphCandidate == '') return null;
-
     var pickup = {
         position: new Vector2(_pos),
-        glyph: glyphCandidate,
+        glyph: glyph,
         floatAnim: new NumberAnim(),
         renderFn: pickup_render,
         renderGlowFn: pickup_renderGlow,
@@ -90,7 +72,7 @@ function pickup_create(_pos)
     return pickup;
 }
 
-function pickup_spawn()
+function pickup_spawn(glyph)
 {
     var foundSpot = false;
     var spawnPos = new Vector2(0, 0);
@@ -133,7 +115,7 @@ function pickup_spawn()
         foundSpot = tiledMap.getCollision(tileX, tileY);
     }
     
-    var pickup = pickup_create(spawnPos);
+    var pickup = pickup_create(spawnPos, glyph);
 
     if (pickup)
     {
@@ -186,6 +168,7 @@ function pickup_renderGlow(pickup)
 
 function pickups_update(dt)
 {
+    /*
     pickupSpawnTime -= dt;
 
     if(pickupSpawnTime < 0)
@@ -197,6 +180,7 @@ function pickups_update(dt)
 
         pickupSpawnTime = PICKUP_SPAWN_INTERVAL_SEC;
     }
+    */
 }
 
 function pickups_acquire(position)
