@@ -35,6 +35,8 @@ function updateEndGame(dt)
                 hero_create(2, new Vector2(28, 15).mul(TILE_HEIGHT).add(HALF_TILE_HEIGHT), Color.fromHexRGB(0xffce00)),
                 hero_create(3, new Vector2(6, 14).mul(TILE_HEIGHT).add(HALF_TILE_HEIGHT), Color.fromHexRGB(0xff8b9c))
             ];
+
+            return;
         }
     }
     victorHero.spriteAnim.play("idle_e");
