@@ -40,15 +40,30 @@ var delays = [1, 1.5, 2, 2.5];
 
 function startGame()
 {
+    var playingPlayers = 0;
+
     for(var i = 0; i < heroes.length; ++i)
     {
         var hero = heroes[i];
         if(hero.playing)
         {
+            playingPlayers++;
             hero_createNewMessage(hero);
             pickup_spawn(hero_getRandomEncryptedGlyph(hero));
         }
 
+    }
+
+    switch(playingPlayers)
+    {
+        case 1: HERO_INTERACTION_PROGRESS_MAX = 3;
+        break;
+        case 2: HERO_INTERACTION_PROGRESS_MAX = 2.5;
+        break;
+        case 3: HERO_INTERACTION_PROGRESS_MAX = 2.5;
+        break;
+        case 4: HERO_INTERACTION_PROGRESS_MAX = 2;
+        break;
     }
 
     gameState = GameStateEnum.GAME
