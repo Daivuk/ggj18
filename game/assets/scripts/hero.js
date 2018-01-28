@@ -86,8 +86,6 @@ function hero_createNewMessage(hero) {
 
         hero.displayMessage += shiftedGlyph;
     }
-
-    pickup_spawn(hero_getRandomEncryptedGlyph(hero));
 }
 
 function hero_getRandomEncryptedGlyph(hero)
@@ -654,6 +652,14 @@ function hero_interactionSuccess(hero)
     hero_createNewMessage(hero);
 
     regenerateUniqueGlyphs(hero);
+
+    for (var i = 0; i < heroes.length; ++i)
+    {
+        //if (heroes[i].isPlaying) 
+        {
+            pickup_spawn(hero_getRandomEncryptedGlyph(heroes[i]));
+        }
+    }
 
     hero.interactionProgress = 0;
     
