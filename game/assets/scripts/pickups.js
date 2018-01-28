@@ -1,4 +1,4 @@
-var PICKUP_HERO_COLLISION_TILE_RADIUS = 2;
+var PICKUP_HERO_COLLISION_TILE_RADIUS = 10;
 var MAX_PICKUPS = 4;
 var PICKUP_SPAWN_INTERVAL_SEC = 1;
 var ACQUIRE_RADIUS = 10;
@@ -76,8 +76,10 @@ function pickup_spawn(glyph)
 {
     var foundSpot = false;
     var spawnPos = new Vector2(0, 0);
+    var maxTry = 20;
+    var spawnRadius = PICKUP_HERO_COLLISION_TILE_RADIUS;
 
-    while(!foundSpot)
+    while (!foundSpot)
     {
         var foundCollision = false;
 
@@ -104,7 +106,7 @@ function pickup_spawn(glyph)
         }
 
         // Make sure we don't spawn too close to a player
-        foundCollision = hero_collision(spawnPos, PICKUP_HERO_COLLISION_TILE_RADIUS * TILE_HEIGHT);
+        foundCollision = hero_collision(spawnPos, spawnRadius * TILE_HEIGHT);
 
         if(foundCollision)
         {
@@ -113,6 +115,16 @@ function pickup_spawn(glyph)
 
         // Returns true if we didn't collide with any walls in the map
         foundSpot = tiledMap.getCollision(tileX, tileY);
+
+        if (!foundSpot)
+        {
+            if (--maxTry <= 0)
+            {
+                --spawnRadius;
+                maxTry = 20;
+                if (spawnRadius < 1) spawnRadius = 1;
+            }
+        }
     }
     
     var pickup = pickup_create(spawnPos, glyph);
