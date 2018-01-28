@@ -1,6 +1,7 @@
 var CENTER_RECT = new Rect();
 var CENTRE_TILE_PROXIMITY = 1.5;
 var music;
+var title = "";
 
 function updateInit(dt)
 {
@@ -19,6 +20,7 @@ function updateInit(dt)
     music_play("Mixdown.ogg");
 
     Input.setMouseVisible(false);
+    title = generateMessage(8);
 }
 
 function renderInit()

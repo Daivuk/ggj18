@@ -117,11 +117,12 @@ function regenerateUniqueGlyphs(hero)
     pickups_clear();
 }
 
+
 function renderMainMenu()
 {
     renderGame();
 
-    SpriteBatch.drawRect(null, new Rect(5 * TILE_HEIGHT, 0, 25 * TILE_HEIGHT, 17 * TILE_HEIGHT), new Color(0, 0, 0, 0.7));
+    SpriteBatch.drawRect(null, new Rect(5 * TILE_HEIGHT, 0, 25 * TILE_HEIGHT, 17 * TILE_HEIGHT), new Color(0, 0, 0, 0.9));
 
     var heroesPlaying = false;
 
@@ -135,8 +136,10 @@ function renderMainMenu()
             break;
         }
     }
-
     var position = new Vector2((resolution.x - 5 * TILE_HEIGHT) / 2 + 5 * TILE_HEIGHT, 100);
+
+    SpriteBatch.drawText(encryptedFont, title.toUpperCase(), new Vector2(position.x, 16), Vector2.TOP);
+
     SpriteBatch.drawText(encryptedFont, "PRESS ^090A^999 TO JOIN", position, Vector2.TOP);
 
     if(heroesPlaying)

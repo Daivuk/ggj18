@@ -16,6 +16,7 @@ function updateEndGame(dt)
             GamePad.isJustDown(3, Button.START))
         {
             gameState = GameStateEnum.MAIN_MENU;
+            title = generateMessage(8);
 
             splatters = [];
             pings = [];
