@@ -773,6 +773,7 @@ function heroes_update(dt)
 
     for(var i = 0; i < heroes.length; ++i)
     {
+        var hero = heroes[i];
         if(hero.playing)
         {
             hero_taser_update(heroes[i], dt);
