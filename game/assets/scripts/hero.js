@@ -16,7 +16,8 @@ var HeroState = {
     TASER_CHARGING: 3,
     TASER_CHARGED: 4,
     TASER_DISCHARGING: 5,
-    DISABLED: 6
+    DISABLED: 6,
+    ELECTROCUTED: 7
 }
 
 function hero_create(_index, _pos, _color)
@@ -125,13 +126,18 @@ function hero_getTaserPos(hero)
 
 function hero_render(hero)
 {
-    SpriteBatch.drawSpriteAnim(hero.spriteAnim, hero.position);
-    SpriteBatch.drawSpriteAnim(hero.spriteAnim, new Vector2(40, 48 + 70 * hero.index), Color.WHITE, 0, 2);
-    
     for (var i = 0; i < hero.glyphMap.length; ++i)
     {
         SpriteBatch.drawText(encryptedFont, hero.displayMessage[i], new Vector2(4+(8*i), 4 + 70 * hero.index), Vector2.TOP_LEFT, hero.glyphMap[i].color.get());
     }
+
+    if (hero.state == HeroState.DISABLED)
+    {
+        return;
+    }
+
+    SpriteBatch.drawSpriteAnim(hero.spriteAnim, hero.position);
+    SpriteBatch.drawSpriteAnim(hero.spriteAnim, new Vector2(40, 48 + 70 * hero.index), Color.WHITE, 0, 2);
 
     if (hero.state == HeroState.TASER_CHARGED)
     {
@@ -155,6 +161,11 @@ function hero_hasFullMessage(hero)
 
 function hero_renderGlow(hero)
 {
+    if (hero.state == HeroState.DISABLED)
+    {
+        return;
+    }
+
     SpriteBatch.drawSprite(glowCircleTexture, new Vector2(hero.position.x, hero.position.y + 2), hero.color);
 
     SpriteBatch.drawSpriteAnim(hero.spriteAnim, hero.position, Color.BLACK);
@@ -179,7 +190,8 @@ function hero_renderGlow(hero)
 
 function hero_update(hero, dt)
 {
-    if(hero.state == HeroState.DISABLED)
+    if (hero.state == HeroState.DISABLED ||
+        hero.state == HeroState.ELECTROCUTED)
     {
         return;
     }
@@ -336,11 +348,27 @@ function hero_update(hero, dt)
 
 function hero_taser_update(hero, dt)
 {
-    if(hero.state == HeroState.TASED || hero.state == HeroState.DISABLED)
+    if( hero.state == HeroState.TASED || hero.state == HeroState.DISABLED || 
+        hero.state == HeroState.ELECTROCUTED)
     {
-        hero.state = HeroState.DISABLED
+        if (hero.state == HeroState.TASED)
+        {
+            hero.spriteAnim = playSpriteAnim("electrocute.spriteanim", "idle");
+            hero.state = HeroState.ELECTROCUTED;
+            return;
+        }
 
         hero.disableTimer -= dt;
+
+        if (hero.state == HeroState.ELECTROCUTED)
+        {
+            if(hero.disableTimer > 1)
+            {
+                return;
+            }
+        }
+
+        hero.state = HeroState.DISABLED;
 
         if(hero.disableTimer < 0)
         {
@@ -351,8 +379,11 @@ function hero_taser_update(hero, dt)
 
 function hero_respawn(hero)
 {
+    hero.taserCharge = 0;
     hero.state = HeroState.IDLE;
     hero.disableTimer = HERO_DISABLE_TIME;
+    hero.spriteAnim = playSpriteAnim("hacker" + hero.index + ".spriteanim", "idle_e");
+    hero.taseReadySpriteAnim = playSpriteAnim("taseReady.spriteanim", "idle_e");
 
     var foundSpot = false;
     var spawnPos = new Vector2(0, 0);

@@ -1,0 +1,6 @@
+<sheet texture="electrocute.png" spriteWidth="24" spriteHeight="32" originX="12" originY="20">
+  <anim name="idle" fps="20" loop="true">
+    <frame id="0"/>
+    <frame id="1"/>
+  </anim>
+</sheet>
