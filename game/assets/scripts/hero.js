@@ -578,6 +578,11 @@ function hero_handle_taser(hero, dt)
                     {
                         var otherHero = heroes[i];
     
+                        if(!otherHero.playing)
+                        {
+                            continue;
+                        }
+
                         if (hero.dir == "e")
                         {
                             if (new Rect(hero.position.x + 8, hero.position.y - 12, 16, 24).contains(otherHero.position))
@@ -785,7 +790,13 @@ function hero_collision(position, radius)
 {
     for(var i = 0; i < heroes.length; ++i)
     {
-        if(Vector2.distance(heroes[i].position, position) < radius)
+        var hero = heroes[i];
+        if(!hero.playing)
+        {
+            continue;
+        }
+        
+        if(Vector2.distance(hero.position, position) < radius)
         {
             return true;
         }
