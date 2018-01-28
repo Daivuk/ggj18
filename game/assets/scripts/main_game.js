@@ -1,14 +1,11 @@
 function updateGame(dt)
 {
     heroes_update(dt)
-
     pickups_update(dt);
-
     splatters_update(dt);
-
     map_update(dt);
-
     gibs_update(dt);
+    pings_update(dt);
 }
 
 function renderGame()
@@ -46,6 +43,8 @@ function renderGameGlow()
         var entity = renderables[i];
         entity.renderGlowFn(entity);
     }
+
+    pings_renderGlow();
 
     // hud
     for (var i = 0; i < heroes.length; ++i)

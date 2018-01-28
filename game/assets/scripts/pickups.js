@@ -64,7 +64,7 @@ function pickup_create(_pos, glyph)
     var x = charIndex >= 13 ? (charIndex - 13) : charIndex;
     var y = charIndex >= 13 ? .5 : 0;
     pickup.uvs = new Vector4(x / 13, y, (x + 1) / 13, y + .25);
-    
+
     pickup.floatAnim.playSingle(-2, 2, .45, Tween.EASE_BOTH, Loop.PING_PONG_LOOP);
 
     renderables.push(pickup);
@@ -195,6 +195,7 @@ function pickups_acquire(position)
             var pickup = pickups.splice(i, 1)[0];
 
             playSound("GGJ18SFX_CollectDecode0" + Random.randInt(1, 4) + ".wav");
+            ping_create(pickup.position, glowCircleTexture, pickupColor);
 
             // remove from renderables since it has been acquired by the hero
             for(var j = 0; j < renderables.length; ++j)
