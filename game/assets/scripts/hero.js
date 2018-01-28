@@ -11,6 +11,7 @@ var HERO_INTERACTION_PROGRESS_MAX = 3.0;
 var INTERACTION_BAR_WIDTH = 10;
 var INTERACTION_BAR_HEIGHT = 3;
 var HERO_SPAWN_TIME = .5;
+var HERO_VICTORY_POINT = 3
 
 var aCODE = ("a").charCodeAt();
 var ACODE = ("A").charCodeAt();
@@ -714,6 +715,12 @@ function hero_interactionSuccess(hero)
     hero.points++;
 
     print("hero " + hero.index + " now has " + hero.points + " points");
+
+    if(hero.points >= HERO_VICTORY_POINT)
+    {
+        victorHero = hero;
+        gameState = GameStateEnum.END_GAME;
+    }
 
     transmissionEffectTimer = 1;
 }
