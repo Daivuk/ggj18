@@ -53,7 +53,6 @@ function hero_createNewMessage(hero) {
 
     hero.glyphMap = []; // reset
     hero.displayMessage = ""; // reset
-    hero.message = message;
 
     var indexShift = Random.randInt(0, 25);
 
@@ -79,8 +78,6 @@ function hero_createNewMessage(hero) {
 
         hero.displayMessage += shiftedGlyph;
     }
-
-    hero.message = hero.message.toUpperCase(); // decrypted
 }
 
 function hero_revealGlyph(hero, glyph)
