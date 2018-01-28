@@ -469,10 +469,57 @@ function hero_update(hero, dt)
             {
                 if (hero_revealGlyph(hero, pickup.glyph)) // if the hero picked up a glyph he/she needs...
                 {
-                    var glyph = hero_getRandomEncryptedGlyph(hero);
-                    if (glyph != '')
+                    var hasAnotherGlyphOnField = false;
+                    for (var x = 0; !hasAnotherGlyphOnField && x < pickups.length; ++x)
                     {
-                        pickup_spawn(glyph);
+                        for (var y = 0; !hasAnotherGlyphOnField && y < hero.displayMessage.length; ++y)
+                        {
+                            if (hero.displayMessage[y] == pickups[x].glyph)
+                            {
+                                hasAnotherGlyphOnField = true;
+                                break;
+                            }
+                        }
+                    }
+
+                    var neededByHero = [];
+                    for (var x = 0;  x < heroes.length; ++x)
+                    {
+                        if (hero == heroes[x]) continue;
+
+                        if (!heroes[x].playing) continue;
+                        
+                        for (var y = 0; y < pickups.length; ++ y)
+                        {
+                            for (var z = 0; z < heroes[x].displayMessage.length; ++z)
+                            {
+                                if (heroes[x].displayMessage[z] == pickups[y].glyph)
+                                {
+                                    neededByHero.push(heroes[x]);
+                                }
+                            }
+                        }
+                    }
+
+                    if (hasAnotherGlyphOnField)
+                    {
+                        if (neededByHero.length > 0)
+                        {
+                            pickup_spawn(pickup.glyph);
+                        }
+                        else
+                        {
+                            pickup_spawn(hero_getRandomEncryptedGlyph(neededByHero[0]));
+                        }
+                    }
+                    else
+                    {
+                        var glyph = hero_getRandomEncryptedGlyph(hero);
+                        if (glyph != '')
+                        {
+                            pickup_spawn(glyph);
+                        }
+    
                     }
                 }   
                 else // or else, put it back to the game (anywhere else)
