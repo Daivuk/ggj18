@@ -84,6 +84,22 @@ function hero_createNewMessage(hero) {
     }
 }
 
+function hero_getRandomEncryptedGlyph(hero)
+{
+    if (hero_hasFullMessage(hero))
+    {
+        return '';
+    }
+    while(true)
+    {
+        var glyph = hero.displayMessage[Random.randInt(0, hero.displayMessage.length - 1)];
+        if (glyph >= 'a' && glyph <= 'z')
+        {
+            return glyph;
+        }
+    }
+}
+
 function hero_revealGlyph(hero, glyph)
 {
     var hadFullMessage = hero_hasFullMessage(hero);
