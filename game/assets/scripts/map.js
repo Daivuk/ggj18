@@ -20,6 +20,7 @@ function map_update(dt)
         if(map_isInCentre(hero.position) && hero.state != HeroState.DISABLED)
         {
             heroesInCentre++;
+            
         }
 
         centerReady |= hero_hasFullMessage(hero);

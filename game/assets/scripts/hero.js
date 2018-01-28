@@ -27,7 +27,8 @@ var HeroState = {
     ELECTROCUTED: 7,
     INTERACTING: 8,
     SPAWNING: 9,
-    VOID: 10
+    VOID: 10,
+    MENU: 11
 }
 
 function hero_create(_index, _pos, _color)
@@ -38,7 +39,7 @@ function hero_create(_index, _pos, _color)
         color: new Color(_color),
         dir: "w",
         taserCharge: 0,
-        state: HeroState.VOID,
+        state: HeroState.MENU,
         disableTimer: 0,
         interactionProgress: 0,
         spriteAnim: playSpriteAnim("hacker" + _index + ".spriteanim", "idle_e"),
@@ -47,7 +48,8 @@ function hero_create(_index, _pos, _color)
         renderGlowFn: hero_renderGlow,
         points: 0,
         spawnTime: HERO_SPAWN_TIME,
-        messageAppearTime: 0
+        messageAppearTime: 0,
+        playing: false
     };
 
     renderables.push(hero);
@@ -164,7 +166,8 @@ function hero_getTaserPos(hero)
 function hero_render(hero)
 {
     if (hero.state == HeroState.DISABLED ||
-        hero.state == HeroState.VOID)
+        hero.state == HeroState.VOID ||
+        hero.state == HeroState.MENU)
     {
         return;
     }
@@ -199,30 +202,47 @@ function hero_render(hero)
 function hero_drawHUD(hero)
 {
     var blockY = (resolution.y / 4) * hero.index - 4;
-    var x = 0;
-    var y = blockY;
+    if(gameState != GameStateEnum.MAIN_MENU && hero.playing)
+    {
+        var x = 0;
+        var y = blockY;
 
-    var count = [0, 0];
-    var countI = 0;
-    for (var i = 0; i < hero.glyphMap.length; ++i)
-    {
-        if (hero.displayMessage[i] == " ")
+        var count = [0, 0];
+        var countI = 0;
+        for (var i = 0; i < hero.glyphMap.length; ++i)
         {
-            ++countI;
-            continue;
+            if (hero.displayMessage[i] == " ")
+            {
+                ++countI;
+                continue;
+            }
+            count[countI]++;
         }
-        count[countI]++;
-    }
-    var offsetX = 40 - (count[0] * 14 / 2);
-    for (var i = 0; i < hero.glyphMap.length; ++i)
-    {
-        if (hero.displayMessage[i] == " ")
+        var offsetX = 40 - (count[0] * 14 / 2);
+        for (var i = 0; i < hero.glyphMap.length; ++i)
         {
-            y += 14;
-            x = 0;
-            offsetX = 40 - (count[1] * 14 / 2);
-            continue;
+            if (hero.displayMessage[i] == " ")
+            {
+                y += 14;
+                x = 0;
+                offsetX = 40 - (count[1] * 14 / 2);
+                continue;
+            }
+            SpriteBatch.drawText(
+                encryptedFont, 
+                hero.displayMessage[i], 
+                new Vector2(offsetX + x + 2, 4 + y + 2), 
+                Vector2.TOP_LEFT, 
+                Color.BLACK);
+            SpriteBatch.drawText(
+                encryptedFont, 
+                hero.displayMessage[i], 
+                new Vector2(offsetX + x, 4 + y), 
+                Vector2.TOP_LEFT, 
+                hero.glyphMap[i].color.get());
+            x += 14;
         }
+
         var percent = (hero.messageAppearTime) - i;
         var char;
         if (percent > 0)
@@ -256,7 +276,8 @@ function hero_drawHUD(hero)
         return;
     }
 
-    SpriteBatch.drawSpriteAnim(hero.spriteAnim, new Vector2(40, 60 + blockY), Color.WHITE, 0, 1.5);
+    var heroBrightness = hero.playing ? 1.0 : 0.5;
+    SpriteBatch.drawSpriteAnim(hero.spriteAnim, new Vector2(40, 60 + blockY), new Color(heroBrightness, heroBrightness, heroBrightness, 1), 0, 1.5);
 }
 
 function hero_drawGLOW(hero)
@@ -655,7 +676,7 @@ function hero_interactionSuccess(hero)
 
     for (var i = 0; i < heroes.length; ++i)
     {
-        //if (heroes[i].isPlaying) 
+        if (heroes[i].playing) 
         {
             pickup_spawn(hero_getRandomEncryptedGlyph(heroes[i]));
         }
@@ -737,12 +758,19 @@ function heroes_update(dt)
 {
     for(var i = 0; i < heroes.length; ++i)
     {
-        hero_update(heroes[i], dt);
+        var hero = heroes[i];
+        if(hero.playing)
+        {
+            hero_update(hero, dt);
+        }
     }
 
     for(var i = 0; i < heroes.length; ++i)
     {
-        hero_taser_update(heroes[i], dt);
+        if(hero.playing)
+        {
+            hero_taser_update(heroes[i], dt);
+        }
     }
 }
 
