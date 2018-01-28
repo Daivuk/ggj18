@@ -138,11 +138,6 @@ function hero_getTaserPos(hero)
 
 function hero_render(hero)
 {
-    for (var i = 0; i < hero.glyphMap.length; ++i)
-    {
-        SpriteBatch.drawText(encryptedFont, hero.displayMessage[i], new Vector2(4+(8*i), 4 + 70 * hero.index), Vector2.TOP_LEFT, hero.glyphMap[i].color.get());
-    }
-
     if (hero.state == HeroState.DISABLED ||
         hero.state == HeroState.VOID)
     {
@@ -150,7 +145,6 @@ function hero_render(hero)
     }
 
     SpriteBatch.drawSpriteAnim(hero.spriteAnim, hero.position);
-    SpriteBatch.drawSpriteAnim(hero.spriteAnim, new Vector2(40, 48 + 70 * hero.index), Color.WHITE, 0, 2);
 
     if (hero.state == HeroState.TASER_CHARGED)
     {
@@ -177,6 +171,34 @@ function hero_render(hero)
     }
 }
 
+function hero_drawHUD(hero)
+{
+    for (var i = 0; i < hero.glyphMap.length; ++i)
+    {
+        SpriteBatch.drawText(encryptedFont, hero.displayMessage[i], new Vector2(4+(8*i), 4 + 70 * hero.index), Vector2.TOP_LEFT, hero.glyphMap[i].color.get());
+    }
+
+    if (hero.state == HeroState.DISABLED ||
+        hero.state == HeroState.VOID)
+    {
+        return;
+    }
+
+    SpriteBatch.drawSpriteAnim(hero.spriteAnim, new Vector2(40, 48 + 70 * hero.index), Color.WHITE, 0, 2);
+}
+
+function hero_drawGLOW(hero)
+{
+    var hasWord = hero_hasFullMessage(hero);
+    for (var i = 0; i < hero.glyphMap.length; ++i)
+    {
+        if (hero.glyphMap[i].color.isPlaying() || hasWord)
+        {
+            SpriteBatch.drawText(encryptedFont, hero.displayMessage[i], new Vector2(4+(8*i), 4 + 70 * hero.index), Vector2.TOP_LEFT, hero.glyphMap[i].color.get());
+        }
+    }
+}
+
 function hero_hasFullMessage(hero)
 {
     for (var i = 0; i < hero.glyphMap.length; ++i)
@@ -198,14 +220,6 @@ function hero_renderGlow(hero)
     SpriteBatch.drawSprite(glowCircleTexture, new Vector2(hero.position.x, hero.position.y + 2), hero.color);
 
     SpriteBatch.drawSpriteAnim(hero.spriteAnim, hero.position, Color.BLACK);
-    var hasWord = hero_hasFullMessage(hero);
-    for (var i = 0; i < hero.glyphMap.length; ++i)
-    {
-        if (hero.glyphMap[i].color.isPlaying() || hasWord)
-        {
-            SpriteBatch.drawText(encryptedFont, hero.displayMessage[i], new Vector2(4+(8*i), 4 + 70 * hero.index), Vector2.TOP_LEFT, hero.glyphMap[i].color.get());
-        }
-    }
 
     if (hero.state == HeroState.TASER_CHARGED)
     {
@@ -228,6 +242,14 @@ function hero_renderGlow(hero)
 
 function hero_update(hero, dt)
 {
+    if (hero.state != HeroState.INTERACTING)
+    {
+        if (hero.transmissionSound)
+        {
+            hero.transmissionSound.stop();
+            hero.transmissionSound = null;
+        }
+    }
     if (hero.state == HeroState.SPAWNING)
     {
         hero.spawnTime -= dt;
@@ -296,6 +318,10 @@ function hero_update(hero, dt)
         if(GamePad.isJustDown(hero.index, Button.X) && heroesInCentre < 2 && map_isInCentre(hero.position) && hero_hasFullMessage(hero))
         {
             hero.state = HeroState.INTERACTING;
+            playSound("GGJ18SFX_TransmissionStart.wav");
+            hero.transmissionSound = getSound("GGJ18SFX_TransmissionLoop.wav").createInstance();
+            hero.transmissionSound.setLoop(true);
+            hero.transmissionSound.play();
         }
 
         if(GamePad.isJustDown(hero.index, Button.Y))
@@ -431,8 +457,9 @@ function hero_taser_update(hero, dt)
     {
         if (hero.state == HeroState.TASED)
         {
-            hero.electrocuteSound = getSound("GGJ18SFX_PlayerElectrocuted.wav").createInstance();
-            hero.electrocuteSound.play();
+            playSound("GGJ18SFX_PlayerElectrocutedShort.wav");
+            //hero.electrocuteSound = getSound("GGJ18SFX_PlayerElectrocuted.wav").createInstance();
+            //hero.electrocuteSound.play();
             hero.spriteAnim = playSpriteAnim("electrocute.spriteanim", "idle");
             hero.state = HeroState.ELECTROCUTED;
             return;
@@ -448,8 +475,8 @@ function hero_taser_update(hero, dt)
             }
             else
             {
-                hero.electrocuteSound.stop();
-                hero.electrocuteSound = null;
+                //hero.electrocuteSound.stop();
+                //hero.electrocuteSound = null;
                 gibs_spawn(hero.position);
             }
         }
@@ -465,6 +492,13 @@ function hero_taser_update(hero, dt)
 
 function hero_interactionSuccess(hero)
 {
+    if (hero.transmissionSound)
+    {
+        hero.transmissionSound.stop();
+        hero.transmissionSound = null;
+    }
+    playSound("GGJ18SFX_TransmissionComplete.wav");
+
     hero_createNewMessage(hero);
 
     regenerateUniqueGlyphs();

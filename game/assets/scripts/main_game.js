@@ -16,7 +16,7 @@ function renderGame()
     // Render the map
     tiledMap.renderLayer(0); // Ground
 
-    splatters_render();
+    splatters_render(); // Blood
 
     tiledMap.renderLayer(1); // Walls
 
@@ -26,5 +26,24 @@ function renderGame()
     {
         var entity = renderables[i];
         entity.renderFn(entity);
+    }
+
+    // hud
+    for (var i = 0; i < heroes.length; ++i)
+    {
+        var hero = heroes[i];
+        hero_drawHUD(hero);
+    }
+}
+
+function renderGameGlow()
+{
+    // Render the map
+    map_renderGlow();
+
+    for(var i = 0; i < renderables.length; ++i)
+    {
+        var entity = renderables[i];
+        entity.renderGlowFn(entity);
     }
 }

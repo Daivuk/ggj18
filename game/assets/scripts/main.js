@@ -130,13 +130,19 @@ function renderGlow()
     SpriteBatch.setFilter(FilterMode.NEAREST);
     SpriteBatch.setBlend(BlendMode.PREMULTIPLIED);
 
-    // Render the map
-    map_renderGlow();
-
-    for(var i = 0; i < renderables.length; ++i)
+    switch(gameState)
     {
-        var entity = renderables[i];
-        entity.renderGlowFn(entity);
+        case GameStateEnum.INIT:
+            break;
+        case GameStateEnum.MAIN_MENU:
+            break;
+        case GameStateEnum.GAME:
+            renderGameGlow();
+            break;
+        case GameStateEnum.END_GAME:
+            break;
+        default:
+            break;
     }
 
     SpriteBatch.end();
