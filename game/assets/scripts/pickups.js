@@ -75,7 +75,7 @@ function pickup_create(_pos, glyph)
 function pickup_spawn(glyph)
 {
     // skip if invalid
-    if (glyph < 'a' && glyph > 'z') return;
+    if (glyph < 'a' || glyph > 'z') return;
 
     var foundSpot = false;
     var spawnPos = new Vector2(0, 0);
