@@ -87,12 +87,13 @@ function hero_createNewMessage(hero) {
 function hero_revealGlyph(hero, glyph)
 {
     var hadFullMessage = hero_hasFullMessage(hero);
-    for (var i = 0; i < hero.glyphMap.length; ++i)
+    for (var i = 0; i < hero.displayMessage.length; ++i)
     {
-        if (hero.glyphMap[i].encrypted == glyph)
+        if (hero.displayMessage[i] == glyph)
         {
             hero.displayMessage = hero.displayMessage.replaceAt(i, hero.glyphMap[i].decrypted);
             hero.glyphMap[i].color.playSingle(Color.WHITE, hero.color.mul(.5), 3, Tween.EASE_IN);
+            break; // only reveal one glyph at a time.
         }
     }
 
