@@ -228,46 +228,32 @@ function hero_drawHUD(hero)
                 offsetX = 40 - (count[1] * 14 / 2);
                 continue;
             }
-            SpriteBatch.drawText(
-                encryptedFont, 
-                hero.displayMessage[i], 
-                new Vector2(offsetX + x + 2, 4 + y + 2), 
-                Vector2.TOP_LEFT, 
-                Color.BLACK);
-            SpriteBatch.drawText(
-                encryptedFont, 
-                hero.displayMessage[i], 
-                new Vector2(offsetX + x, 4 + y), 
-                Vector2.TOP_LEFT, 
-                hero.glyphMap[i].color.get());
+            var percent = (hero.messageAppearTime) - i;
+            var char;
+            if (percent > 0)
+            {
+                percent = Math.min(1, percent / 2);
+                var invPercent = 1 - percent;
+                var code = hero.displayMessage[i].charCodeAt();
+                if (code >= aCODE && code <= "z".charCodeAt())
+                    char = String.fromCharCode(((code - aCODE) + 26 * invPercent) % 26 + aCODE);
+                else if (code >= ACODE && code <= "Z".charCodeAt())
+                    char = String.fromCharCode(((code - ACODE) + 26 * invPercent) % 26 + ACODE);
+                SpriteBatch.drawText(
+                    encryptedFont, 
+                    char, 
+                    new Vector2(offsetX + x + 2, 4 + y + 2), 
+                    Vector2.TOP_LEFT, 
+                    Color.BLACK);
+                SpriteBatch.drawText(
+                    encryptedFont, 
+                    char, 
+                    new Vector2(offsetX + x, 4 + y), 
+                    Vector2.TOP_LEFT, 
+                    hero.glyphMap[i].color.get());
+            }
             x += 14;
         }
-
-        var percent = (hero.messageAppearTime) - i;
-        var char;
-        if (percent > 0)
-        {
-            percent = Math.min(1, percent / 2);
-            var invPercent = 1 - percent;
-            var code = hero.displayMessage[i].charCodeAt();
-            if (code >= aCODE && code <= "z".charCodeAt())
-                char = String.fromCharCode(((code - aCODE) + 26 * invPercent) % 26 + aCODE);
-            else if (code >= ACODE && code <= "Z".charCodeAt())
-                char = String.fromCharCode(((code - ACODE) + 26 * invPercent) % 26 + ACODE);
-            SpriteBatch.drawText(
-                encryptedFont, 
-                char, 
-                new Vector2(offsetX + x + 2, 4 + y + 2), 
-                Vector2.TOP_LEFT, 
-                Color.BLACK);
-            SpriteBatch.drawText(
-                encryptedFont, 
-                char, 
-                new Vector2(offsetX + x, 4 + y), 
-                Vector2.TOP_LEFT, 
-                hero.glyphMap[i].color.get());
-        }
-        x += 14;
     }
 
     if (hero.state == HeroState.DISABLED ||
