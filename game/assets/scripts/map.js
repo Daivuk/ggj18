@@ -13,7 +13,7 @@ function map_update(dt)
     {
         var hero = heroes[i];
 
-        if(map_isInCentre(hero.position) && !hero.disabled)
+        if(map_isInCentre(hero.position) && hero.state != HeroState.DISABLED)
         {
             heroesInCentre++;
         }
