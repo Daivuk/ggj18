@@ -1,5 +1,5 @@
 var HERO_COLLISION_SIZE = 10;
-var HERO_SPEED = 50;
+var HERO_SPEED = 60;
 var HERO_PICKUP_OFFSET = new Vector2(0, 0);
 var HERO_DISABLE_TIME = 2;
 var HERO_TASER_USE_INTERVAL = 3;
@@ -7,6 +7,9 @@ var HERO_TASER_CHARGE_TIME = 1;
 var HERO_TASER_PROXIMITY = 10;
 var HERO_SPAWN_PROXIMITY = 0;
 var HERO_SPAWN_CENTER_TILE_RADIUS = 7;
+var HERO_INTERACTION_PROGRESS_MAX = 1.5;
+var INTERACTION_BAR_WIDTH = 50;
+var INTERACTION_BAR_HEIGHT = 5;
 
 var glowCircleTexture = getTexture("glowCircle.png")
 
@@ -17,7 +20,8 @@ var HeroState = {
     TASER_CHARGED: 4,
     TASER_DISCHARGING: 5,
     DISABLED: 6,
-    ELECTROCUTED: 7
+    ELECTROCUTED: 7,
+    INTERACTING: 8
 }
 
 function hero_create(_index, _pos, _color)
@@ -30,6 +34,7 @@ function hero_create(_index, _pos, _color)
         taserCharge: 0,
         state: HeroState.IDLE,
         disableTimer: HERO_DISABLE_TIME,
+        interactionProgress: 0,
         spriteAnim: playSpriteAnim("hacker" + _index + ".spriteanim", "idle_e"),
         taseReadySpriteAnim: playSpriteAnim("taseReady.spriteanim", "idle_e"),
         renderFn: hero_render,
@@ -147,6 +152,12 @@ function hero_render(hero)
     {
         SpriteBatch.drawSpriteAnim(hero.taseReadySpriteAnim, hero_getTaserPos(hero), Color.WHITE, 0, 2);
     }
+    if (hero.state == HeroState.INTERACTING)
+    {
+        var barPosition = hero.position.sub(new Vector2(INTERACTION_BAR_WIDTH * 0.5, -20));
+        var barSize = new Vector2(INTERACTION_BAR_WIDTH * hero.interactionProgress / HERO_INTERACTION_PROGRESS_MAX, INTERACTION_BAR_HEIGHT);
+        SpriteBatch.drawRect(null, new Rect(barPosition, barSize), new Color(1, 0, 0, 1));
+    }
 }
 
 function hero_hasFullMessage(hero)
@@ -197,28 +208,107 @@ function hero_update(hero, dt)
     }
 
     var leftThumb = GamePad.getLeftThumb(hero.index);
-
-    // Get the next position according to thumb movement
-    var speed = hero.state == HeroState.TASER_CHARGED ? HERO_SPEED * 1.5 : HERO_SPEED;
-    var nextPosition = new Vector2(hero.position.add(leftThumb.mul(dt * speed)));
-
-    // Apply collision to the movement
-    if (hero.state != HeroState.TASER_DISCHARGING)
+    
+    if(hero.state == HeroState.INTERACTING)
     {
-        hero.position = tiledMap.collision(hero.position, nextPosition, new Vector2(HERO_COLLISION_SIZE, HERO_COLLISION_SIZE));
-    }
-
-    // Pick up items
-    if (hero.state == HeroState.IDLE)
-    {
-        var pickup = pickups_acquire(hero.position.add(HERO_PICKUP_OFFSET));
-
-        if(pickup != null)
+        if(GamePad.isDown(hero.index, Button.X))
         {
-            hero_revealGlyph(hero, pickup.glyph);
+            hero.interactionProgress += dt;
+
+            if(hero.interactionProgress > HERO_INTERACTION_PROGRESS_MAX)
+            {
+                hero.state = HeroState.IDLE;
+
+                hero_interactionSuccess(hero);
+            }
+        }
+        else
+        {
+            hero.interactionProgress = 0;
+
+            hero.state = HeroState.IDLE;
+        }
+    }
+    else
+    {
+        // Get the next position according to thumb movement
+        var speed = hero.state == HeroState.TASER_CHARGED ? HERO_SPEED * 1.5 : HERO_SPEED;
+        var nextPosition = new Vector2(hero.position.add(leftThumb.mul(dt * speed)));
+
+        // Apply collision to the movement
+        if (hero.state != HeroState.TASER_DISCHARGING)
+        {
+            hero.position = tiledMap.collision(hero.position, nextPosition, new Vector2(HERO_COLLISION_SIZE, HERO_COLLISION_SIZE));
+        }
+
+        // Pick up items
+        if (hero.state == HeroState.IDLE)
+        {
+            var pickup = pickups_acquire(hero.position.add(HERO_PICKUP_OFFSET));
+
+            if(pickup != null)
+            {
+                hero_revealGlyph(hero, pickup.glyph);
+            }
+        }
+
+        hero_handle_taser(hero, dt);
+        
+
+        // Handle interacting with the transmitter
+        if(GamePad.isJustDown(hero.index, Button.X) && heroesInCentre < 2 && map_isInCentre(hero.position) && hero_hasFullMessage(hero))
+        {
+            hero.state = HeroState.INTERACTING;
+        }
+
+        if(GamePad.isJustDown(hero.index, Button.Y))
+        {
+            gibs_spawn(hero.position);
         }
     }
 
+    // Pick anim
+    var anim = "idle";
+
+    if(hero.state != HeroState.INTERACTING)
+    {
+        if (leftThumb.length() > 0.1) anim = "run";
+
+        if (hero.state == HeroState.TASER_CHARGED ||
+            hero.state == HeroState.TASER_CHARGING ||
+            hero.state == HeroState.TASER_DISCHARGING)
+            anim += "taser";
+    }
+
+    // Point the character in the right direction
+    if (Math.abs(leftThumb.x) > 0.001 &&
+        hero.state != HeroState.TASER_DISCHARGING)
+    {
+        if(leftThumb.x > 0)
+        {
+            hero.dir = "e";
+        }
+        else
+        {
+            hero.dir = "w";
+        }
+    }
+
+    if (hero.state == HeroState.TASER_CHARGING)
+    {
+        hero.taseReadySpriteAnim.play("idle_" + hero.dir);
+    }
+    if (hero.state == HeroState.TASER_DISCHARGING)
+    {
+        hero.taseReadySpriteAnim.play("tase_" + hero.dir);
+        anim = "idletaser";
+    }
+
+    hero.spriteAnim.play(anim + "_" + hero.dir);
+}
+
+function hero_handle_taser(hero, dt)
+{
     // Handle taser
     switch (hero.state)
     {
@@ -292,58 +382,6 @@ function hero_update(hero, dt)
             break;
         }
     }
-
-    // Handle interacting with the transmitter
-    if(GamePad.isJustDown(hero.index, Button.X) && heroesInCentre < 2 && map_isInCentre(hero.position) && hero_hasFullMessage(hero))
-    {
-        hero.points++;
-
-        print("hero " + hero.index + " entered a code and now has " + hero.points + " points");
-
-        hero_createNewMessage(hero);
-
-        regenerateUniqueGlyphs();
-    }
-
-    // if(GamePad.isJustDown(hero.index, Button.Y))
-    // {
-    //     gibs_spawn(hero.position);
-    // }
-
-    // Pick anim
-    var anim = "idle";
-    if (leftThumb.length() > 0.1) anim = "run";
-
-    if (hero.state == HeroState.TASER_CHARGED ||
-        hero.state == HeroState.TASER_CHARGING ||
-        hero.state == HeroState.TASER_DISCHARGING)
-        anim += "taser";
-
-    // Point the character in the right direction
-    if (Math.abs(leftThumb.x) > 0.001 &&
-        hero.state != HeroState.TASER_DISCHARGING)
-    {
-        if(leftThumb.x > 0)
-        {
-            hero.dir = "e";
-        }
-        else
-        {
-            hero.dir = "w";
-        }
-    }
-
-    if (hero.state == HeroState.TASER_CHARGING)
-    {
-        hero.taseReadySpriteAnim.play("idle_" + hero.dir);
-    }
-    if (hero.state == HeroState.TASER_DISCHARGING)
-    {
-        hero.taseReadySpriteAnim.play("tase_" + hero.dir);
-        anim = "idletaser";
-    }
-
-    hero.spriteAnim.play(anim + "_" + hero.dir);
 }
 
 function hero_taser_update(hero, dt)
@@ -381,6 +419,19 @@ function hero_taser_update(hero, dt)
     }
 }
 
+function hero_interactionSuccess(hero)
+{
+    hero_createNewMessage(hero);
+
+    regenerateUniqueGlyphs();
+
+    hero.interactionProgress = 0;
+    
+    hero.points++;
+
+    print("hero " + hero.index + " now has " + hero.points + " points");
+}
+
 function hero_respawn(hero)
 {
     hero.taserCharge = 0;
@@ -388,6 +439,7 @@ function hero_respawn(hero)
     hero.disableTimer = HERO_DISABLE_TIME;
     hero.spriteAnim = playSpriteAnim("hacker" + hero.index + ".spriteanim", "idle_e");
     hero.taseReadySpriteAnim = playSpriteAnim("taseReady.spriteanim", "idle_e");
+    hero.interactionProgress = 0;
 
     var foundSpot = false;
     var spawnPos = new Vector2(0, 0);
