@@ -21,15 +21,17 @@ function pickup_create(_pos)
         return null;
     }
 
+    var glyphIndex = Random.randInt(0, uniqueGlyphs.length - 1);
+
     var pickup = {
         position: new Vector2(_pos),
-        glyph: uniqueGlyphs[0],
+        glyph: uniqueGlyphs[glyphIndex],
         floatAnim: new NumberAnim(),
         renderFn: pickup_render,
         renderGlowFn: pickup_renderGlow,
     }
 
-    uniqueGlyphs = uniqueGlyphs.slice(1);
+    uniqueGlyphs = uniqueGlyphs.replaceAt(glyphIndex, '');
 
     pickup.floatAnim.playSingle(-2, 2, .45, Tween.EASE_BOTH, Loop.PING_PONG_LOOP);
 
