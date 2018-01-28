@@ -305,10 +305,10 @@ function hero_update(hero, dt)
         regenerateUniqueGlyphs();
     }
 
-    if(GamePad.isJustDown(hero.index, Button.Y))
-    {
-        gibs_spawn(hero.position);
-    }
+    // if(GamePad.isJustDown(hero.index, Button.Y))
+    // {
+    //     gibs_spawn(hero.position);
+    // }
 
     // Pick anim
     var anim = "idle";
@@ -365,6 +365,10 @@ function hero_taser_update(hero, dt)
             if(hero.disableTimer > 1)
             {
                 return;
+            }
+            else
+            {
+                gibs_spawn(hero.position);
             }
         }
 

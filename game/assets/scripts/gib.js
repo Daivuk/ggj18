@@ -1,24 +1,26 @@
 var GIB_MIN_VELOCITY_X = 30;
-var GIB_MAX_VELOCITY_X = 300;
-var GIB_MIN_VELOCITY_Y = 300;
-var GIB_MAX_VELOCITY_Y = 500;
+var GIB_MAX_VELOCITY_X = 100;
+var GIB_MIN_VELOCITY_Y = 100;
+var GIB_MAX_VELOCITY_Y = 300;
 var GIB_ANGULAR_SPEED = 300
 var GIB_COLLISION_SIZE = 5;
 var GIB_COUNT = 16;
-var GIB_GRAVITY = 10;
-var GIB_RESTITUTION = 0.666;
+var GIB_GRAVITY = 700;
+var GIB_RESTITUTION = 0.5;
 
 var gibs = [];
-var gibTexture = getTexture("circuit.png"); //TODO. they're not robots
+var gibTexture = getTexture("gib.png"); //TODO. they're not robots
 
-function gib_create(_pos, _texture, _velocityX, _velocityY, _angularSpeed) {
+function gib_create(_pos, _texture, _velocityX, _velocityY, _velocityZ, _angularSpeed) {
 
     var gib = {
         position: new Vector2(_pos),
+        positionZ: 0,
         sourcePos: new Vector2(_pos),
         texture: _texture,
         velocityX: _velocityX,
         velocityY: _velocityY,
+        velocityZ: _velocityZ,
         rotation: 0,
         angularSpeed: _angularSpeed,
         renderFn: gib_render,
@@ -32,29 +34,36 @@ function gib_create(_pos, _texture, _velocityX, _velocityY, _angularSpeed) {
 
 function gibs_spawn(_sourcePosition)
 {
+    splatter_create(_sourcePosition, getTexture("blood.png"));
     for (var i = 0; i < GIB_COUNT; ++i)
     {
-        if (i % 2 == 0)
-        {
-            gibs.push(
-                gib_create(
-                    _sourcePosition, 
-                    null, 
-                    Random.randInt(GIB_MIN_VELOCITY_X, GIB_MAX_VELOCITY_X),
-                    -Random.randInt(GIB_MIN_VELOCITY_Y, GIB_MAX_VELOCITY_Y),
-                    GIB_ANGULAR_SPEED));        
-        }
-        else 
-        {
-            gibs.push(
-                gib_create(
-                    _sourcePosition, 
-                    null, 
-                    -Random.randInt(GIB_MIN_VELOCITY_X, GIB_MAX_VELOCITY_X),
-                    -Random.randInt(GIB_MIN_VELOCITY_Y, GIB_MAX_VELOCITY_Y),
-                    -GIB_ANGULAR_SPEED));        
-        }
+        gibs.push(
+            gib_create(
+                _sourcePosition, 
+                null, 
+                Random.randNumber(-GIB_MAX_VELOCITY_X, GIB_MAX_VELOCITY_X),
+                Random.randNumber(-GIB_MAX_VELOCITY_X, GIB_MAX_VELOCITY_X),
+                Random.randNumber(GIB_MIN_VELOCITY_Y, GIB_MAX_VELOCITY_Y),
+                Random.randNumber(-GIB_ANGULAR_SPEED, GIB_ANGULAR_SPEED)));
     }
+}
+
+function gib_bounce(gib, h)
+{
+    gib.positionZ = h;
+    gib.velocityX *= GIB_RESTITUTION; // BOING!
+    gib.velocityY *= GIB_RESTITUTION; // BOING!
+    gib.velocityZ *= -GIB_RESTITUTION; // BOING!
+    gib.angularSpeed *= GIB_RESTITUTION; // BOING!
+
+    if (gib.velocityZ < 5.0) // despawn if it doesn't bounce high enough
+    {
+        return false;
+    }
+
+    splatter_create(gib.position, getTexture("blood.png"));
+
+    return true;
 }
 
 function gibs_update(dt) {
@@ -62,36 +71,51 @@ function gibs_update(dt) {
     for(var i = 0; i < gibs.length; ++i)
     {
         var gib = gibs[i];
-        gib.velocityY += GIB_GRAVITY;
+        gib.velocityZ -= GIB_GRAVITY * dt;
 
-        var nextPosition = new Vector2(gib.position.x + gib.velocityX * dt, gib.position.y + gib.velocityY * dt);
+        var nextPosition = new Vector2(
+            gib.position.x + gib.velocityX * dt, 
+            gib.position.y + gib.velocityY * dt);
+        gib.positionZ += gib.velocityZ * dt;
 
         // Apply collision to the movement
-        //gib.position = tiledMap.collision(gib.position, nextPosition, new Vector2(GIB_COLLISION_SIZE, GIB_COLLISION_SIZE));
-        gib.position = nextPosition;
+        // if (gib.positionZ < 12)
+        {
+            gib.position = tiledMap.collision(gib.position, nextPosition, new Vector2(GIB_COLLISION_SIZE, GIB_COLLISION_SIZE));
+        }
+        //gib.position = nextPosition;
 
         gib.rotation += (gib.angularSpeed * dt);
-        if (gib.position.y > gib.sourcePos.y)
+        // if (gib.positionZ < 12 && !tiledMap.getCollision(Math.floor(gib.position.x / TILE_HEIGHT), Math.floor(gib.position.y / TILE_HEIGHT)))
+        // {
+        //     if (!gib_bounce(gib, 12))
+        //     {
+        //         for (var j = 0; j < renderables.length; ++j)
+        //         {
+        //             if (renderables[j]== gib)
+        //             {
+        //                 renderables.splice(j, 1);
+        //             }
+        //         }
+
+        //         gibs.splice(i--, 1);
+        //         continue;
+        //     }
+        // }
+        if (gib.positionZ < 0)
         {
-            gib.velocityY *= -GIB_RESTITUTION; // BOING!
-
-            if (gib.velocityY < 5.0 && gib.velocityY > -5.0) // despawn if it doesn't bounce high enough
-            {                
-                for (var i = 0; i < renderables.length; ++i)
+            if (!gib_bounce(gib, 0))
+            {
+                for (var j = 0; j < renderables.length; ++j)
                 {
-                    if (renderables[i]== gib)
+                    if (renderables[j]== gib)
                     {
-                        renderables.splice(i, 1);
+                        renderables.splice(j, 1);
                     }
                 }
 
-                for (var i = 0; i < gibs.length; ++i)
-                {
-                    if (gibs[i]== gib)
-                    {
-                        gibs.splice(i, 1);
-                    }
-                }
+                gibs.splice(i--, 1);
+                continue;
             }
         }
     }
@@ -99,7 +123,9 @@ function gibs_update(dt) {
 
 function gib_render(gib) {
 
-    SpriteBatch.drawSprite(gibTexture, gib.position, Color.WHITE, gib.rotation, 1.0);
+    SpriteBatch.drawSprite(gibTexture, 
+        new Vector2(gib.position.x, gib.position.y - gib.positionZ), 
+        Color.WHITE, Math.round(gib.rotation / 90) * 90, 1.0);
 
 }
 

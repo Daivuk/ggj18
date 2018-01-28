@@ -4,6 +4,8 @@ function updateGame(dt)
 
     pickups_update(dt);
 
+    splatters_update(dt);
+
     map_update(dt);
 
     gibs_update(dt);
@@ -13,6 +15,9 @@ function renderGame()
 {
     // Render the map
     tiledMap.renderLayer(0); // Ground
+
+    splatters_render();
+
     tiledMap.renderLayer(1); // Walls
 
     // Draw entities
@@ -22,5 +27,4 @@ function renderGame()
         var entity = renderables[i];
         entity.renderFn(entity);
     }
-
 }

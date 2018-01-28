@@ -10,7 +10,7 @@ function updateInit(dt)
         CENTRE_TILE_PROXIMITY * TILE_HEIGHT * 2,
         CENTRE_TILE_PROXIMITY * TILE_HEIGHT * 2);
 
-    gameState = GameStateEnum.MAIN_MENU
+    gameState = GameStateEnum.MAIN_MENU;
 }
 
 function renderInit()
