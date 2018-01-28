@@ -24,7 +24,7 @@ function regenerateUniqueGlyphs()
 
     uniqueGlyphs = removeDuplicatesFromArray(uniqueGlyphs);
 
-    uniqueGlyphs = pickup_removeExistingFromArray(uniqueGlyphs);
+    pickups_clear();
 }
 
 function renderMainMenu()

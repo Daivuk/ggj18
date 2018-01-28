@@ -39,27 +39,6 @@ function pickup_create(_pos)
     return pickup;
 }
 
-function pickup_removeExistingFromArray(characters)
-{
-    for(var i = 0; i < pickups.length; ++i)
-    {
-        for(var c = 0; c < characters.length; ++c)
-        {
-            if(characters[c] == pickups[i].glyph)
-            {
-                var newString = characters.slice(0, c);
-                newString += characters.slice(c + 1, -1);
-
-                characters = newString;
-
-                break;
-            }
-        }
-    }
-
-    return characters;
-}
-
 function pickup_spawn()
 {
     var foundSpot = false;
@@ -110,6 +89,23 @@ function pickup_spawn()
         pickups.push(pickup);
     }
 
+}
+
+function pickups_clear()
+{
+    for(var i = 0; i < pickups.length; ++i)
+    {
+        for(var r = 0; r < renderables.length; ++r)
+        {
+            if(pickups[i] == renderables[r])
+            {
+                renderables.splice(r, 1);
+                break;
+            }
+        }
+    }
+    
+    pickups = [];
 }
 
 function pickup_getDrawPosition(pickup)
