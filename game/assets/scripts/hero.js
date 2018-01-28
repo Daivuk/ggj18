@@ -43,7 +43,8 @@ function hero_create(_index, _pos, _color)
         renderFn: hero_render,
         renderGlowFn: hero_renderGlow,
         points: 0,
-        spawnTime: HERO_SPAWN_TIME
+        spawnTime: HERO_SPAWN_TIME,
+        messageAppearTime: 0
     };
 
     renderables.push(hero);
@@ -221,18 +222,25 @@ function hero_drawHUD(hero)
             offsetX = 40 - (count[1] * 14 / 2);
             continue;
         }
-        SpriteBatch.drawText(
-            encryptedFont, 
-            hero.displayMessage[i], 
-            new Vector2(offsetX + x + 2, 4 + y + 2), 
-            Vector2.TOP_LEFT, 
-            Color.BLACK);
-        SpriteBatch.drawText(
-            encryptedFont, 
-            hero.displayMessage[i], 
-            new Vector2(offsetX + x, 4 + y), 
-            Vector2.TOP_LEFT, 
-            hero.glyphMap[i].color.get());
+        var percent = (hero.messageAppearTime) - i;
+        if (percent > 0)
+        {
+            percent = Math.min(1, percent / 2);
+            var invPercent = 1 - percent;
+            var char = String.fromCharCode(((hero.displayMessage[i].charCodeAt() - ("a").charCodeAt()) + 26 * invPercent) % 26 + ("a").charCodeAt());
+            SpriteBatch.drawText(
+                encryptedFont, 
+                char, 
+                new Vector2(offsetX + x + 2, 4 + y + 2), 
+                Vector2.TOP_LEFT, 
+                Color.BLACK);
+            SpriteBatch.drawText(
+                encryptedFont, 
+                char, 
+                new Vector2(offsetX + x, 4 + y), 
+                Vector2.TOP_LEFT, 
+                hero.glyphMap[i].color.get());
+        }
         x += 14;
     }
 
@@ -272,6 +280,20 @@ function hero_drawGLOW(hero)
             x = 0;
             offsetX = 40 - (count[1] * 14 / 2);
             continue;
+        }
+
+        var percent = (hero.messageAppearTime) - i;
+        if (percent > 0)
+        {
+            percent = Math.min(1, percent / 2);
+            var invPercent = 1 - percent;
+            var char = String.fromCharCode(((hero.displayMessage[i].charCodeAt() - ("a").charCodeAt()) + 26 * invPercent) % 26 + ("a").charCodeAt());
+            SpriteBatch.drawText(
+                encryptedFont, 
+                char, 
+                new Vector2(offsetX + x, 4 + y), 
+                Vector2.TOP_LEFT, 
+                hero.glyphMap[i].color.get().mul(invPercent));
         }
 
         if (hero.glyphMap[i].color.isPlaying() || hasWord)
@@ -361,6 +383,8 @@ function hero_update(hero, dt)
     {
         return;
     }
+
+    hero.messageAppearTime += dt * 8;
 
     var leftThumb = GamePad.getLeftThumb(hero.index);
     
@@ -608,7 +632,7 @@ function hero_interactionSuccess(hero)
 
     hero_createNewMessage(hero);
 
-    regenerateUniqueGlyphs();
+    regenerateUniqueGlyphs(hero);
 
     hero.interactionProgress = 0;
     
@@ -628,6 +652,7 @@ function hero_respawn(hero)
     hero.taseReadySpriteAnim = playSpriteAnim("taseReady.spriteanim", "idle_e");
     hero.interactionProgress = 0;
     hero.spawnTime = HERO_SPAWN_TIME;
+    hero.messageAppearTime = 0;
 
     var foundSpot = false;
     var spawnPos = new Vector2(0, 0);

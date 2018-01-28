@@ -17,16 +17,17 @@ function updateMainMenu(dt)
     gameState = GameStateEnum.GAME
 }
 
-function regenerateUniqueGlyphs()
+function regenerateUniqueGlyphs(hero)
 {
     uniqueGlyphs = ""
-    for(var i = 0; i < heroes.length; ++i)
+    //for(var i = 0; i < heroes.length; ++i)
     {
-        var hero = heroes[i];
+        //var hero = heroes[i];
         for(var j = 0; j < hero.glyphMap.length; ++j)
         {
             if (hero.glyphMap[j].encrypted !== ' ') {uniqueGlyphs += hero.glyphMap[j].encrypted;}
         }
+        hero.messageAppearTime = 0;
     }
 
     uniqueGlyphs = removeDuplicatesFromArray(uniqueGlyphs);
