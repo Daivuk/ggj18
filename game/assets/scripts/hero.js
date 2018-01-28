@@ -49,7 +49,8 @@ function hero_create(_index, _pos, _color)
         points: 0,
         spawnTime: HERO_SPAWN_TIME,
         messageAppearTime: 0,
-        playing: false
+        playing: false,
+        bounceAnim: 0
     };
 
     renderables.push(hero);
@@ -172,7 +173,11 @@ function hero_render(hero)
         return;
     }
 
-    SpriteBatch.drawSpriteAnim(hero.spriteAnim, hero.position);
+    var percent = (hero.bounceAnim * 10) % 2;
+    if (percent > 1) percent = 1 - (percent - 1);
+    percent = 1 - (1 - percent) * (1 - percent);
+    SpriteBatch.drawSpriteAnim(hero.spriteAnim, 
+        new Vector2(hero.position.x, hero.position.y));
 
     if (hero.state == HeroState.TASER_CHARGED)
     {
@@ -496,13 +501,19 @@ function hero_update(hero, dt)
 
     if(hero.state != HeroState.INTERACTING)
     {
-        if (leftThumb.length() > 0.1) anim = "run";
+        if (leftThumb.length() > 0.1)
+        {
+            anim = "run";
+        }
 
         if (hero.state == HeroState.TASER_CHARGED ||
             hero.state == HeroState.TASER_CHARGING ||
             hero.state == HeroState.TASER_DISCHARGING)
             anim += "taser";
     }
+
+    if (anim == "run" || anim == "runtaser") hero.bounceAnim += dt;
+    else hero.bounceAnim = 0;
 
     // Point the character in the right direction
     if (Math.abs(leftThumb.x) > 0.001 &&
