@@ -17,6 +17,8 @@ function updateInit(dt)
     //if (Random.randBool()) music = getMusic("GG18musicA.ogg");
     //else music = getMusic("GG18musicB.ogg");
     music_play("Mixdown.ogg");
+
+    Input.setMouseVisible(false);
 }
 
 function renderInit()
