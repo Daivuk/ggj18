@@ -50,6 +50,9 @@ function renderGameGlow()
     for (var i = 0; i < heroes.length; ++i)
     {
         var hero = heroes[i];
-        hero_drawGLOW(hero);
+        if(hero.playing)
+        {
+            hero_drawGLOW(hero);
+        }
     }
 }
