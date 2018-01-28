@@ -5,6 +5,8 @@ function updateGame(dt)
     pickups_update(dt);
 
     map_update(dt);
+
+    gibs_update(dt);
 }
 
 function renderGame()

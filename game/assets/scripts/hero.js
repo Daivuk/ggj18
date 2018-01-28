@@ -293,6 +293,11 @@ function hero_update(hero, dt)
         regenerateUniqueGlyphs();
     }
 
+    if(GamePad.isJustDown(hero.index, Button.Y))
+    {
+        gibs_spawn(hero.position);
+    }
+
     // Pick anim
     var anim = "idle";
     if (leftThumb.length() > 0.1) anim = "run";
