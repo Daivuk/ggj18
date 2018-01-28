@@ -8,8 +8,8 @@ var HERO_TASER_PROXIMITY = 10;
 var HERO_SPAWN_PROXIMITY = 0;
 var HERO_SPAWN_CENTER_TILE_RADIUS = 7;
 var HERO_INTERACTION_PROGRESS_MAX = 3.0;
-var INTERACTION_BAR_WIDTH = 50;
-var INTERACTION_BAR_HEIGHT = 5;
+var INTERACTION_BAR_WIDTH = 10;
+var INTERACTION_BAR_HEIGHT = 3;
 var HERO_SPAWN_TIME = .5;
 
 var glowCircleTexture = getTexture("glowCircle.png")
@@ -173,9 +173,9 @@ function hero_render(hero)
     }
     if (hero.state == HeroState.INTERACTING)
     {
-        var barPosition = hero.position.sub(new Vector2(INTERACTION_BAR_WIDTH * 0.5, -20));
+        var barPosition = new Vector2(17 * TILE_HEIGHT + 3, 8 * TILE_HEIGHT);
         var barSize = new Vector2(INTERACTION_BAR_WIDTH * hero.interactionProgress / HERO_INTERACTION_PROGRESS_MAX, INTERACTION_BAR_HEIGHT);
-        SpriteBatch.drawRect(null, new Rect(barPosition, barSize), new Color(1, 0, 0, 1));
+        SpriteBatch.drawRect(null, new Rect(barPosition, barSize), new Color(0, 1, 1, 1));
     }
 
     if (hero.state == HeroState.SPAWNING)
@@ -280,6 +280,13 @@ function hero_drawGLOW(hero)
 
         x += 14;
     }
+
+    if (hero.state == HeroState.INTERACTING)
+    {
+        var barPosition = new Vector2(17 * TILE_HEIGHT + 3, 8 * TILE_HEIGHT);
+        var barSize = new Vector2(INTERACTION_BAR_WIDTH * hero.interactionProgress / HERO_INTERACTION_PROGRESS_MAX, INTERACTION_BAR_HEIGHT);
+        SpriteBatch.drawRect(null, new Rect(barPosition, barSize), new Color(0, 1, 1, 1));
+    }
 }
 
 function hero_hasFullMessage(hero)
@@ -353,7 +360,7 @@ function hero_update(hero, dt)
     
     if(hero.state == HeroState.INTERACTING)
     {
-        if(GamePad.isDown(hero.index, Button.X))
+        if(GamePad.isDown(hero.index, Button.X) && centerReady)
         {
             hero.interactionProgress += dt;
 
