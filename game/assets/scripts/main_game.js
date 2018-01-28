@@ -25,6 +25,9 @@ function renderGame()
         entity.renderFn(entity);
     }
 
+    // fx shit
+    map_render();
+
     // hud
     for (var i = 0; i < heroes.length; ++i)
     {

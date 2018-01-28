@@ -483,7 +483,10 @@ function hero_update(hero, dt)
 
         if(GamePad.isJustDown(hero.index, Button.Y))
         {
-            gibs_spawn(hero.position);
+            // Add cheats here
+            
+            //gibs_spawn(hero.position);
+            //hero.displayMessage = hero.displayMessage.toUpperCase();
         }
     }
 
@@ -649,6 +652,20 @@ function hero_taser_update(hero, dt)
 
 function hero_interactionSuccess(hero)
 {
+    for (var i = 0; i < hero.displayMessage.length; ++i)
+    {
+        if (hero.displayMessage[i] == " ")
+        {
+            continue;
+        }
+        flyingSymbols.push({
+            glyph: hero.displayMessage[i],
+            xOffset: Random.randNumber(-16, 16),
+            delay: i * .1,
+            progress: 0
+        });
+    }
+
     if (hero.transmissionSound)
     {
         hero.transmissionSound.stop();
@@ -673,6 +690,8 @@ function hero_interactionSuccess(hero)
     hero.points++;
 
     print("hero " + hero.index + " now has " + hero.points + " points");
+
+    transmissionEffectTimer = 1;
 }
 
 function hero_respawn(hero)

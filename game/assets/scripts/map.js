@@ -2,6 +2,8 @@ var heroesInCentre = 0;
 var rotatingLight = new NumberAnim();
 var angle = 0;
 var centerReady = false;
+var transmissionEffectTimer = 0;
+var flyingSymbols = [];
 
 var alertTexture = getTexture("alert.png");
 
@@ -43,6 +45,30 @@ function map_update(dt)
     }
 
     angle += Math.PI * dt;
+    while (angle >= Math.PI * 2) angle -= Math.PI * 2;
+
+    if (transmissionEffectTimer > 0)
+    {
+        transmissionEffectTimer -= dt;
+        if (transmissionEffectTimer < 0)
+        {
+            transmissionEffectTimer = 0;
+        }
+    }
+
+    for (var i = 0; i < flyingSymbols.length; ++i)
+    {
+        var flyingSymbol = flyingSymbols[i];
+        flyingSymbol.delay -= dt;
+        if (flyingSymbol.delay <= 0)
+        {
+            flyingSymbol.progress += dt * 300;
+            if (flyingSymbol.progress > 1000)
+            {
+                flyingSymbols.splice(i--, 1);
+            }
+        }
+    }
 }
 
 function map_isInCentre(position)
@@ -51,6 +77,33 @@ function map_isInCentre(position)
 }
 
 var PI = 3.1415926536;
+
+function map_render()
+{
+    var pos = new Vector2(17.5, 8.5).mul(TILE_HEIGHT);
+
+    if (transmissionEffectTimer > 0)
+    {
+        var invPercent = transmissionEffectTimer;
+        var percent = 1 - invPercent;
+
+        SpriteBatch.drawBeam(null, pos, 
+            new Vector2(pos.x, pos.y - 1000),
+            percent * 32, new Color(0, 1, 1).mul(invPercent));
+    }
+
+    for (var i = 0; i < flyingSymbols.length; ++i)
+    {
+        var flyingSymbol = flyingSymbols[i];
+        if (flyingSymbol.delay <= 0)
+            SpriteBatch.drawText(
+                encryptedFont, 
+                flyingSymbol.glyph, 
+                new Vector2(pos.x + flyingSymbol.xOffset, pos.y - flyingSymbol.progress), 
+                Vector2.CENTER, 
+                new Color(0, 1, 1));
+    }
+}
 
 function map_renderGlow()
 {
@@ -66,5 +119,35 @@ function map_renderGlow()
                 new Color(.35));
             angle += PI / 2;
         }
+    }
+
+    if (transmissionEffectTimer > 0)
+    {
+        var invPercent = transmissionEffectTimer;
+        var percent = 1 - invPercent;
+
+        var pos = new Vector2(17.5, 8.5).mul(TILE_HEIGHT);
+        SpriteBatch.drawBeam(null, pos, 
+            new Vector2(pos.x, pos.y - 1000),
+            percent * 16, new Color(0, 1, 1).mul(invPercent));
+
+        if (transmissionEffectTimer > .75)
+        {
+            var overlayPercent = (transmissionEffectTimer - .75) / .25;
+            SpriteBatch.drawRect(null, new Rect(0, 0, resolution), 
+                new Color(0, 1, 1).mul(overlayPercent));
+        }
+    }
+    var pos = new Vector2(17.5, 8.5).mul(TILE_HEIGHT);
+    for (var i = 0; i < flyingSymbols.length; ++i)
+    {
+        var flyingSymbol = flyingSymbols[i];
+        if (flyingSymbol.delay <= 0)
+            SpriteBatch.drawText(
+                encryptedFont, 
+                flyingSymbol.glyph, 
+                new Vector2(pos.x + flyingSymbol.xOffset, pos.y - flyingSymbol.progress), 
+                Vector2.CENTER, 
+                new Color(0, 1, 1).mul(.5));
     }
 }
