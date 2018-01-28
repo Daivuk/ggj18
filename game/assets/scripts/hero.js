@@ -12,6 +12,9 @@ var INTERACTION_BAR_WIDTH = 10;
 var INTERACTION_BAR_HEIGHT = 3;
 var HERO_SPAWN_TIME = .5;
 
+var aCODE = ("a").charCodeAt();
+var ACODE = ("A").charCodeAt();
+
 var glowCircleTexture = getTexture("glowCircle.png")
 
 var HeroState = {
@@ -223,11 +226,16 @@ function hero_drawHUD(hero)
             continue;
         }
         var percent = (hero.messageAppearTime) - i;
+        var char;
         if (percent > 0)
         {
             percent = Math.min(1, percent / 2);
             var invPercent = 1 - percent;
-            var char = String.fromCharCode(((hero.displayMessage[i].charCodeAt() - ("a").charCodeAt()) + 26 * invPercent) % 26 + ("a").charCodeAt());
+            var code = hero.displayMessage[i].charCodeAt();
+            if (code >= aCODE && code <= "z".charCodeAt())
+                char = String.fromCharCode(((code - aCODE) + 26 * invPercent) % 26 + aCODE);
+            else if (code >= ACODE && code <= "Z".charCodeAt())
+                char = String.fromCharCode(((code - ACODE) + 26 * invPercent) % 26 + ACODE);
             SpriteBatch.drawText(
                 encryptedFont, 
                 char, 
@@ -283,11 +291,16 @@ function hero_drawGLOW(hero)
         }
 
         var percent = (hero.messageAppearTime) - i;
+        var char;
         if (percent > 0)
         {
             percent = Math.min(1, percent / 2);
             var invPercent = 1 - percent;
-            var char = String.fromCharCode(((hero.displayMessage[i].charCodeAt() - ("a").charCodeAt()) + 26 * invPercent) % 26 + ("a").charCodeAt());
+            var code = hero.displayMessage[i].charCodeAt();
+            if (code >= aCODE && code <= "z".charCodeAt())
+                char = String.fromCharCode(((code - aCODE) + 26 * invPercent) % 26 + aCODE);
+            else if (code >= ACODE && code <= "Z".charCodeAt())
+                char = String.fromCharCode(((code - ACODE) + 26 * invPercent) % 26 + ACODE);
             SpriteBatch.drawText(
                 encryptedFont, 
                 char, 
@@ -384,7 +397,15 @@ function hero_update(hero, dt)
         return;
     }
 
+    var lastMessageAppearTime = hero.messageAppearTime;
     hero.messageAppearTime += dt * 8;
+    if (hero.messageAppearTime <= hero.glyphMap.length)
+    {
+        if (Math.floor(lastMessageAppearTime) < Math.floor(hero.messageAppearTime))
+        {
+            playSound("GGJ18SFX_InfoSpawn0" + Random.randInt(1, 4) + ".wav");
+        }
+    }
 
     var leftThumb = GamePad.getLeftThumb(hero.index);
     

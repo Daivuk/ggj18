@@ -132,7 +132,6 @@ function pickup_spawn(glyph)
     if (pickup)
     {
         pickups.push(pickup);
-        playSound("GGJ18SFX_InfoSpawn0" + Random.randInt(1, 4) + ".wav", .25);
     }
 
 }
