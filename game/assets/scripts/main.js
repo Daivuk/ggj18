@@ -122,6 +122,7 @@ function renderGlow()
             renderGameGlow();
             break;
         case GameStateEnum.END_GAME:
+            renderEndGameGlow();
             break;
         default:
             break;

@@ -500,7 +500,7 @@ function hero_update(hero, dt)
             // Add cheats here
             
             //gibs_spawn(hero.position);
-            //hero.displayMessage = hero.displayMessage.toUpperCase();
+            hero.displayMessage = hero.displayMessage.toUpperCase();
         }
     }
 
@@ -720,6 +720,7 @@ function hero_interactionSuccess(hero)
     {
         victorHero = hero;
         gameState = GameStateEnum.END_GAME;
+        music_play("Mixdown.ogg");
     }
 
     transmissionEffectTimer = 1;

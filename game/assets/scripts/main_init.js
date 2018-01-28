@@ -28,7 +28,7 @@ function music_play(filename)
 {
     if (music)
     {
-        music.pause();
+        music.stop();
         music = null;
     }
     music = getMusic(filename);
