@@ -246,9 +246,19 @@ function hero_update(hero, dt)
                     {
                         var otherHero = heroes[i];
     
-                        if(Vector2.distance(hero.position, otherHero.position) < HERO_TASER_PROXIMITY)
+                        if (hero.dir == "e")
                         {
-                            hero_tasered(otherHero);
+                            if (new Rect(hero.position.x + 8, hero.position.y - 12, 16, 24).contains(otherHero.position))
+                            {
+                                hero_tasered(otherHero);
+                            }
+                        }
+                        else
+                        {
+                            if (new Rect(hero.position.x - 12 - 16, hero.position.y - 12, 16, 24).contains(otherHero.position))
+                            {
+                                hero_tasered(otherHero);
+                            }
                         }
                     }
                 }
@@ -309,7 +319,7 @@ function hero_update(hero, dt)
     if (hero.state == HeroState.TASER_DISCHARGING)
     {
         hero.taseReadySpriteAnim.play("tase_" + hero.dir);
-        anim = "idle";
+        anim = "idletaser";
     }
 
     hero.spriteAnim.play(anim + "_" + hero.dir);
@@ -332,8 +342,7 @@ function hero_taser_update(hero, dt)
 
 function hero_respawn(hero)
 {
-    hero.disabled = false;
-    hero.tasered = false;
+    hero.state = HeroState.IDLE;
     hero.disableTimer = HERO_DISABLE_TIME;
 
     var foundSpot = false;
