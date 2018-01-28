@@ -91,4 +91,28 @@ function regenerateUniqueGlyphs(hero)
 function renderMainMenu()
 {
     renderGame();
+
+    SpriteBatch.drawRect(null, new Rect(5 * TILE_HEIGHT, 0, 25 * TILE_HEIGHT, 17 * TILE_HEIGHT), new Color(0, 0, 0, 0.7));
+
+    var heroesPlaying = false;
+
+    for (var i = 0; i < heroes.length; ++i)
+    {
+        var hero = heroes[i];
+
+        if(hero.playing)
+        {
+            heroesPlaying = true;
+            break;
+        }
+    }
+
+    var position = new Vector2((resolution.x - 5 * TILE_HEIGHT) / 2 + 5 * TILE_HEIGHT, 100);
+    SpriteBatch.drawText(encryptedFont, "PRESS ^090A^999 TO JOIN", position, Vector2.TOP);
+
+    if(heroesPlaying)
+    {
+        var position = new Vector2((resolution.x - 5 * TILE_HEIGHT) / 2 + 5 * TILE_HEIGHT, 150);
+        SpriteBatch.drawText(encryptedFont, "PRESS START TO PLAY", position, Vector2.TOP);
+    }
 }
