@@ -187,7 +187,8 @@ function hero_update(hero, dt)
     var leftThumb = GamePad.getLeftThumb(hero.index);
 
     // Get the next position according to thumb movement
-    var nextPosition = new Vector2(hero.position.add(leftThumb.mul(dt * HERO_SPEED)));
+    var speed = hero.state == HeroState.TASER_CHARGED ? HERO_SPEED * 1.5 : HERO_SPEED;
+    var nextPosition = new Vector2(hero.position.add(leftThumb.mul(dt * speed)));
 
     // Apply collision to the movement
     if (hero.state != HeroState.TASER_DISCHARGING)
@@ -196,11 +197,14 @@ function hero_update(hero, dt)
     }
 
     // Pick up items
-    var pickup = pickups_acquire(hero.position.add(HERO_PICKUP_OFFSET));
-
-    if(pickup != null)
+    if (hero.state == HeroState.IDLE)
     {
-        hero_revealGlyph(hero, pickup.glyph);
+        var pickup = pickups_acquire(hero.position.add(HERO_PICKUP_OFFSET));
+
+        if(pickup != null)
+        {
+            hero_revealGlyph(hero, pickup.glyph);
+        }
     }
 
     // Handle taser
