@@ -2,7 +2,9 @@ function updateMainMenu(dt)
 {
     for(var i = 0; i < 4; ++i)
     {
-        if(heroes[i].playing && GamePad.isJustDown(i, Button.START))
+        var hero = heroes[i];
+
+        if(hero.playing && GamePad.isJustDown(i, Button.START))
         {
             startGame()
             break;
@@ -10,20 +12,31 @@ function updateMainMenu(dt)
 
         if(GamePad.isJustDown(i, Button.A))
         {
-            var hero = heroes[i];
             if(!hero.playing)
             {
                 hero.playing = true;
             }
+            else
+            {
+                hero.spriteAnim.play("idletaser_e");
+                playSound("GGJ18SFX_TaserOut.wav");
+            }
+        }
+
+        
+        if(GamePad.isJustUp(i, Button.A))
+        {
+            hero.spriteAnim.play("idle_e");
         }
 
         if(GamePad.isJustDown(i, Button.B))
         {
-            var hero = heroes[i];
             if(hero.playing)
             {
                 hero.playing = false;
             }
+            
+            hero.spriteAnim.play("idle_e");
         }
     }
 }
