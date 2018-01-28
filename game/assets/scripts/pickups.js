@@ -1,5 +1,5 @@
 var PICKUP_HERO_COLLISION_TILE_RADIUS = 2;
-var MAX_PICKUPS = 50;
+var MAX_PICKUPS = 4;
 var PICKUP_SPAWN_INTERVAL_SEC = 1;
 var ACQUIRE_RADIUS = 10;
 var PICKUP_CENTER_SPAWN_TILE_RADIUS = 3;
@@ -12,7 +12,10 @@ var pickupSpawnTime = PICKUP_SPAWN_INTERVAL_SEC;
 
 var pickups = [];
 var uniqueGlyphs;
+var pickupHeroIndex = 0;
 
+
+/*
 function pickup_create(_pos)
 {
     if (uniqueGlyphs.length == 0)
@@ -35,6 +38,41 @@ function pickup_create(_pos)
 
     pickup.floatAnim.playSingle(-2, 2, .45, Tween.EASE_BOTH, Loop.PING_PONG_LOOP);
 
+
+    renderables.push(pickup);
+
+    return pickup;
+}
+*/
+
+function pickup_create(_pos)
+{
+    var glyphCandidate = null;
+    while(glyphCandidate == null)
+    {
+        var glyphCandidate = hero_getRandomEncryptedGlyph(heroes[pickupHeroIndex]);
+        for (var i = 0; i < pickups.length; ++i)
+        {
+            if (pickups[i].glyph == glyphCandidate) {
+                glyphCandidate = null;
+                break;
+            }
+        }
+    }
+
+    pickupHeroIndex = ((pickupHeroIndex + 1) % heroes.length);
+
+    if (glyphCandidate == '') return null;
+
+    var pickup = {
+        position: new Vector2(_pos),
+        glyph: glyphCandidate,
+        floatAnim: new NumberAnim(),
+        renderFn: pickup_render,
+        renderGlowFn: pickup_renderGlow,
+    }
+
+    pickup.floatAnim.playSingle(-2, 2, .45, Tween.EASE_BOTH, Loop.PING_PONG_LOOP);
 
     renderables.push(pickup);
 
