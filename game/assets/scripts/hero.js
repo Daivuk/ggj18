@@ -348,7 +348,8 @@ function hero_hasFullMessage(hero)
 function hero_renderGlow(hero)
 {
     if (hero.state == HeroState.DISABLED ||
-        hero.state == HeroState.VOID)
+        hero.state == HeroState.VOID ||
+        !hero.playing)
     {
         return;
     }
