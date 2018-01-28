@@ -16,12 +16,22 @@ function updateInit(dt)
     //playMusic("ingame.ogg", true);
     //if (Random.randBool()) music = getMusic("GG18musicA.ogg");
     //else music = getMusic("GG18musicB.ogg");
-    music = getMusic("GG18musicB.ogg");
-    music.setVolume(.5);
-    music.play(true);
+    music_play("Mixdown.ogg");
 }
 
 function renderInit()
 {
     
+}
+
+function music_play(filename)
+{
+    if (music)
+    {
+        music.pause();
+        music = null;
+    }
+    music = getMusic(filename);
+    music.setVolume(.5);
+    music.play(true);
 }

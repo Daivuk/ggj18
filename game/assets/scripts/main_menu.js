@@ -41,7 +41,8 @@ var delays = [1, 1.5, 2, 2.5];
 function startGame()
 {
     var playingPlayers = 0;
-
+    music_play("GG18musicB.ogg");
+    
     for(var i = 0; i < heroes.length; ++i)
     {
         var hero = heroes[i];

@@ -270,7 +270,7 @@ function hero_drawHUD(hero)
         return;
     }
 
-    var heroBrightness = hero.playing ? 1.0 : 0.5;
+    var heroBrightness = hero.playing ? 1.0 : 0.15;
     SpriteBatch.drawSpriteAnim(hero.spriteAnim, new Vector2(40, 60 + blockY), new Color(heroBrightness, heroBrightness, heroBrightness, 1), 0, 1.5);
 
     for (var i = 0; i < hero.points; ++i)
