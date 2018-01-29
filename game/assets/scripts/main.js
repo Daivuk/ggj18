@@ -18,7 +18,7 @@ function isADown(i)
 {
     if (i == 0) return GamePad.isDown(i, Button.A) || Input.isDown(Key.SPACE_BAR);
     if (i == 1) return GamePad.isDown(i, Button.A) || Input.isDown(Key.ENTER);
-    return GamePad.isJustDown(i, Button.A);
+    return GamePad.isDown(i, Button.A);
 }
 
 function isXJustDown(i)
@@ -32,7 +32,7 @@ function isXDown(i)
 {
     if (i == 0) return GamePad.isDown(i, Button.X) || Input.isDown(Key.E);
     if (i == 1) return GamePad.isDown(i, Button.X) || Input.isDown(Key.RIGHT_SHIFT);
-    return GamePad.isJustDown(i, Button.X);
+    return GamePad.isDown(i, Button.X);
 }
 
 function isBJustDown(i)
