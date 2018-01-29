@@ -4,13 +4,13 @@ function updateMainMenu(dt)
     {
         var hero = heroes[i];
 
-        if(hero.playing && GamePad.isJustDown(i, Button.START))
+        if(hero.playing && isStartJustDown(i))
         {
             startGame()
             break;
         }
 
-        if(GamePad.isJustDown(i, Button.A))
+        if(isAJustDown(i))
         {
             if(!hero.playing)
             {
@@ -24,12 +24,12 @@ function updateMainMenu(dt)
         }
 
         
-        if(GamePad.isJustUp(i, Button.A))
+        if(isAJustUp(i))
         {
             hero.spriteAnim.play("idle_e");
         }
 
-        if(GamePad.isJustDown(i, Button.B))
+        if(isBJustDown(i))
         {
             if(hero.playing)
             {

@@ -426,11 +426,11 @@ function hero_update(hero, dt)
         }
     }
 
-    var leftThumb = GamePad.getLeftThumb(hero.index);
+    var leftThumb = getAxis(hero.index);
     
     if(hero.state == HeroState.INTERACTING)
     {
-        if(GamePad.isDown(hero.index, Button.X) && centerReady)
+        if(isXDown(hero.index) && centerReady)
         {
             hero.interactionProgress += dt;
 
@@ -483,7 +483,7 @@ function hero_update(hero, dt)
         
 
         // Handle interacting with the transmitter
-        if(GamePad.isJustDown(hero.index, Button.X) && heroesInCentre < 2 && map_isInCentre(hero.position) && hero_hasFullMessage(hero))
+        if(isXJustDown(hero.index) && heroesInCentre < 2 && map_isInCentre(hero.position) && hero_hasFullMessage(hero))
         {
             hero.state = HeroState.INTERACTING;
             playSound("GGJ18SFX_TransmissionStart.wav");
@@ -572,7 +572,7 @@ function hero_handle_taser(hero, dt)
     {
         case HeroState.IDLE:
         {
-            if (GamePad.isDown(hero.index, Button.A))
+            if (isADown(hero.index))
             {
                 hero.state = HeroState.TASER_CHARGING;
                 playSound("GGJ18SFX_TaserOut.wav");
@@ -581,7 +581,7 @@ function hero_handle_taser(hero, dt)
         }
         case HeroState.TASER_CHARGING:
         {
-            if (GamePad.isDown(hero.index, Button.A))
+            if (isADown(hero.index))
             {
                 hero.taserCharge += dt;
                 if(hero.taserCharge > HERO_TASER_CHARGE_TIME)
@@ -600,7 +600,7 @@ function hero_handle_taser(hero, dt)
         }
         case HeroState.TASER_CHARGED:
         {
-            if (!GamePad.isDown(hero.index, Button.A))
+            if (!isADown(hero.index))
             {
                 for(var i = 0; i < heroes.length; ++i)
                 {

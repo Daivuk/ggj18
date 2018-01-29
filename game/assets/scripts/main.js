@@ -1,5 +1,76 @@
 Random.randomizeSeed(); // QBASIC equivalent: RANDOMIZE TIMER
 
+function isAJustDown(i)
+{
+    if (i == 0) return GamePad.isJustDown(i, Button.A) || Input.isJustDown(Key.SPACE_BAR);
+    if (i == 1) return GamePad.isJustDown(i, Button.A) || Input.isJustDown(Key.ENTER);
+    return GamePad.isJustDown(i, Button.A);
+}
+
+function isAJustUp(i)
+{
+    if (i == 0) return GamePad.isJustUp(i, Button.A) || Input.isJustUp(Key.SPACE_BAR);
+    if (i == 1) return GamePad.isJustUp(i, Button.A) || Input.isJustUp(Key.ENTER);
+    return GamePad.isJustUp(i, Button.A);
+}
+
+function isADown(i)
+{
+    if (i == 0) return GamePad.isDown(i, Button.A) || Input.isDown(Key.SPACE_BAR);
+    if (i == 1) return GamePad.isDown(i, Button.A) || Input.isDown(Key.ENTER);
+    return GamePad.isJustDown(i, Button.A);
+}
+
+function isXJustDown(i)
+{
+    if (i == 0) return GamePad.isJustDown(i, Button.X) || Input.isJustDown(Key.E);
+    if (i == 1) return GamePad.isJustDown(i, Button.X) || Input.isJustDown(Key.RIGHT_SHIFT);
+    return GamePad.isJustDown(i, Button.X);
+}
+
+function isXDown(i)
+{
+    if (i == 0) return GamePad.isDown(i, Button.X) || Input.isDown(Key.E);
+    if (i == 1) return GamePad.isDown(i, Button.X) || Input.isDown(Key.RIGHT_SHIFT);
+    return GamePad.isJustDown(i, Button.X);
+}
+
+function isBJustDown(i)
+{
+    if (i == 0) return GamePad.isJustDown(i, Button.B) || Input.isJustDown(Key.TAB);
+    if (i == 1) return GamePad.isJustDown(i, Button.B) || Input.isJustDown(Key.BACKSPACE);
+    return GamePad.isJustDown(i, Button.B);
+}
+
+function isStartJustDown(i)
+{
+    if (i == 0) return GamePad.isJustDown(i, Button.START) || Input.isJustDown(Key.F);
+    return GamePad.isJustDown(i, Button.START);
+}
+
+function getAxis(i)
+{
+    var axis = GamePad.getLeftThumb(i);
+    if (i == 0)
+    {
+        if (Input.isDown(Key.A)) axis.x -= 1;
+        if (Input.isDown(Key.D)) axis.x += 1;
+        if (Input.isDown(Key.W)) axis.y -= 1;
+        if (Input.isDown(Key.S)) axis.y += 1;
+        if (axis.lengthSquared() > 1) axis = axis.normalize();
+    }
+    else if (i == 1)
+    {
+        if (Input.isDown(Key.LEFT)) axis.x -= 1;
+        if (Input.isDown(Key.RIGHT)) axis.x += 1;
+        if (Input.isDown(Key.UP)) axis.y -= 1;
+        if (Input.isDown(Key.DOWN)) axis.y += 1;
+        if (axis.lengthSquared() > 1) axis = axis.normalize();
+    }
+
+    return axis;
+}
+
 var GameStateEnum = {
     INIT: 1,
     MAIN_MENU: 2,

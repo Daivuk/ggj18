@@ -10,10 +10,10 @@ function updateEndGame(dt)
     }
     else
     {
-        if (GamePad.isJustDown(0, Button.START) ||
-            GamePad.isJustDown(1, Button.START) ||
-            GamePad.isJustDown(2, Button.START) ||
-            GamePad.isJustDown(3, Button.START))
+        if (isStartJustDown(0) ||
+            isStartJustDown(1) ||
+            isStartJustDown(2) ||
+            isStartJustDown(3))
         {
             gameState = GameStateEnum.MAIN_MENU;
             title = generateMessage(8);
