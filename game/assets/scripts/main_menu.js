@@ -145,13 +145,24 @@ function renderMainMenu()
     }
     var position = new Vector2((resolution.x - 5 * TILE_HEIGHT) / 2 + 5 * TILE_HEIGHT, 100);
 
-    SpriteBatch.drawText(encryptedFont, title.toUpperCase(), new Vector2(position.x, 16), Vector2.TOP);
+    SpriteBatch.drawText(encryptedFont, "MESSENGER HACKERS", new Vector2(position.x, 4), Vector2.TOP);
+    SpriteBatch.drawText(encryptedFont, title.toUpperCase(), new Vector2(position.x, 4 + 12), Vector2.TOP);
 
-    SpriteBatch.drawText(encryptedFont, "PRESS ^090A^999 TO JOIN", position, Vector2.TOP);
+    SpriteBatch.drawText(encryptedFont, "^777PRESS ^090A^777 TO JOIN", position, Vector2.TOP);
+    position.y += 12;
+    SpriteBatch.drawText(encryptedFont, "^777OR SPACE OR ENTER", position, Vector2.TOP);
 
     if(heroesPlaying)
     {
         var position = new Vector2((resolution.x - 5 * TILE_HEIGHT) / 2 + 5 * TILE_HEIGHT, 150);
-        SpriteBatch.drawText(encryptedFont, "PRESS START TO PLAY", position, Vector2.TOP);
+        SpriteBatch.drawText(encryptedFont, "^777PRESS START OR F TO PLAY", position, Vector2.TOP);
     }
+}
+
+function renderMainMenuGLOW()
+{
+    var position = new Vector2((resolution.x - 5 * TILE_HEIGHT) / 2 + 5 * TILE_HEIGHT, 100);
+
+    SpriteBatch.drawText(encryptedFont, "MESSENGER HACKERS", new Vector2(position.x, 4), Vector2.TOP, new Color(.5));
+    SpriteBatch.drawText(encryptedFont, title.toUpperCase(), new Vector2(position.x, 4 + 12), Vector2.TOP, new Color(.5));
 }

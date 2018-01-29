@@ -188,6 +188,7 @@ function renderGlow()
         case GameStateEnum.INIT:
             break;
         case GameStateEnum.MAIN_MENU:
+            renderMainMenuGLOW();
             break;
         case GameStateEnum.GAME:
             renderGameGlow();
@@ -202,6 +203,9 @@ function renderGlow()
     SpriteBatch.end();
 }
 
+var blurAnim = new NumberAnim();
+blurAnim.playSingle(15, 17, .2, Tween.EASE_BOTH, Loop.PING_PONG_LOOP);
+
 function render()
 {
     // Draw everything into the bloom first
@@ -209,7 +213,7 @@ function render()
     Renderer.clear(new Color(0, 0, 0, 1));
     renderGlow();
     Renderer.popRenderTarget();
-    bloomRT.blur(16);
+    bloomRT.blur(blurAnim.get());
 
     // Draw the world on the main RT
     Renderer.pushRenderTarget(mainRT);
