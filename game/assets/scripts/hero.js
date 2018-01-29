@@ -47,6 +47,8 @@ function hero_create(_index, _pos, _color)
         interactionProgress: 0,
         spriteAnim: playSpriteAnim("hacker" + _index + ".spriteanim", "idle_e"),
         taseReadySpriteAnim: playSpriteAnim("taseReady.spriteanim", "idle_e"),
+        glyphMap: [],
+        displayMessage: "",
         renderFn: hero_render,
         renderGlowFn: hero_renderGlow,
         points: 0,
