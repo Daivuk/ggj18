@@ -469,58 +469,43 @@ function hero_update(hero, dt)
             {
                 if (hero_revealGlyph(hero, pickup.glyph)) // if the hero picked up a glyph he/she needs...
                 {
-                    var hasAnotherGlyphOnField = false;
-                    for (var x = 0; !hasAnotherGlyphOnField && x < pickups.length; ++x)
-                    {
-                        for (var y = 0; !hasAnotherGlyphOnField && y < hero.displayMessage.length; ++y)
-                        {
-                            if (hero.displayMessage[y] == pickups[x].glyph)
-                            {
-                                hasAnotherGlyphOnField = true;
-                                break;
-                            }
-                        }
-                    }
+                    pickup_spawn(hero_getRandomEncryptedGlyph(hero));
 
-                    var neededByHero = [];
-                    for (var x = 0;  x < heroes.length; ++x)
+                    for (var heroId = 0;  heroId < heroes.length; ++heroId)
                     {
-                        if (hero == heroes[x]) continue;
+                        var otherHero = heroes[heroId];
+                        if (otherHero == hero) continue;
+                        if (!otherHero.playing) continue;
 
-                        if (!heroes[x].playing) continue;
-                        
-                        for (var y = 0; y < pickups.length; ++ y)
+                        for (var glyphId = 0; glyphId < otherHero.displayMessage.length; ++glyphId)
                         {
-                            for (var z = 0; z < heroes[x].displayMessage.length; ++z)
+                            var otherGlyph = otherHero.displayMessage[glyphId];
+                            if (otherGlyph == pickup.glyph) // was the same glyph required by other heroes?
                             {
-                                if (heroes[x].displayMessage[z] == pickups[y].glyph)
+                                var hasOtherGlyph = false
+                                for (var pickupId = 0; !hasOtherGlyph && pickupId < pickups.length; ++pickupId)
                                 {
-                                    neededByHero.push(heroes[x]);
+                                    var otherPickup = pickups[pickupId];
+                                    for (var otherGlyphId = 0; !hasOtherGlyph && otherGlyphId < otherHero.displayMessage.length; ++otherGlyphId)
+                                    {
+                                        if (otherHero.displayMessage[otherGlyphId] == otherPickup.glyph)
+                                        {
+                                            hasOtherGlyph = true;
+                                        }
+                                    }
+                                }
+
+                                // if the other player has absolutely no other glyph it can pick on the map, add a new glyph,
+                                // at the risk of having more than 4 glyphs at the end....
+                                if (!hasOtherGlyph)
+                                {
+                                    pickup_spawn(hero_getRandomEncryptedGlyph(otherHero));
                                 }
                             }
                         }
+
                     }
 
-                    if (hasAnotherGlyphOnField)
-                    {
-                        if (neededByHero.length > 0)
-                        {
-                            pickup_spawn(pickup.glyph);
-                        }
-                        else
-                        {
-                            pickup_spawn(hero_getRandomEncryptedGlyph(neededByHero[0]));
-                        }
-                    }
-                    else
-                    {
-                        var glyph = hero_getRandomEncryptedGlyph(hero);
-                        if (glyph != '')
-                        {
-                            pickup_spawn(glyph);
-                        }
-    
-                    }
                 }   
                 else // or else, put it back to the game (anywhere else)
                 {
