@@ -467,50 +467,15 @@ function hero_update(hero, dt)
 
             if(pickup != null)
             {
-                if (hero_revealGlyph(hero, pickup.glyph)) // if the hero picked up a glyph he/she needs...
-                {
-                    pickup_spawn(hero_getRandomEncryptedGlyph(hero));
+                hero_revealGlyph(hero, pickup.glyph);
 
-                    for (var heroId = 0;  heroId < heroes.length; ++heroId)
+                for (var i = 0;  i < heroes.length; ++i)
+                {
+                    if (heroes[i].playing && !hero_hasPickupAvailable(heroes[i]))
                     {
-                        var otherHero = heroes[heroId];
-                        if (otherHero == hero) continue;
-                        if (!otherHero.playing) continue;
-
-                        for (var glyphId = 0; glyphId < otherHero.displayMessage.length; ++glyphId)
-                        {
-                            var otherGlyph = otherHero.displayMessage[glyphId];
-                            if (otherGlyph == pickup.glyph) // was the same glyph required by other heroes?
-                            {
-                                var hasOtherGlyph = false
-                                for (var pickupId = 0; !hasOtherGlyph && pickupId < pickups.length; ++pickupId)
-                                {
-                                    var otherPickup = pickups[pickupId];
-                                    for (var otherGlyphId = 0; !hasOtherGlyph && otherGlyphId < otherHero.displayMessage.length; ++otherGlyphId)
-                                    {
-                                        if (otherHero.displayMessage[otherGlyphId] == otherPickup.glyph)
-                                        {
-                                            hasOtherGlyph = true;
-                                        }
-                                    }
-                                }
-
-                                // if the other player has absolutely no other glyph it can pick on the map, add a new glyph,
-                                // at the risk of having more than 4 glyphs at the end....
-                                if (!hasOtherGlyph)
-                                {
-                                    pickup_spawn(hero_getRandomEncryptedGlyph(otherHero));
-                                }
-                            }
-                        }
-
+                        pickup_spawn(hero_getRandomEncryptedGlyph(heroes[i]))
                     }
-
-                }   
-                else // or else, put it back to the game (anywhere else)
-                {
-                    pickup_spawn(pickup.glyph);
-                }                 
+                }
             }
         }
 
@@ -580,6 +545,24 @@ function hero_update(hero, dt)
     }
 
     hero.spriteAnim.play(anim + "_" + hero.dir);
+}
+
+function hero_hasPickupAvailable(hero)
+{
+    for (var i = 0; i < pickups.length; ++i)
+    {
+        var pickup = pickups[i];
+        for (var j = 0; j < hero.displayMessage.length; ++j)
+        {
+            var glyph = hero.displayMessage[j]
+            if (glyph == pickup.glyph)
+            {
+                return true;
+            }
+        }
+    }
+
+    return false;
 }
 
 function hero_handle_taser(hero, dt)
@@ -736,7 +719,7 @@ function hero_interactionSuccess(hero)
 
     for (var i = 0; i < heroes.length; ++i)
     {
-        if (heroes[i].playing) 
+        if (heroes[i].playing && !hero_hasPickupAvailable(heroes[i]))
         {
             pickup_spawn(hero_getRandomEncryptedGlyph(heroes[i]));
         }

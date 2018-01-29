@@ -63,11 +63,18 @@ function startGame()
         {
             playingPlayers++;
             hero_createNewMessage(hero);
-            pickup_spawn(hero_getRandomEncryptedGlyph(hero));
         }
 
     }
 
+    for (var i = 0; i < heroes.length; ++i)
+    {
+        if (heroes[i].playing && !hero_hasPickupAvailable(heroes[i]))
+        {
+            pickup_spawn(hero_getRandomEncryptedGlyph(heroes[i]));
+        }
+    }
+    
     switch(playingPlayers)
     {
         case 1: HERO_INTERACTION_PROGRESS_MAX = 3;
