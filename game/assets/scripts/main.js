@@ -18,7 +18,7 @@ function isADown(i)
 {
     if (i == 0) return GamePad.isDown(i, Button.A) || Input.isDown(Key.SPACE_BAR);
     if (i == 1) return GamePad.isDown(i, Button.A) || Input.isDown(Key.ENTER);
-    return GamePad.isDown(i, Button.A);
+    return GamePad.isJustDown(i, Button.A);
 }
 
 function isXJustDown(i)
@@ -32,7 +32,7 @@ function isXDown(i)
 {
     if (i == 0) return GamePad.isDown(i, Button.X) || Input.isDown(Key.E);
     if (i == 1) return GamePad.isDown(i, Button.X) || Input.isDown(Key.RIGHT_SHIFT);
-    return GamePad.isDown(i, Button.X);
+    return GamePad.isJustDown(i, Button.X);
 }
 
 function isBJustDown(i)
@@ -99,10 +99,12 @@ var heroes = [
 ];
 
 var mainRT = Texture.createScreenRenderTarget();
-var bloomRT = Texture.createScreenRenderTarget();
+var bloomRT = Texture.createRenderTarget(resolution);
 
 var encryptedFont = getFont("sga.fnt");
 var encryptedMessage;
+
+var cam_scale = 1;
 
 function updateCamera()
 {
@@ -111,9 +113,12 @@ function updateCamera()
     var scale = screenRes.x / resolution.x;
     var newH = resolution.y * scale;
     var diffH = screenRes.y - newH;
+
     cameraTransform = 
         Matrix.createTranslation(new Vector3(0, diffH / scale / 2, 0)).mul(
         Matrix.createScale(new Vector3(scale, scale, 1)));
+
+    cam_scale = scale;
 }
 
 function update(dt)
@@ -177,10 +182,10 @@ function renderWorld()
 function renderGlow()
 {
     Renderer.setBlendMode(BlendMode.PREMULTIPLIED);
-    Renderer.setFilterMode(FilterMode.NEAREST);
+    Renderer.setFilterMode(FilterMode.LINEAR);
     
-    SpriteBatch.begin(cameraTransform);
-    SpriteBatch.setFilter(FilterMode.NEAREST);
+    SpriteBatch.begin();
+    SpriteBatch.setFilter(FilterMode.LINEAR);
     SpriteBatch.setBlend(BlendMode.PREMULTIPLIED);
 
     switch(gameState)
@@ -213,7 +218,7 @@ function render()
     Renderer.clear(new Color(0, 0, 0, 1));
     renderGlow();
     Renderer.popRenderTarget();
-    bloomRT.blur(blurAnim.get());
+    bloomRT.blur(blurAnim.get() / cam_scale);
 
     // Draw the world on the main RT
     Renderer.pushRenderTarget(mainRT);
@@ -221,17 +226,17 @@ function render()
     renderWorld();
 
     // Apply the bloom on top
-    SpriteBatch.begin();
+    SpriteBatch.begin(cameraTransform);
     SpriteBatch.setFilter(FilterMode.LINEAR);
     SpriteBatch.setBlend(BlendMode.ADD);
-    SpriteBatch.drawRect(bloomRT, new Rect(0, 0, Renderer.getResolution()), new Color(3));
+    SpriteBatch.drawRect(bloomRT, new Rect(0, 0, resolution), new Color(3));
     SpriteBatch.end();
     Renderer.popRenderTarget();
 
     // Draw the final image
     Renderer.clear(new Color(0, 0, 0, 1));
     SpriteBatch.begin();
-    SpriteBatch.setFilter(FilterMode.LINEAR);
+    SpriteBatch.setFilter(FilterMode.NEAREST);
     SpriteBatch.setBlend(BlendMode.OPAQUE);
     SpriteBatch.drawRect(mainRT, new Rect(0, 0, Renderer.getResolution()));
     SpriteBatch.end();
