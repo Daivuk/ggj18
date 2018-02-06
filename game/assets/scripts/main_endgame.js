@@ -15,8 +15,7 @@ function updateEndGame(dt)
             isStartJustDown(2) ||
             isStartJustDown(3))
         {
-            gameState = GameStateEnum.MAIN_MENU;
-            title = generateMessage(8);
+            startMainMenu();
 
             splatters = [];
             pings = [];

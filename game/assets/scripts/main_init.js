@@ -1,10 +1,11 @@
 var CENTER_RECT = new Rect();
 var CENTRE_TILE_PROXIMITY = 1.5;
 var music;
-var title = "";
 
 function updateInit(dt)
 {
+    Input.setMouseVisible(false);
+
     HERO_SPAWN_PROXIMITY = TILE_HEIGHT * 5;
     CENTER_RECT = new Rect(
         CENTRE_POSITION.x - CENTRE_TILE_PROXIMITY * TILE_HEIGHT,
@@ -12,15 +13,12 @@ function updateInit(dt)
         CENTRE_TILE_PROXIMITY * TILE_HEIGHT * 2,
         CENTRE_TILE_PROXIMITY * TILE_HEIGHT * 2);
 
-    gameState = GameStateEnum.MAIN_MENU;
+    startMainMenu();
 
     //playMusic("ingame.ogg", true);
     //if (Random.randBool()) music = getMusic("GG18musicA.ogg");
     //else music = getMusic("GG18musicB.ogg");
     music_play("Mixdown.ogg");
-
-    Input.setMouseVisible(false);
-    title = generateMessage(8);
 }
 
 function renderInit()

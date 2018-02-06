@@ -1,3 +1,22 @@
+var title;
+var subtitle;
+var pressAToJoin;
+var orSpaceOrEnter;
+var pressStartOrFToPlay = null;
+
+function startMainMenu()
+{
+    gameState = GameStateEnum.MAIN_MENU;
+
+    title = animtext_create("MESSENGER HACKERS");
+    subtitle = animtext_create(generateMessage(8).toUpperCase(), 1);
+    pressAToJoin = animtext_create("^777PRESS ^090A^777 TO JOIN", 3);
+    orSpaceOrEnter = animtext_create("^777OR SPACE OR ENTER", 4);
+    pressStartOrFToPlay = null;
+
+    matrixRain_start(5 * TILE_HEIGHT);
+}
+
 function updateMainMenu(dt)
 {
     for(var i = 0; i < 4; ++i)
@@ -39,6 +58,27 @@ function updateMainMenu(dt)
             hero.spriteAnim.play("idle_e");
         }
     }
+
+    animtext_update(title, dt);
+    animtext_update(subtitle, dt);
+    animtext_update(pressAToJoin, dt);
+    animtext_update(orSpaceOrEnter, dt);
+    if (!pressStartOrFToPlay)
+    {
+        for (var i = 0; i < heroes.length; ++i)
+        {
+            var hero = heroes[i];
+
+            if (hero.playing)
+            {
+                pressStartOrFToPlay = animtext_create("^777PRESS START OR F TO PLAY");
+                break;
+            }
+        }
+    }
+    if (pressStartOrFToPlay) animtext_update(pressStartOrFToPlay, dt);
+
+    if (subtitle.time > 64) subtitle = animtext_create(generateMessage(8).toUpperCase());
 }
 
 function delayed_spawn(hero, delay)
@@ -124,38 +164,29 @@ function regenerateUniqueGlyphs(hero)
     pickups_clear();
 }
 
-
 function renderMainMenu()
 {
-    renderGame();
+    renderGame(); // lel
 
-    SpriteBatch.drawRect(null, new Rect(5 * TILE_HEIGHT, 0, 25 * TILE_HEIGHT, 17 * TILE_HEIGHT), new Color(0, 0, 0, 0.9));
+    SpriteBatch.drawRect(null, new Rect(5 * TILE_HEIGHT, 0, 25 * TILE_HEIGHT, 17 * TILE_HEIGHT), new Color(0, 0, 0, 1));
 
-    var heroesPlaying = false;
-
-    for (var i = 0; i < heroes.length; ++i)
-    {
-        var hero = heroes[i];
-
-        if(hero.playing)
-        {
-            heroesPlaying = true;
-            break;
-        }
-    }
     var position = new Vector2((resolution.x - 5 * TILE_HEIGHT) / 2 + 5 * TILE_HEIGHT, 100);
 
-    SpriteBatch.drawText(encryptedFont, "MESSENGER HACKERS", new Vector2(position.x, 4), Vector2.TOP);
-    SpriteBatch.drawText(encryptedFont, title.toUpperCase(), new Vector2(position.x, 4 + 12), Vector2.TOP);
-
-    SpriteBatch.drawText(encryptedFont, "^777PRESS ^090A^777 TO JOIN", position, Vector2.TOP);
+    SpriteBatch.end();
+    SpriteBatch.begin(cameraTransform.mul(Matrix.createScale(1.5)));
+    animtext_render(title, new Vector2(position.x / 1.5, 4), new Color(0, 1, 1));
+    SpriteBatch.end();
+    SpriteBatch.begin(cameraTransform);
+    animtext_render(subtitle, new Vector2(position.x, 4 + 24), new Color(1, 0, 1));
+    
+    animtext_render(pressAToJoin, position);
     position.y += 12;
-    SpriteBatch.drawText(encryptedFont, "^777OR SPACE OR ENTER", position, Vector2.TOP);
-
-    if(heroesPlaying)
+    animtext_render(orSpaceOrEnter, position);
+    
+    if(pressStartOrFToPlay)
     {
         var position = new Vector2((resolution.x - 5 * TILE_HEIGHT) / 2 + 5 * TILE_HEIGHT, 150);
-        SpriteBatch.drawText(encryptedFont, "^777PRESS START OR F TO PLAY", position, Vector2.TOP);
+        animtext_render(pressStartOrFToPlay, position);
     }
 }
 
@@ -163,6 +194,20 @@ function renderMainMenuGLOW()
 {
     var position = new Vector2((resolution.x - 5 * TILE_HEIGHT) / 2 + 5 * TILE_HEIGHT, 100);
 
-    SpriteBatch.drawText(encryptedFont, "MESSENGER HACKERS", new Vector2(position.x, 4), Vector2.TOP, new Color(.5));
-    SpriteBatch.drawText(encryptedFont, title.toUpperCase(), new Vector2(position.x, 4 + 12), Vector2.TOP, new Color(.5));
+    SpriteBatch.end();
+    SpriteBatch.begin(Matrix.createScale(1.5));
+    animtext_renderGlow(title, new Vector2(position.x / 1.5, 4), new Color(0, 1, 1));
+    SpriteBatch.end();
+    SpriteBatch.begin();
+    animtext_renderGlow(subtitle, new Vector2(position.x, 4 + 24), new Color(1, 0, 1));
+
+    animtext_renderGlow(pressAToJoin, position);
+    position.y += 12;
+    animtext_renderGlow(orSpaceOrEnter, position);
+    
+    if(pressStartOrFToPlay)
+    {
+        var position = new Vector2((resolution.x - 5 * TILE_HEIGHT) / 2 + 5 * TILE_HEIGHT, 150);
+        animtext_renderGlow(pressStartOrFToPlay, position);
+    }
 }
