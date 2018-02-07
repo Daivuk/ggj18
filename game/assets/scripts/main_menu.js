@@ -8,10 +8,10 @@ function startMainMenu()
 {
     gameState = GameStateEnum.MAIN_MENU;
 
-    title = animtext_create("MESSENGER HACKERS");
+    title = animtext_create("^044MESSENGER HACKERS");
     subtitle = animtext_create(generateMessage(8).toUpperCase(), 1);
-    pressAToJoin = animtext_create("^777PRESS ^090A^777 TO JOIN", 3);
-    orSpaceOrEnter = animtext_create("^777OR SPACE OR ENTER", 4);
+    pressAToJoin = animtext_create("^333PRESS ^050A^333 TO JOIN", 3);
+    orSpaceOrEnter = animtext_create("^333OR SPACE OR ENTER", 4);
     pressStartOrFToPlay = null;
 
     matrixRain_start(5 * TILE_HEIGHT);
@@ -71,7 +71,7 @@ function updateMainMenu(dt)
 
             if (hero.playing)
             {
-                pressStartOrFToPlay = animtext_create("^777PRESS START OR F TO PLAY");
+                pressStartOrFToPlay = animtext_create("^333PRESS START OR F TO PLAY");
                 break;
             }
         }
@@ -79,6 +79,8 @@ function updateMainMenu(dt)
     if (pressStartOrFToPlay) animtext_update(pressStartOrFToPlay, dt);
 
     if (subtitle.time > 64) subtitle = animtext_create(generateMessage(8).toUpperCase());
+
+    matrixRain_update(dt);
 }
 
 function delayed_spawn(hero, delay)
@@ -170,6 +172,8 @@ function renderMainMenu()
 
     SpriteBatch.drawRect(null, new Rect(5 * TILE_HEIGHT, 0, 25 * TILE_HEIGHT, 17 * TILE_HEIGHT), new Color(0, 0, 0, 1));
 
+    matrixRain_render();
+
     var position = new Vector2((resolution.x - 5 * TILE_HEIGHT) / 2 + 5 * TILE_HEIGHT, 100);
 
     SpriteBatch.end();
@@ -193,6 +197,8 @@ function renderMainMenu()
 function renderMainMenuGLOW()
 {
     var position = new Vector2((resolution.x - 5 * TILE_HEIGHT) / 2 + 5 * TILE_HEIGHT, 100);
+
+    matrixRain_renderGlow();
 
     SpriteBatch.end();
     SpriteBatch.begin(Matrix.createScale(1.5));

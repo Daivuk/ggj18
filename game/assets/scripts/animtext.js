@@ -138,7 +138,10 @@ function animtext_renderGlow(animtext, pos, color)
                 prefix + char, 
                 new Vector2(x, y), 
                 Vector2.TOP_LEFT, 
-                color.mul(invPercent));
+                new Color(
+                    (color.r + 1) * invPercent, 
+                    (color.g + 1) * invPercent, 
+                    (color.b + 1) * invPercent, 1));
         }
         x += 14;
         ++cnt;
