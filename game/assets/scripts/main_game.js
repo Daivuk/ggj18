@@ -8,6 +8,16 @@ function updateGame(dt)
     pings_update(dt);
 }
 
+function updateEndGameLimbo(dt)
+{
+    //heroes_update(dt)
+    pickups_update(dt);
+    splatters_update(dt);
+    map_update(dt);
+    gibs_update(dt);
+    pings_update(dt);
+}
+
 function renderGame()
 {
     // Render the map

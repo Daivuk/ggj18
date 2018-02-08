@@ -192,7 +192,7 @@ function hero_render(hero)
     {
         SpriteBatch.drawSpriteAnim(hero.taseReadySpriteAnim, hero_getTaserPos(hero), Color.WHITE, 0, 2);
     }
-    if (hero.state == HeroState.INTERACTING)
+    if (hero.interactionProgress > 0)
     {
         var barPosition = new Vector2(17 * TILE_HEIGHT + 3, 8 * TILE_HEIGHT);
         var barSize = new Vector2(INTERACTION_BAR_WIDTH * hero.interactionProgress / HERO_INTERACTION_PROGRESS_MAX, INTERACTION_BAR_HEIGHT);
@@ -392,10 +392,17 @@ function hero_renderGlow(hero)
     }
 }
 
+function hero_canTransmit(hero)
+{
+    return getHeroInCenter() < 2 && map_isInCentre(hero.position) && hero_hasFullMessage(hero) &&
+    hero.state == HeroState.IDLE;
+}
+
 function hero_update(hero, dt)
 {
-    if (hero.state != HeroState.INTERACTING)
+    if (!hero_canTransmit(hero) || gameState != GameStateEnum.GAME)
     {
+        hero.interactionProgress = 0;
         if (hero.transmissionSound)
         {
             hero.transmissionSound.stop();
@@ -430,27 +437,27 @@ function hero_update(hero, dt)
 
     var leftThumb = getAxis(hero.index);
     
-    if(hero.state == HeroState.INTERACTING)
-    {
-        if(isXDown(hero.index) && centerReady)
-        {
-            hero.interactionProgress += dt;
+    // if(hero.state == HeroState.INTERACTING)
+    // {
+    //     if(isXDown(hero.index) && centerReady)
+    //     {
+    //         hero.interactionProgress += dt;
 
-            if(hero.interactionProgress > HERO_INTERACTION_PROGRESS_MAX)
-            {
-                hero.state = HeroState.IDLE;
+    //         if(hero.interactionProgress > HERO_INTERACTION_PROGRESS_MAX)
+    //         {
+    //             hero.state = HeroState.IDLE;
 
-                hero_interactionSuccess(hero);
-            }
-        }
-        else
-        {
-            hero.interactionProgress = 0;
+    //             hero_interactionSuccess(hero);
+    //         }
+    //     }
+    //     else
+    //     {
+    //         hero.interactionProgress = 0;
 
-            hero.state = HeroState.IDLE;
-        }
-    }
-    else
+    //         hero.state = HeroState.IDLE;
+    //     }
+    // }
+    // else
     {
         // Get the next position according to thumb movement
         var speed = hero.state == HeroState.TASER_CHARGED ? HERO_SPEED * 1.5 : HERO_SPEED;
@@ -485,13 +492,29 @@ function hero_update(hero, dt)
         
 
         // Handle interacting with the transmitter
-        if(isXJustDown(hero.index) && heroesInCentre < 2 && map_isInCentre(hero.position) && hero_hasFullMessage(hero))
+        if(hero_canTransmit(hero))
         {
-            hero.state = HeroState.INTERACTING;
-            playSound("GGJ18SFX_TransmissionStart.wav");
-            hero.transmissionSound = getSound("GGJ18SFX_TransmissionLoop.wav").createInstance();
-            hero.transmissionSound.setLoop(true);
-            hero.transmissionSound.play();
+            if (hero.interactionProgress == 0)
+            {
+                //hero.state = HeroState.INTERACTING;
+                playSound("GGJ18SFX_TransmissionStart.wav");
+                hero.transmissionSound = getSound("GGJ18SFX_TransmissionLoop.wav").createInstance();
+                hero.transmissionSound.setLoop(true);
+                hero.transmissionSound.play();
+            }
+            
+            hero.interactionProgress += dt;
+
+            if(hero.interactionProgress > HERO_INTERACTION_PROGRESS_MAX)
+            {
+                hero.state = HeroState.IDLE;
+
+                hero_interactionSuccess(hero);
+            }
+        }
+        else
+        {
+            hero.interactionProgress = 0;
         }
 
         if(GamePad.isJustDown(hero.index, Button.Y))
@@ -677,8 +700,11 @@ function hero_taser_update(hero, dt)
             }
             else
             {
-                //hero.electrocuteSound.stop();
-                //hero.electrocuteSound = null;
+                if (hero.electrocuteSound)
+                {
+                    hero.electrocuteSound.stop();
+                    hero.electrocuteSound = null;
+                }
                 gibs_spawn(hero.position);
             }
         }
@@ -731,13 +757,21 @@ function hero_interactionSuccess(hero)
     
     hero.points++;
 
-    print("hero " + hero.index + " now has " + hero.points + " points");
+    //print("hero " + hero.index + " now has " + hero.points + " points");
 
     if(hero.points >= HERO_VICTORY_POINT)
     {
         victorHero = hero;
-        gameState = GameStateEnum.END_GAME;
-        music_play("Mixdown.ogg");
+        gameState = GameStateEnum.END_GAME_LIMBO;
+        setTimeout(function()
+        {
+            gameState = GameStateEnum.END_GAME;
+            music_play("Mixdown.ogg");
+            matrixRain_start(0);
+            hqTransmissionReceived = null;
+            wellDone = null;
+            pressStartToContinue = null;
+        }, 2000);
     }
 
     transmissionEffectTimer = 1;

@@ -14,7 +14,7 @@ gameName = Global Game Jam 2018
 resizableWindow = false
 
 # Run the game in full screen.This is borderless fullscreen taking up your desktop resolution
-fullscreen = false
+fullscreen = true
 
 # Fixed step update.Games where simulation or physic is important should use that
 fixedStep = true

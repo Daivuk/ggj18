@@ -1,12 +1,22 @@
 var faceFrameCount = 60
 var victorHero = null;
 
+var hqTransmissionReceived;
+var wellDone;
+var pressStartToContinue;
+
 function updateEndGame(dt)
 {
     if (faceFrameCount > 0)
     {
         faceFrameCount--;
-        updateGame(dt);
+        //updateGame(dt);
+        if (faceFrameCount == 0)
+        {
+            hqTransmissionReceived = animtext_create("HQ RECEIVED TRANSMISSION");
+            wellDone = animtext_create("WELL DONE", 1.5);
+            pressStartToContinue = animtext_create("^333PRESS START TO CONTINUE", 3);
+        }
     }
     else
     {
@@ -38,8 +48,12 @@ function updateEndGame(dt)
 
             return;
         }
+        animtext_update(hqTransmissionReceived, dt);
+        animtext_update(wellDone, dt);
+        animtext_update(pressStartToContinue, dt);
     }
     victorHero.spriteAnim.play("idle_e");
+    matrixRain_update(dt);
 }
 
 function renderEndGame()
@@ -51,20 +65,39 @@ function renderEndGame()
 
     SpriteBatch.drawRect(null, new Rect(0, 0, resolution), new Color(.0, .0, .0, (60.0 - faceFrameCount)/ 60.0));
 
+    matrixRain_render();
+
     var center = resolution.div(2);
-    SpriteBatch.drawText(encryptedFont, "HQ RECEIVED TRANSMISSION", new Vector2(center.x, center.y - 80), Vector2.CENTER, new Color(victorHero.color));
-    SpriteBatch.drawText(encryptedFont, "WELL DONE", new Vector2(center.x, center.y + 20), Vector2.CENTER, new Color(victorHero.color));
+    if (hqTransmissionReceived)
+    {
+        animtext_render(hqTransmissionReceived, new Vector2(center.x, center.y - 80), victorHero.color);
+        animtext_render(wellDone, new Vector2(center.x, center.y + 20), victorHero.color);
+    }
+    // SpriteBatch.drawText(encryptedFont, "HQ RECEIVED TRANSMISSION", new Vector2(center.x, center.y - 80), Vector2.CENTER, new Color(victorHero.color));
+    // SpriteBatch.drawText(encryptedFont, "WELL DONE", new Vector2(center.x, center.y + 20), Vector2.CENTER, new Color(victorHero.color));
     SpriteBatch.drawSpriteAnim(victorHero.spriteAnim, new Vector2(center), Color.WHITE, 0, 3);
 
     if (faceFrameCount <= 0)
     {
-        SpriteBatch.drawText(encryptedFont, "PRESS START TO CONTINUE", new Vector2(center.x, resolution.y - 20), Vector2.BOTTOM, Color.WHITE);
+        animtext_render(pressStartToContinue, new Vector2(center.x, resolution.y - 20));
     }
 }
 
 function renderEndGameGlow()
 {
     var center = resolution.div(2);
-    SpriteBatch.drawText(encryptedFont, "HQ RECEIVED TRANSMISSION", new Vector2(center.x, center.y - 80), Vector2.CENTER, new Color(victorHero.color).mul(.5));
-    SpriteBatch.drawText(encryptedFont, "WELL DONE", new Vector2(center.x, center.y + 20), Vector2.CENTER, new Color(victorHero.color).mul(.5));
+    matrixRain_renderGlow();
+    
+    if (hqTransmissionReceived)
+    {
+        animtext_renderGlow(hqTransmissionReceived, new Vector2(center.x, center.y - 80), victorHero.color);
+        animtext_renderGlow(wellDone, new Vector2(center.x, center.y + 20), victorHero.color);
+    }
+    // SpriteBatch.drawText(encryptedFont, "HQ RECEIVED TRANSMISSION", new Vector2(center.x, center.y - 80), Vector2.CENTER, new Color(victorHero.color).mul(.5));
+    // SpriteBatch.drawText(encryptedFont, "WELL DONE", new Vector2(center.x, center.y + 20), Vector2.CENTER, new Color(victorHero.color).mul(.5));
+    SpriteBatch.drawSpriteAnim(victorHero.spriteAnim, new Vector2(center), Color.BLACK, 0, 3);
+    if (faceFrameCount <= 0)
+    {
+        animtext_render(pressStartToContinue, new Vector2(center.x, resolution.y - 20));
+    }
 }

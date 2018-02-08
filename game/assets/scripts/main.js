@@ -75,7 +75,8 @@ var GameStateEnum = {
     INIT: 1,
     MAIN_MENU: 2,
     GAME: 3,
-    END_GAME: 4
+    END_GAME: 4,
+    END_GAME_LIMBO: 5
 };
 
 var gameState = GameStateEnum.INIT;
@@ -143,6 +144,9 @@ function update(dt)
         case GameStateEnum.END_GAME:
             updateEndGame(dt);
             break;
+        case GameStateEnum.END_GAME_LIMBO:
+            updateEndGameLimbo(dt);
+            break;
         default:
             break;
     }
@@ -166,6 +170,7 @@ function renderWorld()
         case GameStateEnum.MAIN_MENU:
             renderMainMenu();
             break;
+        case GameStateEnum.END_GAME_LIMBO:
         case GameStateEnum.GAME:
             renderGame();
             break;
@@ -195,6 +200,7 @@ function renderGlow()
         case GameStateEnum.MAIN_MENU:
             renderMainMenuGLOW();
             break;
+        case GameStateEnum.END_GAME_LIMBO:
         case GameStateEnum.GAME:
             renderGameGlow();
             break;

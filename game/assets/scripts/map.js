@@ -7,6 +7,24 @@ var flyingSymbols = [];
 
 var alertTexture = getTexture("alert.png");
 
+function getHeroInCenter()
+{
+    var count = 0;
+    for(var i = 0; i < heroes.length; ++i)
+    {
+        var hero = heroes[i];
+
+        if(!hero.playing) continue;
+
+        if(map_isInCentre(hero.position) && hero.state != HeroState.DISABLED)
+        {
+            count++;
+        }
+    }
+
+    return count;
+}
+
 function map_update(dt)
 {
     var lastCount = heroesInCentre;

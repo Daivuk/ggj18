@@ -177,9 +177,15 @@ function renderMainMenu()
     var position = new Vector2((resolution.x - 5 * TILE_HEIGHT) / 2 + 5 * TILE_HEIGHT, 100);
 
     SpriteBatch.end();
-    SpriteBatch.begin(cameraTransform.mul(Matrix.createScale(1.5)));
+    var _41 = cameraTransform._41;
+    var _42 = cameraTransform._42;
+    cameraTransform._41 = 0;
+    cameraTransform._42 = 0;
+    SpriteBatch.begin(cameraTransform.mul(Matrix.createScale(1.5).mul(Matrix.createTranslation(new Vector3(_41, _42, 0)))));//.mul(Matrix.createTranslation(new Vector3(cameraTransform.translation().mul(-.75))))));
     animtext_render(title, new Vector2(position.x / 1.5, 4), new Color(0, 1, 1));
     SpriteBatch.end();
+    cameraTransform._41 = _41;
+    cameraTransform._42 = _42;
     SpriteBatch.begin(cameraTransform);
     animtext_render(subtitle, new Vector2(position.x, 4 + 24), new Color(1, 0, 1));
     
