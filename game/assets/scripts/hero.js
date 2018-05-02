@@ -21,42 +21,69 @@ var glowCircleTexture = getTexture("glowCircle.png")
 var chevronAnim = playSpriteAnim("chevron.spriteanim", "idle");
 
 var HeroState = {
-    IDLE: 1,
-    TASED: 2,
-    TASER_CHARGING: 3,
-    TASER_CHARGED: 4,
-    TASER_DISCHARGING: 5,
-    DISABLED: 6,
-    ELECTROCUTED: 7,
-    INTERACTING: 8,
-    SPAWNING: 9,
-    VOID: 10,
-    MENU: 11
+    IDLE: {
+        render: hero_render,
+        renderGlow: hero_renderGlow,
+    },
+    TASED: {
+        render: hero_render,
+        renderGlow: hero_renderGlow,
+    },
+    TASER_CHARGING: {
+        render: hero_render,
+        renderGlow: hero_renderGlow,
+    },
+    TASER_CHARGED: {
+        render: hero_render,
+        renderGlow: hero_renderGlow,
+    },
+    TASER_DISCHARGING: {
+        render: hero_render,
+        renderGlow: hero_renderGlow,
+    },
+    DISABLED: {
+    },
+    ELECTROCUTED: {
+        render: hero_render,
+        renderGlow: hero_renderGlow,
+    },
+    INTERACTING: {
+        render: hero_render,
+        renderGlow: hero_renderGlow,
+    },
+    SPAWNING: {
+        render: hero_render,
+        renderGlow: hero_renderGlow,
+    },
+    VOID: {
+    },
+    MENU: {
+    }
 }
 
-function hero_create(_index, _pos, _color)
-{
-    var hero = {
-        index: _index,
-        position: new Vector2(_pos),
-        color: new Color(_color),
-        dir: "w",
-        taserCharge: 0,
-        state: HeroState.MENU,
-        disableTimer: 0,
-        interactionProgress: 0,
-        spriteAnim: playSpriteAnim("hacker" + _index + ".spriteanim", "idle_e"),
-        taseReadySpriteAnim: playSpriteAnim("taseReady.spriteanim", "idle_e"),
-        glyphMap: [],
-        displayMessage: "",
-        renderFn: hero_render,
-        renderGlowFn: hero_renderGlow,
-        points: 0,
-        spawnTime: HERO_SPAWN_TIME,
-        messageAppearTime: 0,
-        playing: false,
-        bounceAnim: 0
-    };
+function hero_create(_index, _pos, _color) {
+    var hero = new OStateMachine();
+
+    hero.index = _index;
+    hero.position = new Vector2(_pos);
+    hero.color = new Color(_color);
+    hero.dir = "w";
+    hero.taserCharge = 0;
+    hero.disableTimer = 0;
+    hero.interactionProgress = 0;
+    hero.spriteAnim = playSpriteAnim("hacker" + _index + ".spriteanim", "idle_e");
+    hero.taseReadySpriteAnim = playSpriteAnim("taseReady.spriteanim", "idle_e");
+    hero.glyphMap = [];
+    hero.displayMessage = "";
+    hero.renderFn = function (hero) { hero.trigger('render', hero); };
+    hero.renderGlowFn = function (hero) { hero.trigger('renderGlow', hero); };
+    hero.points = 0;
+    hero.spawnTime = HERO_SPAWN_TIME;
+    hero.messageAppearTime = 0;
+    hero.playing = false;
+    hero.bounceAnim = 0;
+
+    hero.setState(HeroState.MENU); // starting state.
 
     renderables.push(hero);
 
@@ -158,7 +185,7 @@ function hero_getTaserPos(hero)
 {
     if (hero.dir == "e")
     {
-        if (hero.state == HeroState.TASER_DISCHARGING)
+        if (hero.getState() == HeroState.TASER_DISCHARGING)
             return new Vector2(hero.position.x + 21, hero.position.y - 1);
         else
             return new Vector2(hero.position.x + 15, hero.position.y - 1);
@@ -171,24 +198,17 @@ function hero_getTaserPos(hero)
 
 function hero_render(hero)
 {
-    if (hero.state == HeroState.DISABLED ||
-        hero.state == HeroState.VOID ||
-        hero.state == HeroState.MENU)
-    {
-        return;
-    }
-
     var percent = (hero.bounceAnim * 10) % 2;
     if (percent > 1) percent = 1 - (percent - 1);
     percent = 1 - (1 - percent) * (1 - percent);
     SpriteBatch.drawSpriteAnim(hero.spriteAnim, 
         new Vector2(hero.position.x, hero.position.y));
 
-    if (hero.state == HeroState.TASER_CHARGED)
+    if (hero.getState() == HeroState.TASER_CHARGED)
     {
         SpriteBatch.drawSpriteAnim(hero.taseReadySpriteAnim, hero_getTaserPos(hero));
     }
-    if (hero.state == HeroState.TASER_DISCHARGING)
+    if (hero.getState() == HeroState.TASER_DISCHARGING)
     {
         SpriteBatch.drawSpriteAnim(hero.taseReadySpriteAnim, hero_getTaserPos(hero), Color.WHITE, 0, 2);
     }
@@ -199,7 +219,7 @@ function hero_render(hero)
         SpriteBatch.drawRect(null, new Rect(barPosition, barSize), new Color(0, 1, 1, 1));
     }
 
-    if (hero.state == HeroState.SPAWNING)
+    if (hero.getState() == HeroState.SPAWNING)
     {
         var invPercent = hero.spawnTime / HERO_SPAWN_TIME;
         var percent = 1 - invPercent;
@@ -266,8 +286,8 @@ function hero_drawHUD(hero)
         }
     }
 
-    if (hero.state == HeroState.DISABLED ||
-        hero.state == HeroState.VOID)
+    if (hero.getState() == HeroState.DISABLED ||
+        hero.getState() == HeroState.VOID)
     {
         return;
     }
@@ -342,7 +362,7 @@ function hero_drawGLOW(hero)
         x += 14;
     }
 
-    if (hero.state == HeroState.INTERACTING)
+    if (hero.getState() == HeroState.INTERACTING)
     {
         var barPosition = new Vector2(17 * TILE_HEIGHT + 3, 8 * TILE_HEIGHT);
         var barSize = new Vector2(INTERACTION_BAR_WIDTH * hero.interactionProgress / HERO_INTERACTION_PROGRESS_MAX, INTERACTION_BAR_HEIGHT);
@@ -362,9 +382,7 @@ function hero_hasFullMessage(hero)
 
 function hero_renderGlow(hero)
 {
-    if (hero.state == HeroState.DISABLED ||
-        hero.state == HeroState.VOID ||
-        !hero.playing)
+    if (!hero.playing)
     {
         return;
     }
@@ -373,16 +391,16 @@ function hero_renderGlow(hero)
 
     SpriteBatch.drawSpriteAnim(hero.spriteAnim, hero.position, Color.BLACK);
 
-    if (hero.state == HeroState.TASER_CHARGED)
+    if (hero.getState() == HeroState.TASER_CHARGED)
     {
         SpriteBatch.drawSpriteAnim(hero.taseReadySpriteAnim, hero_getTaserPos(hero), new Color(.5));
     }
-    if (hero.state == HeroState.TASER_DISCHARGING)
+    if (hero.getState() == HeroState.TASER_DISCHARGING)
     {
         SpriteBatch.drawSpriteAnim(hero.taseReadySpriteAnim, hero_getTaserPos(hero), new Color(.5), 0, 2);
     }
 
-    if (hero.state == HeroState.SPAWNING)
+    if (hero.getState() == HeroState.SPAWNING)
     {
         var invPercent = hero.spawnTime / HERO_SPAWN_TIME;
         var percent = 1 - invPercent;
@@ -395,7 +413,7 @@ function hero_renderGlow(hero)
 function hero_canTransmit(hero)
 {
     return getHeroInCenter() < 2 && map_isInCentre(hero.position) && hero_hasFullMessage(hero) &&
-    hero.state == HeroState.IDLE;
+    hero.getState() == HeroState.IDLE;
 }
 
 function hero_update(hero, dt)
@@ -409,18 +427,18 @@ function hero_update(hero, dt)
             hero.transmissionSound = null;
         }
     }
-    if (hero.state == HeroState.SPAWNING)
+    if (hero.getState() == HeroState.SPAWNING)
     {
         hero.spawnTime -= dt;
         if (hero.spawnTime <= 0)
         {
-            hero.state = HeroState.IDLE;
+            hero.setState(HeroState.IDLE);
         }
         return;
     }
-    if (hero.state == HeroState.DISABLED ||
-        hero.state == HeroState.ELECTROCUTED ||
-        hero.state == HeroState.VOID)
+    if (hero.getState() == HeroState.DISABLED ||
+        hero.getState() == HeroState.ELECTROCUTED ||
+        hero.getState() == HeroState.VOID)
     {
         return;
     }
@@ -437,7 +455,7 @@ function hero_update(hero, dt)
 
     var leftThumb = getAxis(hero.index);
     
-    // if(hero.state == HeroState.INTERACTING)
+    // if(hero.getState() == HeroState.INTERACTING)
     // {
     //     if(isXDown(hero.index) && centerReady)
     //     {
@@ -445,7 +463,7 @@ function hero_update(hero, dt)
 
     //         if(hero.interactionProgress > HERO_INTERACTION_PROGRESS_MAX)
     //         {
-    //             hero.state = HeroState.IDLE;
+    //             hero.setState(HeroState.IDLE);
 
     //             hero_interactionSuccess(hero);
     //         }
@@ -454,13 +472,13 @@ function hero_update(hero, dt)
     //     {
     //         hero.interactionProgress = 0;
 
-    //         hero.state = HeroState.IDLE;
+    //         hero.setState(HeroState.IDLE);
     //     }
     // }
     // else
     {
         // Get the next position according to thumb movement
-        var speed = hero.state == HeroState.TASER_CHARGED ? HERO_SPEED * 1.5 : HERO_SPEED;
+        var speed = hero.getState() == HeroState.TASER_CHARGED ? HERO_SPEED * 1.5 : HERO_SPEED;
         var nextPosition = new Vector2(hero.position.add(leftThumb.mul(dt * speed)));
 
         // Apply collision to the movement
@@ -470,7 +488,7 @@ function hero_update(hero, dt)
         }
 
         // Pick up items
-        if (hero.state == HeroState.IDLE)
+        if (hero.getState() == HeroState.IDLE)
         {
             var pickup = pickups_acquire(hero.position.add(HERO_PICKUP_OFFSET));
 
@@ -496,7 +514,7 @@ function hero_update(hero, dt)
         {
             if (hero.interactionProgress == 0)
             {
-                //hero.state = HeroState.INTERACTING;
+                //hero.setState(HeroState.INTERACTING);
                 playSound("GGJ18SFX_TransmissionStart.wav");
                 hero.transmissionSound = getSound("GGJ18SFX_TransmissionLoop.wav").createInstance();
                 hero.transmissionSound.setLoop(true);
@@ -507,7 +525,7 @@ function hero_update(hero, dt)
 
             if(hero.interactionProgress > HERO_INTERACTION_PROGRESS_MAX)
             {
-                hero.state = HeroState.IDLE;
+                hero.setState(HeroState.IDLE);
 
                 hero_interactionSuccess(hero);
             }
@@ -536,9 +554,9 @@ function hero_update(hero, dt)
             anim = "run";
         }
 
-        if (hero.state == HeroState.TASER_CHARGED ||
-            hero.state == HeroState.TASER_CHARGING ||
-            hero.state == HeroState.TASER_DISCHARGING)
+        if (hero.getState() == HeroState.TASER_CHARGED ||
+            hero.getState() == HeroState.TASER_CHARGING ||
+            hero.getState() == HeroState.TASER_DISCHARGING)
             anim += "taser";
     }
 
@@ -559,11 +577,11 @@ function hero_update(hero, dt)
         }
     }
 
-    if (hero.state == HeroState.TASER_CHARGING)
+    if (hero.getState() == HeroState.TASER_CHARGING)
     {
         hero.taseReadySpriteAnim.play("idle_" + hero.dir);
     }
-    if (hero.state == HeroState.TASER_DISCHARGING)
+    if (hero.getState() == HeroState.TASER_DISCHARGING)
     {
         hero.taseReadySpriteAnim.play("tase_" + hero.dir);
         anim = "idletaser";
@@ -599,7 +617,7 @@ function hero_handle_taser(hero, dt)
         {
             if (isADown(hero.index))
             {
-                hero.state = HeroState.TASER_CHARGING;
+                hero.setState(HeroState.TASER_CHARGING);
                 playSound("GGJ18SFX_TaserOut.wav");
             }
             break;
@@ -611,7 +629,7 @@ function hero_handle_taser(hero, dt)
                 hero.taserCharge += dt;
                 if(hero.taserCharge > HERO_TASER_CHARGE_TIME)
                 {
-                    hero.state = HeroState.TASER_CHARGED;
+                    hero.setState(HeroState.TASER_CHARGED);
                     hero.taserCharge = HERO_TASER_CHARGE_TIME;
                     playSound("GGJ18SFX_TaserCharged.wav");
                 }
@@ -619,7 +637,7 @@ function hero_handle_taser(hero, dt)
             else
             {
                 hero.taserCharge = 0;
-                hero.state = HeroState.IDLE;
+                hero.setState(HeroState.IDLE);
             }
             break;
         }
@@ -658,7 +676,7 @@ function hero_handle_taser(hero, dt)
                         }
                     }
                 }
-                hero.state = HeroState.TASER_DISCHARGING;
+                hero.setState(HeroState.TASER_DISCHARGING);
                 playSound("GGJ18SFX_TaserFire.wav");
             }
             break;
@@ -668,7 +686,7 @@ function hero_handle_taser(hero, dt)
             hero.taserCharge -= dt * 2;
             if (hero.taserCharge <= 0)
             {
-                hero.state = HeroState.IDLE;
+                hero.setState(HeroState.IDLE);
             }
             break;
         }
@@ -677,22 +695,22 @@ function hero_handle_taser(hero, dt)
 
 function hero_taser_update(hero, dt)
 {
-    if( hero.state == HeroState.TASED || hero.state == HeroState.DISABLED || 
-        hero.state == HeroState.ELECTROCUTED)
+    if( hero.getState() == HeroState.TASED || hero.getState() == HeroState.DISABLED || 
+        hero.getState() == HeroState.ELECTROCUTED)
     {
-        if (hero.state == HeroState.TASED)
+        if (hero.getState() == HeroState.TASED)
         {
             playSound("GGJ18SFX_PlayerElectrocutedShort.wav");
             //hero.electrocuteSound = getSound("GGJ18SFX_PlayerElectrocuted.wav").createInstance();
             //hero.electrocuteSound.play();
             hero.spriteAnim = playSpriteAnim("electrocute.spriteanim", "idle");
-            hero.state = HeroState.ELECTROCUTED;
+            hero.setState(HeroState.ELECTROCUTED);
             return;
         }
 
         hero.disableTimer -= dt;
 
-        if (hero.state == HeroState.ELECTROCUTED)
+        if (hero.getState() == HeroState.ELECTROCUTED)
         {
             if(hero.disableTimer > HERO_DISABLE_TIME - 1)
             {
@@ -709,7 +727,7 @@ function hero_taser_update(hero, dt)
             }
         }
 
-        hero.state = HeroState.DISABLED;
+        hero.setState(HeroState.DISABLED);
 
         if(hero.disableTimer < 0)
         {
@@ -782,7 +800,7 @@ function hero_respawn(hero)
     playSound("GGJ18SFX_PlayerRespawn.wav");
 
     hero.taserCharge = 0;
-    hero.state = HeroState.SPAWNING;
+    hero.setState(HeroState.SPAWNING);
     hero.disableTimer = HERO_DISABLE_TIME;
     hero.spriteAnim = playSpriteAnim("hacker" + hero.index + ".spriteanim", "idle_e");
     hero.taseReadySpriteAnim = playSpriteAnim("taseReady.spriteanim", "idle_e");
@@ -838,7 +856,7 @@ function hero_tasered(hero)
 {
     if(hero.state != HeroState.DISABLED)
     {
-        hero.state = HeroState.TASED;
+        hero.setState(HeroState.TASED);
     }
 }
 
